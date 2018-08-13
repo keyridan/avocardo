@@ -1,0 +1,11 @@
+.info_table_container{
+  display: grid !important;
+  grid-template: 1fr/1fr 1fr;
+}
+.info_table {}
+.info_table_body {
+}
+
+.info_cell_highlight{
+  color: green;
+}

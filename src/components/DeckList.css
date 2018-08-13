@@ -1,0 +1,16 @@
+.deck_list {
+  max-width: 500px;
+}
+
+.deck_cover {
+  margin-right: 15px;
+  width: 200px;
+  height: 200px;
+}
+
+.deck_item {
+  display: flex;
+  flex-direction: row-reverse;
+  line-height: 40px;
+}
+

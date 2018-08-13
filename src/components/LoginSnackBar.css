@@ -1,0 +1,11 @@
+.login_snackbar {
+  padding-top: 15px;
+}
+
+.snackbar_login_content {
+  width: 100%;
+}
+
+.snackbar_login_content>div{
+  width: 100%;
+}

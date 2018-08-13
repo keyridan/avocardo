@@ -1,0 +1,9 @@
+.cards_app_bar {
+  padding-bottom: 10px;
+}
+
+.cards_app_bar .title {
+  flex: 1
+}
+
+.theme_switcher {}
