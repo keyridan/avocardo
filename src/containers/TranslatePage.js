@@ -1,52 +1,48 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
-import FromLanguageButtonBarContainer from './FromLanguageButtonBarContainer'
-import LanguageFromSelectorContainer from './LanguageFromSelectorContainer'
-import TranslationResultContainer from './TranslationResultContainer'
-import ToLanguageButtonBarContainer from './ToLanguageButtonBarContainer'
-import LanguageToSelectorContainer from './LanguageToSelectorContainer'
-import WordInput from './WordInput'
-import TranslateButton from './TranslateButton'
-import ReverseButton from './ReverseButton'
-import CardsAppBar from './CardsAppBar'
-import InfoCardsContainer from './InfoCardsContainer'
-import Card from '../components/Card'
-import s from './TranslatePage.css'
+import PropTypes from 'prop-types'
+import TranslationPage from '../components/TranslationPage'
+import {
+  chooseFromLanguageAndAddToRecent,
+  chooseToLanguageAndAddToRecent,
+  setWord,
+  translateAndSetValues,
+} from '../actions'
 
-export class TranslatePage extends Component {
-  render() {
-    console.log('p:', this.props)
-    return (
-      <div >
-        <CardsAppBar />
-        <div className={s.cards_content} >
-          <LanguageFromSelectorContainer className={s.from_translation_language_selector} />
-          <FromLanguageButtonBarContainer className={s.from_language_bar} />
-          <WordInput className={s.word_input_container} />
-          <InfoCardsContainer className={s.infocards} />
-          <TranslateButton className={s.btn_translate} />
-
-          <ReverseButton className={s.reverse_button_container} />
-
-          <LanguageToSelectorContainer className={s.to_translation_language_selector} />
-          <ToLanguageButtonBarContainer className={s.to_language_bar} />
-          <TranslationResultContainer className={s.translation_result} />
-
-          <Card className={s.flash_card_content} />
-        </div >
-      </div >
-    )
-  }
+const TranslatePage = ({ params, chooseFromLanguageAndAddToRecent, chooseToLanguageAndAddToRecent, setWord, translateAndSetValues }) => {
+  const { fromLanguage, toLanguage, word } = params
+  chooseFromLanguageAndAddToRecent(fromLanguage.toUpperCase())
+  chooseToLanguageAndAddToRecent(toLanguage.toUpperCase())
+  setWord(word)
+  translateAndSetValues()
+  return (
+    <TranslationPage />
+  )
 }
 
-function mapStateToProps(state) {
-  return {
-    ...state,
-  }
+TranslatePage.propTypes = {
+  params: PropTypes.shape({
+    fromLanguage: PropTypes.string,
+    toLanguage: PropTypes.string,
+    word: PropTypes.string,
+  }).isRequired,
+  chooseFromLanguageAndAddToRecent: PropTypes.func.isRequired,
+  chooseToLanguageAndAddToRecent: PropTypes.func.isRequired,
+  setWord: PropTypes.func.isRequired,
+  translateAndSetValues: PropTypes.func.isRequired,
 }
 
-const mapDispatchToProps = {}
+const mapStateToProps = (state, ownProps) => ({
+  params: ownProps.match.params,
+})
+
+const mapDispatchToProps = {
+  chooseFromLanguageAndAddToRecent,
+  chooseToLanguageAndAddToRecent,
+  setWord,
+  translateAndSetValues,
+}
 
 export default withRouter(connect(
   mapStateToProps,

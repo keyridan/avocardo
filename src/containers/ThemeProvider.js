@@ -5,7 +5,6 @@ import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles'
 import theme from '../theme'
 
 const ThemeProvider = ({ children, themeType }) => {
-  console.log(themeType)
   const newTheme = createMuiTheme({
     ...theme,
     palette: {

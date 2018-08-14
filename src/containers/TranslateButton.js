@@ -1,40 +1,40 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { withRouter } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import SimpleButton from '../components/SimpleButton'
 import { translateAndSetValues } from '../actions'
 
-const TranslateButton = ({ className, translatePending, translateAndSetValues }) => {
-  return (
-    <div className={className} >
-      <SimpleButton
-        className="btn_translate"
-        active={translatePending}
-        variant="raised"
-        color="primary"
-        onClick={translateAndSetValues}
-      >
-        {translatePending ? 'pending_translation_btn' : 'translation_btn'}
-      </SimpleButton >
-    </div >
-  )
-}
-
+const TranslateButton = ({ className, translatePending, onClick }) => (
+  <div className={className} >
+    <SimpleButton
+      className="btn_translate"
+      active={translatePending}
+      variant="raised"
+      color="primary"
+      onClick={onClick}
+    >
+      {translatePending ? 'pending_translation_btn' : 'translation_btn'}
+    </SimpleButton >
+  </div >
+)
 
 TranslateButton.propTypes = {
   translatePending: PropTypes.bool.isRequired,
-  translateAndSetValues: PropTypes.func.isRequired,
+  onClick: PropTypes.func.isRequired,
 }
 
 const mapStateToProps = state => ({
   ...state.translation,
 })
 
-const mapDispatchToProps = {
-  translateAndSetValues,
-}
+const mapDispatchToProps = dispatch => ({
+  onClick: () => {
+    dispatch(translateAndSetValues())
+  },
+})
 
-export default connect(
+export default withRouter(connect(
   mapStateToProps,
   mapDispatchToProps,
-)(TranslateButton)
+)(TranslateButton))

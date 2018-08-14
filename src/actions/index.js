@@ -3,12 +3,15 @@ import {
   ADD_CARD_TO_DECK_BEGIN,
   ADD_CARD_TO_DECK_FAILURE,
   ADD_CARD_TO_DECK_SUCCESS,
-  ADD_CARD_TO_DECK_URL, CHANGE_CHOOSE_LANGUAGE_STATE,
+  ADD_CARD_TO_DECK_URL,
+  CHANGE_CHOOSE_LANGUAGE_STATE,
   CHANGE_DECK_LIST_STATE,
   CHANGE_INFO_SWITCHER_STATE,
-  CHANGE_OPEN_LOGIN_FORM, CHANGE_THEME_TYPE_STATE,
+  CHANGE_OPEN_LOGIN_FORM,
+  CHANGE_THEME_TYPE_STATE,
   CHOOSE_DECK,
-  CHOOSE_FROM_LANGUAGE, CHOOSE_LANGUAGE,
+  CHOOSE_FROM_LANGUAGE,
+  CHOOSE_LANGUAGE,
   CHOOSE_RECENT_FROM_LANGUAGE,
   CHOOSE_RECENT_TO_LANGUAGE,
   CHOOSE_TO_LANGUAGE,
@@ -140,8 +143,8 @@ export const setFrontSide = value => ({
 
 const addToRecentIfNotExist = (recentLanguages = [], value, dispatchChooseRecentLanguage) => {
   recentLanguages.indexOf(value) !== -1 || dispatchChooseRecentLanguage([
-    ...recentLanguages,
     value,
+    ...recentLanguages,
   ])
 }
 
@@ -250,7 +253,9 @@ export const setPassword = value => ({
   payload: value,
 })
 
-export const translate = ({ toLanguage, word, fromLanguage, infoProvider }) => {
+export const translate = ({
+                            toLanguage, word, fromLanguage, infoProvider,
+                          }) => {
   if (!word) {
     return Promise.resolve()
   }
@@ -334,6 +339,16 @@ export const addCardToDeck = () => (dispatch, getState) => {
   })
 }
 
+const translationLink = ({ fromLanguage, toLanguage, word }) => (
+  `/${fromLanguage.toLowerCase()}/${toLanguage.toLowerCase()}/${word}`
+)
+
+export const setWordAndAndToHistory = (value, history) => (dispatch, getState) => {
+  dispatch(setWord(value))
+  const { fromLanguage, toLanguage } = getState()
+  history.push(translationLink({ fromLanguage, toLanguage, word: value }))
+}
+
 export const translateAndSetValues = () => (dispatch, getState) =>
   dispatch(translate(getState())).then(() => {
     dispatch(setTranslationResult(getState().translation))
@@ -342,6 +357,16 @@ export const translateAndSetValues = () => (dispatch, getState) =>
   })
 
 const clearTranslationResult = () => dispatch => dispatch(setTranslationResult({}))
+
+export const chooseFromLanguageAndAddToRecent = fromLanguage => (dispatch) => {
+  dispatch(chooseFromLanguage(fromLanguage))
+  dispatch(addToRecentFromIfNotExist(fromLanguage))
+}
+
+export const chooseToLanguageAndAddToRecent = toLanguage => (dispatch) => {
+  dispatch(chooseToLanguage(toLanguage))
+  dispatch(addToRecentToIfNotExist(toLanguage))
+}
 
 const reverseLanguages = () => (dispatch, getState) => {
   const { toLanguage, fromLanguage } = getState()
@@ -370,26 +395,28 @@ export const reverseLanguagesAndTranslate = () => (dispatch) => {
 
 export const chooseToLanguageAndTranslate = toLanguage => (dispatch) => {
   dispatch(chooseToLanguage(toLanguage))
-  dispatch(translateAndSetValues())
+  return dispatch(translateAndSetValues())
 }
 
 export const chooseFromLanguageAndTranslate = fromLanguage => (dispatch) => {
   dispatch(chooseFromLanguage(fromLanguage))
-  dispatch(translateAndSetValues())
+  return dispatch(translateAndSetValues())
 }
 
-export const setFromLanguage = fromLanguage => (dispatch, getState) => {
+export const setFromLanguage = (fromLanguage, history) => (dispatch, getState) => {
   const { toLanguage } = getState()
   dispatch(fromLanguage === toLanguage
     ? reverseLanguagesAndTranslate()
     : chooseFromLanguageAndTranslate(fromLanguage))
+    .then(() => history.push(translationLink(getState())))
 }
 
-export const setToLanguage = toLanguage => (dispatch, getState) => {
+export const setToLanguage = (toLanguage, history) => (dispatch, getState) => {
   const { fromLanguage } = getState()
   dispatch(toLanguage === fromLanguage
     ? reverseLanguagesAndTranslate()
     : chooseToLanguageAndTranslate(toLanguage))
+    .then(() => history.push(translationLink(getState())))
 }
 
 export const setWordAndTranslate = value => (dispatch) => {

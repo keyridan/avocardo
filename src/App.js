@@ -5,7 +5,8 @@ import { hot } from 'react-hot-loader'
 import { Route } from 'react-router-dom'
 import CssBaseline from '@material-ui/core/CssBaseline'
 import store, { history } from './store/createStore'
-import { TranslatePage } from './containers/TranslatePage'
+import TranslatePage from './containers/TranslatePage'
+import TranslateDefaultPage from './containers/TranslateDefaultPage'
 import { saveState } from './store/localStorage'
 import ThemeProvider from './containers/ThemeProvider'
 
@@ -23,7 +24,7 @@ const App = () => (
           <Route
             exact
             path="/"
-            component={TranslatePage}
+            component={TranslateDefaultPage}
           />
           <Route
             path="/:fromLanguage/:toLanguage/:word"
