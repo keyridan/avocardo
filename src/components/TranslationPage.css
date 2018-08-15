@@ -17,24 +17,9 @@
   grid-row: 4/5;
 }
 
-.reverse_button_container {
-  grid-column: 2/3;
-  grid-row: 2/3;
-}
-
 .btn_translate {
   grid-column: 2/3;
-  grid-row: 3/4;
-}
-
-.to_translation_content {
-  grid-column: 3/4;
-  grid-row: 1/4;
-}
-
-.reverse_button {
-  justify-content: center;
-  align-items: center;
+  grid-row: 2/3;
 }
 
 .flash_card_content {
@@ -69,7 +54,6 @@
 }
 
 .translation_result {
-  margin-top: 15px;
   grid-column: 3/4;
   grid-row: 3/6;
 }
