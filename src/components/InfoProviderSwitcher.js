@@ -5,10 +5,13 @@ import FormControlLabel from '@material-ui/core/FormControlLabel'
 import Switch from '@material-ui/core/Switch'
 import TranslatedTextContainer from '../containers/TranslatedTextContainer'
 
-const InfoProviderSwitcher = ({ type, checked, changeSwitcherState, className }) => (
+const InfoProviderSwitcher = ({
+  type, checked, changeSwitcherState, className,
+}) => (
   <div className={className} >
     <FormGroup row >
       <FormControlLabel
+        onClick={event => event.stopPropagation()}
         control={
           <Switch
             checked={checked}
@@ -22,6 +25,7 @@ const InfoProviderSwitcher = ({ type, checked, changeSwitcherState, className })
 )
 
 InfoProviderSwitcher.propTypes = {
+  className: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
   checked: PropTypes.bool.isRequired,
   changeSwitcherState: PropTypes.func.isRequired,
