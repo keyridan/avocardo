@@ -7,3 +7,13 @@
 }
 
 .theme_switcher {}
+
+.theme_switcher_night_mode {
+  transform: rotateZ(150deg);
+}
+
+.theme_switcher_glyph {
+  display: inline-block;
+  vertical-align: middle;
+  line-height: 0;
+}

@@ -3,10 +3,12 @@
   flex-direction: column;
 }
 
-.info_panel{
+.info_panel>div:nth-child(1){
+  justify-content: space-between;
 }
 
 .info_panel_title{
+  line-height: 48px !important;
 }
 
 .info_provider_switcher{

@@ -15,7 +15,9 @@ import s from './CardsAppBar.css'
 import { changeChooseLanguageState, changeLoginFormState, chooseLanguage } from '../actions'
 import { SUPPORTED_LOCALISATION_LANGUAGES } from '../constants'
 
-const CardsAppBar = ({ auth, language, classes, changeChooseLanguageState, chooseLanguage, chooseLanguageState }) => (
+const CardsAppBar = ({
+  auth, language, classes, changeChooseLanguageState, chooseLanguage, chooseLanguageState,
+}) => (
   <div className={s.cards_app_bar} >
     <AppBar position="static" >
       <Toolbar >
@@ -37,7 +39,7 @@ const CardsAppBar = ({ auth, language, classes, changeChooseLanguageState, choos
           onClick={event => changeChooseLanguageState(event.currentTarget)}
           color="inherit"
         >
-          <span >{language}</span >
+          <span style={{ paddingBottom: '5px' }}>{language}</span >
         </IconButton >
         <Menu
           id="lnaguage-menu-appbar"

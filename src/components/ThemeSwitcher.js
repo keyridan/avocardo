@@ -1,17 +1,21 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import Star from '@material-ui/icons/Star'
+import Brightness3 from '@material-ui/icons/Brightness3'
 import WbSunny from '@material-ui/icons/WbSunny'
 import Switch from '@material-ui/core/Switch'
 
 const ThemeSwitcher = ({ themeType, className, changeThemeTypeState }) => (
   <div className={className} >
-    <WbSunny />
+    <span className={`${className}_glyph`} >
+      <WbSunny />
+    </span >
     <Switch
       checked={themeType.isDark}
       onChange={changeThemeTypeState}
     />
-    <Star />
+    <span className={`${className}_glyph`} >
+      <Brightness3 className={`${className}_night_mode`} />
+    </span >
   </div >
 )
 

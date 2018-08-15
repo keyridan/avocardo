@@ -1,4 +1,5 @@
 .cards_content {
+  padding: 0 15px;
   display: grid;
   grid-template: 25% 25% 25% 25% 25% 25%/45% 10% 45%;
 }
