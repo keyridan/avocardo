@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import SimpleButton from '../components/SimpleButton'
-import { translateAndSetValues } from '../actions'
+import { setWordToHistory } from '../actions'
 
 const TranslateButton = ({ className, translatePending, onClick }) => (
   <div className={className} >
@@ -20,6 +20,7 @@ const TranslateButton = ({ className, translatePending, onClick }) => (
 )
 
 TranslateButton.propTypes = {
+  className: PropTypes.string.isRequired,
   translatePending: PropTypes.bool.isRequired,
   onClick: PropTypes.func.isRequired,
 }
@@ -30,7 +31,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   onClick: () => {
-    dispatch(translateAndSetValues())
+    dispatch(setWordToHistory())
   },
 })
 

@@ -1,13 +1,14 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { withRouter } from 'react-router-dom'
 import FormHelperText from '@material-ui/core/FormHelperText'
 import PropTypes from 'prop-types'
-import { setWordAndAndToHistory, translateAndSetValues } from '../actions'
+import { setWord, setWordToHistory } from '../actions'
 import SimpleInput from '../components/SimpleInput'
 import TranslatedTextContainer from '../containers/TranslatedTextContainer'
 
-const WordInput = ({ value, className, onChange, onEnterKey }) => (
+const WordInput = ({
+  value, className, onChange, onEnterKey,
+}) => (
   <div className={className} >
     <SimpleInput
       className="word_input"
@@ -32,16 +33,16 @@ const mapStateToProps = state => ({
   value: state.word,
 })
 
-const mapDispatchToProps = (dispatch, ownProps) => ({
+const mapDispatchToProps = dispatch => ({
   onChange: (event) => {
-    dispatch(setWordAndAndToHistory(event.target.value, ownProps.history))
+    dispatch(setWord(event.target.value))
   },
   onEnterKey: () => {
-    dispatch(translateAndSetValues())
+    dispatch(setWordToHistory())
   },
 })
 
-export default withRouter(connect(
+export default connect(
   mapStateToProps,
   mapDispatchToProps,
-)(WordInput))
+)(WordInput)

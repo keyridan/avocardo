@@ -1,5 +1,4 @@
 import { connect } from 'react-redux'
-import { withRouter } from 'react-router-dom'
 import { setToLanguage } from '../actions'
 import SimpleButton from '../components/SimpleButton'
 
@@ -9,11 +8,11 @@ const mapStateToProps = (state, ownProps) => ({
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
   onClick: () => {
-    dispatch(setToLanguage(ownProps.value, ownProps.history))
+    dispatch(setToLanguage(ownProps.value))
   },
 })
 
-export default withRouter(connect(
+export default connect(
   mapStateToProps,
   mapDispatchToProps,
-)(SimpleButton))
+)(SimpleButton)
