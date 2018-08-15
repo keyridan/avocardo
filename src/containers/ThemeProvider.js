@@ -1,5 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { withRouter } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles'
 import theme from '../theme'
@@ -24,6 +25,7 @@ const ThemeProvider = ({ children, themeType }) => {
 }
 
 ThemeProvider.propTypes = {
+  children: PropTypes.node.isRequired,
   themeType: PropTypes.string.isRequired,
 }
 
@@ -31,4 +33,4 @@ const mapStateToProps = state => ({
   themeType: state.themeType,
 })
 
-export default connect(mapStateToProps)(ThemeProvider)
+export default withRouter(connect(mapStateToProps)(ThemeProvider))
