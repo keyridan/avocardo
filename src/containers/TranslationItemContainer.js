@@ -1,14 +1,12 @@
 import { connect } from 'react-redux'
 import TranslationItem from '../components/TranslationItem'
-import { setWordAndTranslate } from '../actions'
+import { setWordToHistoryAndReverseLanguages } from '../actions'
 
-const mapStateToProps = (state, ownProps) => ({
-
-})
+const mapStateToProps = () => ({})
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
   onClick: () => {
-    dispatch(setWordAndTranslate(ownProps.value))
+    dispatch(setWordToHistoryAndReverseLanguages(ownProps.value))
   },
 })
 

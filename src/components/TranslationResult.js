@@ -2,19 +2,12 @@ import List from '@material-ui/core/List'
 import React from 'react'
 import PropTypes from 'prop-types'
 import TranslationItemContainer from '../containers/TranslationItemContainer'
-import SimpleInput from './SimpleInput'
 
 const TranslationResult = ({ translationResult, className }) => (
-  <div className={className} >
-    <SimpleInput
-      multiline
-      className="cards-translation-pair"
-      value={translationResult.wordTo || ''}
-      readOnly
-    />
-    <List >
-      {translationResult.options.length > 0 &&
-      translationResult.options.map((item, index) => (
+  <div className={className}>
+    <List>
+      {translationResult.options.length > 0
+      && translationResult.options.map((item, index) => (
         <TranslationItemContainer
           key={item.word}
           value={item.word}
@@ -22,8 +15,8 @@ const TranslationResult = ({ translationResult, className }) => (
           className="translation-item"
         />
       ))}
-    </List >
-  </div >
+    </List>
+  </div>
 )
 
 TranslationResult.propTypes = {

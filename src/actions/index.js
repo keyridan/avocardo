@@ -1,4 +1,5 @@
 import { RSAA } from 'redux-api-middleware'
+import { push } from 'connected-react-router'
 import {
   ADD_CARD_TO_DECK_BEGIN,
   ADD_CARD_TO_DECK_FAILURE,
@@ -44,10 +45,9 @@ import { setCardValues, setTranslationResult } from './setTranslationValues'
 export const toggleOption = index => (dispatch, getState) => {
   const { backSide } = getState().flashCard
 
-  const newBackSide = backSide.map((backSideItem, itemIndex) =>
-    ((itemIndex === index)
-      ? { ...backSideItem, checked: backSideItem.checked === 0 ? 1 : 0 }
-      : backSideItem))
+  const newBackSide = backSide.map((backSideItem, itemIndex) => ((itemIndex === index)
+    ? { ...backSideItem, checked: backSideItem.checked === 0 ? 1 : 0 }
+    : backSideItem))
 
   if (newBackSide.filter(item => item.checked === 1).length > 3) {
     return dispatch({
@@ -142,10 +142,12 @@ export const setFrontSide = value => ({
 })
 
 const addToRecentIfNotExist = (recentLanguages = [], value, dispatchChooseRecentLanguage) => {
-  recentLanguages.indexOf(value) !== -1 || dispatchChooseRecentLanguage([
-    value,
-    ...recentLanguages,
-  ])
+  if (recentLanguages.indexOf(value) === -1) {
+    dispatchChooseRecentLanguage([
+      value,
+      ...recentLanguages,
+    ])
+  }
 }
 
 const addToRecentToIfNotExist = value => (dispatch, getState) => {
@@ -174,10 +176,9 @@ const addToRecentFromIfNotExist = value => (dispatch, getState) => {
 
 export const setBackSideValue = (value, index) => (dispatch, getState) => {
   const { backSide } = getState().flashCard
-  const newBackSide = backSide.map((backSideItem, itemIndex) =>
-    ((index === itemIndex)
-      ? { ...backSideItem, value }
-      : backSideItem))
+  const newBackSide = backSide.map((backSideItem, itemIndex) => ((index === itemIndex)
+    ? { ...backSideItem, value }
+    : backSideItem))
 
   return dispatch({
     type: SET_BACK_SIDE,
@@ -254,14 +255,14 @@ export const setPassword = value => ({
 })
 
 export const translate = ({
-                            toLanguage, word, fromLanguage, infoProvider,
-                          }) => {
+  toLanguage, word, fromLanguage, infoProvider,
+}) => {
   if (!word) {
     return Promise.resolve()
   }
   const activeProviders = infoProvider
     ? Object.entries(infoProvider).filter(providerList => providerList[1].checked)
-      .map(prodiverList => prodiverList[0])
+      .map(providerList => providerList[0])
     : []
   return {
     [RSAA]: {
@@ -297,13 +298,14 @@ export const login = () => (dispatch, getState) => {
 
 export const fetchDecks = () => (dispatch, getState) => {
   const { token } = getState()
+  const authorization = `${token.tokenType} ${token.accessToken}`
   return dispatch({
     [RSAA]: {
       endpoint: FETCH_DECKS_URL,
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `${token.tokenType} ${token.accessToken}`,
+        Authorization: authorization,
       },
       types: [FETCH_DECKS_BEGIN, FETCH_DECKS_SUCCESS, FETCH_DECKS_FAILURE],
     },
@@ -325,29 +327,25 @@ export const addCardToDeck = () => (dispatch, getState) => {
       },
     ],
   }
+  const endpoint = `${ADD_CARD_TO_DECK_URL}${deck.id}`
+  const authorization = `${token.tokenType} ${token.accessToken}`
   return dispatch({
     [RSAA]: {
-      endpoint: `${ADD_CARD_TO_DECK_URL}${deck.id}`,
+      endpoint,
       method: 'POST',
       body: JSON.stringify(data),
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `${token.tokenType} ${token.accessToken}`,
+        Authorization: authorization,
       },
       types: [ADD_CARD_TO_DECK_BEGIN, ADD_CARD_TO_DECK_SUCCESS, ADD_CARD_TO_DECK_FAILURE],
     },
   })
 }
 
-const translationLink = ({ fromLanguage, toLanguage, word }) => (
+export const translationLink = ({ fromLanguage, toLanguage, word }) => (
   `/${fromLanguage.toLowerCase()}/${toLanguage.toLowerCase()}/${word}`
 )
-
-export const setWordAndAndToHistory = (value, history) => (dispatch, getState) => {
-  dispatch(setWord(value))
-  const { fromLanguage, toLanguage } = getState()
-  history.push(translationLink({ fromLanguage, toLanguage, word: value }))
-}
 
 export const translateAndSetValues = () => (dispatch, getState) =>
   dispatch(translate(getState())).then(() => {
@@ -355,6 +353,21 @@ export const translateAndSetValues = () => (dispatch, getState) =>
     dispatch(setCardValues(getState().translation))
     dispatch(setInfos(getState().translation.infos))
   })
+
+export const setWordToHistory = () => (dispatch, getState) => {
+  const path = translationLink(getState())
+  return dispatch(push(path))
+}
+
+export const setWordToHistoryAndReverseLanguages = value => (dispatch, getState) => {
+  const { fromLanguage, toLanguage } = getState()
+  const path = translationLink({
+    fromLanguage: toLanguage,
+    toLanguage: fromLanguage,
+    word: value,
+  })
+  return dispatch(push(path))
+}
 
 const clearTranslationResult = () => dispatch => dispatch(setTranslationResult({}))
 
@@ -377,49 +390,21 @@ const reverseLanguages = () => (dispatch, getState) => {
   dispatch(clearTranslationResult())
 }
 
-const reverseTranslation = () => (dispatch, getState) => {
-  const { translationResult } = getState()
-  dispatch(reverseLanguages())
-  dispatch(setWord(translationResult.wordTo))
-}
-
-export const reverseTranslationValuesAndTranslate = () => (dispatch) => {
-  dispatch(reverseTranslation())
-  return dispatch(translateAndSetValues())
-}
-
 export const reverseLanguagesAndTranslate = () => (dispatch) => {
   dispatch(reverseLanguages())
   return dispatch(translateAndSetValues())
 }
 
-export const chooseToLanguageAndTranslate = toLanguage => (dispatch) => {
-  dispatch(chooseToLanguage(toLanguage))
-  return dispatch(translateAndSetValues())
+export const setFromLanguage = newValue => (dispatch, getState) => {
+  const { fromLanguage, toLanguage, word } = getState()
+  return dispatch(push(newValue === toLanguage
+    ? translationLink({ fromLanguage: newValue, toLanguage: fromLanguage, word })
+    : translationLink({ fromLanguage: newValue, toLanguage, word })))
 }
 
-export const chooseFromLanguageAndTranslate = fromLanguage => (dispatch) => {
-  dispatch(chooseFromLanguage(fromLanguage))
-  return dispatch(translateAndSetValues())
-}
-
-export const setFromLanguage = (fromLanguage, history) => (dispatch, getState) => {
-  const { toLanguage } = getState()
-  dispatch(fromLanguage === toLanguage
-    ? reverseLanguagesAndTranslate()
-    : chooseFromLanguageAndTranslate(fromLanguage))
-    .then(() => history.push(translationLink(getState())))
-}
-
-export const setToLanguage = (toLanguage, history) => (dispatch, getState) => {
-  const { fromLanguage } = getState()
-  dispatch(toLanguage === fromLanguage
-    ? reverseLanguagesAndTranslate()
-    : chooseToLanguageAndTranslate(toLanguage))
-    .then(() => history.push(translationLink(getState())))
-}
-
-export const setWordAndTranslate = value => (dispatch) => {
-  dispatch(setWord(value))
-  dispatch(reverseLanguagesAndTranslate())
+export const setToLanguage = newValue => (dispatch, getState) => {
+  const { fromLanguage, toLanguage, word } = getState()
+  return dispatch(push(newValue === fromLanguage
+    ? translationLink({ fromLanguage: toLanguage, toLanguage: newValue, word })
+    : translationLink({ fromLanguage, toLanguage: newValue, word })))
 }
