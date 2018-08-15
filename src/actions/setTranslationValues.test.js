@@ -2,7 +2,19 @@ import { SET_CARD_VALUES, SET_TRANSLATION_RESULT } from '../constants'
 import { setCardValues, setTranslationResult } from './setTranslationValues'
 
 describe('setTranslationResult action', () => {
-  it('setTranslationResult should create SET_TRANSLATION_RESULT action and wordTo', () => {
+  it('should create SET_TRANSLATION_RESULT with default values when empty', () => {
+    const defaultResult = {
+      wordTo: '',
+      options: [],
+    }
+    const translationResult = setTranslationResult({})
+    expect(translationResult).to.eql({
+      type: SET_TRANSLATION_RESULT,
+      payload: defaultResult,
+    })
+  })
+
+  it('should create SET_TRANSLATION_RESULT action, wordTo and options of wordTo', () => {
     const wordTo = 'Apfel'
     const translation = {
       pair: {
@@ -16,16 +28,19 @@ describe('setTranslationResult action', () => {
       type: SET_TRANSLATION_RESULT,
       payload: {
         wordTo,
-        options: [],
+        options: [{
+          word: wordTo,
+        }],
       },
     }
     expect(translationResult).to.eql(expected)
   })
 
-  it('when translation has translatedWords then translationResult should contain options of translatedWords', () => {
+  it('should contain options of translatedWords and wordTo when translation has translatedWords then translationResult', () => {
+    const wordTo = 'Apfel'
     const translation = {
       pair: {
-        wordTo: 'Apfel',
+        wordTo,
         wordFrom: 'apple',
       },
       translatedWords: [{
@@ -39,8 +54,10 @@ describe('setTranslationResult action', () => {
     const expected = {
       type: SET_TRANSLATION_RESULT,
       payload: {
-        wordTo: 'Apfel',
+        wordTo,
         options: [{
+          word: wordTo,
+        }, {
           word: 'der Apfel',
         }, {
           word: 'wordWithoutArticle',
@@ -50,19 +67,54 @@ describe('setTranslationResult action', () => {
     expect(translationResult).to.eql(expected)
   })
 
-  it('setTranslationResult should create SET_TRANSLATION_RESULT with default values when empty', () => {
-    const defaultResult = {
-      wordTo: '',
-      options: [],
+  it('should not contain options of same translatedWord and wordTo when translatedWord is the same as wordTo', () => {
+    const wordTo = 'Apfel'
+    const translation = {
+      pair: {
+        wordTo,
+        wordFrom: 'apple',
+      },
+      translatedWords: [{
+        article: 'der',
+        word: 'Apfel',
+      }, {
+        word: 'wordWithoutArticle',
+      }, {
+        word: wordTo,
+      }],
     }
-    const translationResult = setTranslationResult({})
-    expect(translationResult).to.eql({
+    const translationResult = setTranslationResult(translation)
+    const expected = {
       type: SET_TRANSLATION_RESULT,
+      payload: {
+        wordTo,
+        options: [{
+          word: wordTo,
+        }, {
+          word: 'der Apfel',
+        }, {
+          word: 'wordWithoutArticle',
+        }],
+      },
+    }
+    expect(translationResult).to.eql(expected)
+  })
+})
+
+describe('setCardValues action', () => {
+  it('should create SET_CARD_VALUES with default values when empty', () => {
+    const defaultResult = {
+      frontSide: '',
+      backSide: [],
+    }
+    const translationResult = setCardValues({})
+    expect(translationResult).to.eql({
+      type: SET_CARD_VALUES,
       payload: defaultResult,
     })
   })
 
-  it('setCardValues should create SET_CARD_VALUES action, frontSide, backSide', () => {
+  it('should create SET_CARD_VALUES action, frontSide, backSide', () => {
     const wordTo = 'Apfel'
     const wordFrom = 'apple'
     const translation = {
@@ -86,7 +138,7 @@ describe('setTranslationResult action', () => {
     expect(cardValues).to.eql(expected)
   })
 
-  it('when translation has translatedWords then card values should contain backSides of translatedWords', () => {
+  it('should contain backSides of translatedWords and wordTo when translation has translatedWords', () => {
     const translation = {
       pair: {
         wordTo: 'Apfel',
@@ -105,6 +157,9 @@ describe('setTranslationResult action', () => {
       payload: {
         frontSide: 'apple',
         backSide: [{
+          value: 'Apfel',
+          checked: 0,
+        }, {
           value: 'der Apfel',
           checked: 0,
         }, {
@@ -116,7 +171,43 @@ describe('setTranslationResult action', () => {
     expect(cardValues).to.eql(expected)
   })
 
-  it('when translation has no translatedWords then card values should contain backSides of pair', () => {
+  it('should contain backSides of one same translatedWord and wordTo when translatedWord is the same as wordTo', () => {
+    const wordTo = 'Apfel'
+    const translation = {
+      pair: {
+        wordTo,
+        wordFrom: 'apple',
+      },
+      translatedWords: [{
+        article: 'der',
+        word: 'Apfel',
+      }, {
+        word: 'wordWithoutArticle',
+      }, {
+        word: wordTo,
+      }],
+    }
+    const cardValues = setCardValues(translation)
+    const expected = {
+      type: SET_CARD_VALUES,
+      payload: {
+        frontSide: 'apple',
+        backSide: [{
+          value: wordTo,
+          checked: 0,
+        }, {
+          value: 'der Apfel',
+          checked: 0,
+        }, {
+          value: 'wordWithoutArticle',
+          checked: 0,
+        }],
+      },
+    }
+    expect(cardValues).to.eql(expected)
+  })
+
+  it('should contain backSides of pair when translation has no translatedWords then card values ', () => {
     const translation = {
       pair: {
         wordTo: 'Apfel',

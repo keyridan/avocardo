@@ -194,12 +194,17 @@ describe('async actions', () => {
     const expectedTranslationResult = {
       wordTo: 'Apfel',
       options: [{
+        word: 'Apfel',
+      }, {
         word: 'der Apfel',
       }],
     }
     const expectedCardValues = {
       frontSide: 'apple',
       backSide: [{
+        value: 'Apfel',
+        checked: 0,
+      }, {
         value: 'der Apfel',
         checked: 0,
       }],
@@ -243,12 +248,17 @@ describe('async actions', () => {
     const expectedTranslationResult = {
       wordTo: 'Apfel',
       options: [{
+        word: 'Apfel',
+      }, {
         word: 'der Apfel',
       }],
     }
     const expectedCardValues = {
       frontSide: 'apple',
       backSide: [{
+        value: 'Apfel',
+        checked: 0,
+      }, {
         value: 'der Apfel',
         checked: 0,
       }],
