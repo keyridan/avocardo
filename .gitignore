@@ -18,3 +18,4 @@ coverage
 # project
 __trash__
 dist
+/yarn.lock

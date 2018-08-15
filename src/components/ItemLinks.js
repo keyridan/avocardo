@@ -8,6 +8,7 @@ const ItemLinks = ({ value, fromLanguage, toLanguage }) => (
     {value.split(' ').map(item => (
 // eslint-disable-next-line jsx-a11y/anchor-is-valid
       <Link
+        onClick={event => event.stopPropagation()}
         to={translationLink({
           fromLanguage: toLanguage,
           toLanguage: fromLanguage,
