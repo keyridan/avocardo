@@ -19,7 +19,8 @@
     "cover": "cross-env COVER=true nyc --reporter=lcov --reporter=text npm run test",
     "list-browsers": "babel-node ./tools/printBrowsersList",
     "precommit": "lint-staged",
-    "postcommit": "git update-index -g"
+    "postcommit": "git update-index -g",
+    "heroku-postbuild": "yarn build"
   },
   "lint-staged": {
     "*.js": ["eslint --fix", "git add"]
@@ -30,6 +31,9 @@
     ],
     "instrument": false,
     "sourceMap": false
+  },
+  "engines": {
+    "yarn": "^1.7.0"
   },
   "dependencies": {
     "@material-ui/core": "latest",

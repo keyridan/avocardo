@@ -18,7 +18,7 @@ bs.init({
     ],
   },
 
-  port: 4000,
+  port: process.env.PORT || 4000,
 
   ui: {
     port: 4001,

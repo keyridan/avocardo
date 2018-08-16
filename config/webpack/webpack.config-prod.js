@@ -83,9 +83,9 @@ export default {
       svgo: null,
     }),
     new CompressionPlugin(),
-    new BundleAnalyzerPlugin({
-      openAnalyzer: false,
-    }),
+    // new BundleAnalyzerPlugin({
+    //   openAnalyzer: false,
+    // }),
     new StyleLintPlugin({
       configFile: '.stylelintrc.js',
       files: ['**/*.css'],
