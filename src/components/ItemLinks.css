@@ -1,0 +1,26 @@
+.item_link {
+  text-decoration: none;
+  cursor: pointer;
+  color: unset;
+}
+
+.item_link:visited {
+  text-decoration: none;
+}
+
+.item_child_link {
+  border-bottom: 1px dashed green;
+}
+
+.item_child_link:hover {
+  background-color: lightgreen;
+}
+
+.item_link_icon {
+  vertical-align: middle;
+  cursor: pointer;
+}
+
+.item_main_link:hover ~ .item_child_links{
+  background-color: lightcyan;
+}

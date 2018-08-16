@@ -2,8 +2,8 @@ import { connect } from 'react-redux'
 import ItemLinks from '../components/ItemLinks'
 
 const mapStateToProps = state => ({
-  fromLanguage: state.fromLanguage,
-  toLanguage: state.toLanguage,
+  toLanguage: state.fromLanguage,
+  fromLanguage: state.toLanguage,
 })
 
 export default connect(mapStateToProps)(ItemLinks)
