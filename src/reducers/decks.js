@@ -6,13 +6,11 @@ const decks = (state = { pending: false, values: [] }, action) => {
       return {
         ...state,
         pending: true,
-        values: [],
       }
     case FETCH_DECKS_FAILURE:
       return {
         ...state,
         pending: false,
-        values: [],
       }
     case FETCH_DECKS_SUCCESS:
       return {

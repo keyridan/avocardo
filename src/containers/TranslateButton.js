@@ -14,7 +14,7 @@ const TranslateButton = ({ className, translatePending, onClick }) => (
       color="primary"
       onClick={onClick}
     >
-      {translatePending ? 'pending_translation_btn' : 'translation_btn'}
+      {translatePending ? '' : 'translation_btn'}
     </SimpleButton >
     <Progress loading={translatePending} className={`${className}_progress`} />
   </div >

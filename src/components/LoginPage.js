@@ -12,50 +12,53 @@ import LoginButton from '../containers/LoginButton'
 import TranslatedTextContainer from '../containers/TranslatedTextContainer'
 import s from './LoginPage.css'
 
-const LoginPage = ({
-  tinyCardsLogin, setIdentifier, setPassword, showPassword, changeShowPassword,
-}) => {
+const LoginPage = ({ tinyCardsLogin, setIdentifier, setPassword, showPassword, changeShowPassword, login }) => {
   const {
     identifier, password,
   } = tinyCardsLogin
   return (
     <div className={s.login_page} >
-      <TextField
-        id="email"
-        key="email"
-        label={<TranslatedTextContainer value="email" />}
-        className="tiny-cards-login"
-        type="e-mail"
-        autoComplete="current-e-mail"
-        margin="normal"
-        onChange={event => setIdentifier(event.target.value)}
-        value={identifier}
-      />
-      <br />
-      <FormControl >
-        <InputLabel htmlFor="adornment-password" >
-          <TranslatedTextContainer value="password" />
-        </InputLabel >
-        <Input
-          id="adornment-password"
-          type={showPassword ? 'text' : 'password'}
-          value={password}
-          autoComplete="current-password"
-          className="tiny-cards-password"
-          onChange={event => setPassword(event.target.value)}
-          endAdornment={
-            <InputAdornment position="end" >
-              <IconButton
-                aria-label="Toggle password visibility"
-                onClick={changeShowPassword}
-              >
-                {showPassword ? <VisibilityOff /> : <Visibility />}
-              </IconButton >
-            </InputAdornment >
-          }
+      <div className={s.login_form} >
+        <TextField
+          id="email"
+          key="email"
+          label={<TranslatedTextContainer value="email-address" />}
+          className="tiny-cards-login"
+          type="e-mail"
+          autoComplete="current-e-mail"
+          margin="normal"
+          onChange={event => setIdentifier(event.target.value)}
+          value={identifier}
         />
-      </FormControl >
-      <br />
+        <FormControl >
+          <InputLabel htmlFor="adornment-password" >
+            <TranslatedTextContainer value="password" />
+          </InputLabel >
+          <Input
+            id="adornment-password"
+            type={showPassword ? 'text' : 'password'}
+            value={password}
+            autoComplete="current-password"
+            className="tiny-cards-password"
+            onChange={event => setPassword(event.target.value)}
+            onKeyPress={(event) => {
+              if (event.key === 'Enter') {
+                login()
+              }
+            }}
+            endAdornment={
+              <InputAdornment position="end" >
+                <IconButton
+                  aria-label="Toggle password visibility"
+                  onClick={changeShowPassword}
+                >
+                  {showPassword ? <VisibilityOff /> : <Visibility />}
+                </IconButton >
+              </InputAdornment >
+            }
+          />
+        </FormControl >
+      </div >
       <LoginButton className={s.login_button} />
     </div >
   )
@@ -68,6 +71,7 @@ LoginPage.propTypes = {
   }).isRequired,
   setIdentifier: PropTypes.func.isRequired,
   setPassword: PropTypes.func.isRequired,
+  changeShowPassword: PropTypes.func.isRequired,
   showPassword: PropTypes.bool.isRequired,
 }
 
