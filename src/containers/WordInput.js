@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import FormHelperText from '@material-ui/core/FormHelperText'
 import PropTypes from 'prop-types'
-import { setWord, setWordToHistory } from '../actions'
+import { setWord, setWordToHistoryOrClearHistory } from '../actions'
 import SimpleInput from '../components/SimpleInput'
 import TranslatedTextContainer from '../containers/TranslatedTextContainer'
 
@@ -38,7 +38,7 @@ const mapDispatchToProps = dispatch => ({
     dispatch(setWord(event.target.value))
   },
   onEnterKey: () => {
-    dispatch(setWordToHistory())
+    dispatch(setWordToHistoryOrClearHistory())
   },
 })
 

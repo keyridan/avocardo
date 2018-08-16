@@ -254,9 +254,7 @@ export const setPassword = value => ({
   payload: value,
 })
 
-export const translate = ({
-  toLanguage, word, fromLanguage, infoProvider,
-}) => {
+export const translate = ({ toLanguage, word, fromLanguage, infoProvider }) => {
   if (!word) {
     return Promise.resolve()
   }
@@ -354,11 +352,6 @@ export const translateAndSetValues = () => (dispatch, getState) =>
     dispatch(setInfos(getState().translation.infos))
   })
 
-export const setWordToHistory = () => (dispatch, getState) => {
-  const path = translationLink(getState())
-  return dispatch(push(path))
-}
-
 export const setWordToHistoryAndReverseLanguages = value => (dispatch, getState) => {
   const { fromLanguage, toLanguage } = getState()
   const path = translationLink({
@@ -390,21 +383,61 @@ const reverseLanguages = () => (dispatch, getState) => {
   dispatch(clearTranslationResult())
 }
 
-export const reverseLanguagesAndTranslate = () => (dispatch) => {
-  dispatch(reverseLanguages())
-  return dispatch(translateAndSetValues())
+export const setFromLanguageOrReverseLanguages = fromLanguage => (dispatch, getState) => {
+  const { toLanguage } = getState()
+  dispatch(fromLanguage === toLanguage
+    ? reverseLanguages()
+    : chooseFromLanguage(fromLanguage))
 }
 
-export const setFromLanguage = newValue => (dispatch, getState) => {
+export const setToLanguageOrReverseLanguages = toLanguage => (dispatch, getState) => {
+  const { fromLanguage } = getState()
+  dispatch(toLanguage === fromLanguage
+    ? reverseLanguages()
+    : chooseToLanguage(toLanguage))
+}
+
+const pushFromLanguage = newValue => (dispatch, getState) => {
   const { fromLanguage, toLanguage, word } = getState()
   return dispatch(push(newValue === toLanguage
     ? translationLink({ fromLanguage: newValue, toLanguage: fromLanguage, word })
     : translationLink({ fromLanguage: newValue, toLanguage, word })))
 }
 
-export const setToLanguage = newValue => (dispatch, getState) => {
+const pushToLanguage = newValue => (dispatch, getState) => {
   const { fromLanguage, toLanguage, word } = getState()
   return dispatch(push(newValue === fromLanguage
     ? translationLink({ fromLanguage: toLanguage, toLanguage: newValue, word })
     : translationLink({ fromLanguage, toLanguage: newValue, word })))
+}
+
+export const setFromLanguage = newValue => (dispatch, getState) => {
+  const { word } = getState()
+  return dispatch(word
+    ? pushFromLanguage(newValue)
+    : setFromLanguageOrReverseLanguages(newValue))
+}
+
+export const setToLanguage = newValue => (dispatch, getState) => {
+  const { word } = getState()
+  return dispatch(word
+    ? pushToLanguage(newValue)
+    : setToLanguageOrReverseLanguages(newValue))
+}
+
+const setWordToHistory = () => (dispatch, getState) => {
+  const path = translationLink(getState())
+  return dispatch(push(path))
+}
+
+const clearHistoryAndValues = () => (dispatch) => {
+  dispatch(clearTranslationResult())
+  return dispatch(push('/'))
+}
+
+export const setWordToHistoryOrClearHistory = () => (dispatch, getState) => {
+  const { word } = getState()
+  return dispatch(word
+    ? setWordToHistory()
+    : clearHistoryAndValues())
 }

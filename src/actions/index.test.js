@@ -228,64 +228,6 @@ describe('async actions', () => {
     })
   })
 
-  it('reverseLanguagesAndTranslate should dispatch translate and set values ', () => {
-    const expectedTranslation = {
-      pair: { wordTo: 'Apfel', wordFrom: 'apple' },
-      translatedWords: [
-        {
-          article: 'der',
-          word: 'Apfel',
-        },
-      ],
-      infos: [],
-    }
-    const store = mockStore({
-      fromLanguage: 'EN',
-      toLanguage: 'DE',
-      word: 'testWord',
-      translation: expectedTranslation,
-    })
-    const expectedTranslationResult = {
-      wordTo: 'Apfel',
-      options: [{
-        word: 'Apfel',
-      }, {
-        word: 'der Apfel',
-      }],
-    }
-    const expectedCardValues = {
-      frontSide: 'apple',
-      backSide: [{
-        value: 'Apfel',
-        checked: 0,
-      }, {
-        value: 'der Apfel',
-        checked: 0,
-      }],
-    }
-    mockTranslate(expectedTranslation)
-    const expectedActions = [
-      { type: CHOOSE_FROM_LANGUAGE, payload: 'DE' },
-      { type: CHOOSE_RECENT_FROM_LANGUAGE, payload: ['DE'] },
-      { type: CHOOSE_TO_LANGUAGE, payload: 'EN' },
-      { type: CHOOSE_RECENT_TO_LANGUAGE, payload: ['EN'] },
-      { type: SET_TRANSLATION_RESULT, payload: { wordTo: '', options: [] } },
-      { type: TRANSLATE_BEGIN },
-      { type: TRANSLATE_SUCCESS, payload: expectedTranslation, meta: undefined },
-      { type: SET_TRANSLATION_RESULT, payload: expectedTranslationResult },
-      { type: SET_CARD_VALUES, payload: expectedCardValues },
-      {
-        type: SET_INFO_VALUES,
-        payload: {
-          LEO: {},
-        },
-      },
-    ]
-    return store.dispatch(actions.reverseLanguagesAndTranslate()).then(() => {
-      expect(store.getActions()).to.eql(expectedActions)
-    })
-  })
-
   it('should dispatch LOGIN_SUCCESS when login is called', () => {
     const tinyCardsLogin = {
       identifier: 'test',

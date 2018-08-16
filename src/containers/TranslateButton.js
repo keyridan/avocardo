@@ -1,9 +1,8 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { withRouter } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import SimpleButton from '../components/SimpleButton'
-import { setWordToHistory } from '../actions'
+import { setWordToHistoryOrClearHistory } from '../actions'
 
 const TranslateButton = ({ className, translatePending, onClick }) => (
   <div className={className} >
@@ -31,11 +30,11 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   onClick: () => {
-    dispatch(setWordToHistory())
+    dispatch(setWordToHistoryOrClearHistory())
   },
 })
 
-export default withRouter(connect(
+export default connect(
   mapStateToProps,
   mapDispatchToProps,
-)(TranslateButton))
+)(TranslateButton)
