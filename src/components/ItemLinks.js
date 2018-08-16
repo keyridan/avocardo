@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
-import LinkIcon from '@material-ui/icons/Link'
+import Launch from '@material-ui/icons/Launch'
 import { translationLink } from '../actions'
 import s from './ItemLinks.css'
 
@@ -18,7 +18,7 @@ const ItemLinks = ({
         word: value,
       })}
     >
-      <LinkIcon className={s.item_link_icon} />
+      <Launch className={s.item_link_icon} />
     </Link >
     <span className={s.item_child_links} >
       {items.map((item, index) => (
