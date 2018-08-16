@@ -1,11 +1,20 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import TextField from '@material-ui/core/TextField'
+import IconButton from '@material-ui/core/IconButton'
+import Input from '@material-ui/core/Input'
+import InputLabel from '@material-ui/core/InputLabel'
+import InputAdornment from '@material-ui/core/InputAdornment'
+import FormControl from '@material-ui/core/FormControl'
+import Visibility from '@material-ui/icons/Visibility'
+import VisibilityOff from '@material-ui/icons/VisibilityOff'
 import LoginButton from '../containers/LoginButton'
 import TranslatedTextContainer from '../containers/TranslatedTextContainer'
 import s from './LoginPage.css'
 
-const LoginPage = ({ tinyCardsLogin, setIdentifier, setPassword }) => {
+const LoginPage = ({
+  tinyCardsLogin, setIdentifier, setPassword, showPassword, changeShowPassword,
+}) => {
   const {
     identifier, password,
   } = tinyCardsLogin
@@ -23,16 +32,29 @@ const LoginPage = ({ tinyCardsLogin, setIdentifier, setPassword }) => {
         value={identifier}
       />
       <br />
-      <TextField
-        id="password-input"
-        label={<TranslatedTextContainer value="password" />}
-        className="tiny-cards-password"
-        type="password"
-        autoComplete="current-password"
-        margin="normal"
-        onChange={event => setPassword(event.target.value)}
-        value={password}
-      />
+      <FormControl >
+        <InputLabel htmlFor="adornment-password" >
+          <TranslatedTextContainer value="password" />
+        </InputLabel >
+        <Input
+          id="adornment-password"
+          type={showPassword ? 'text' : 'password'}
+          value={password}
+          autoComplete="current-password"
+          className="tiny-cards-password"
+          onChange={event => setPassword(event.target.value)}
+          endAdornment={
+            <InputAdornment position="end" >
+              <IconButton
+                aria-label="Toggle password visibility"
+                onClick={changeShowPassword}
+              >
+                {showPassword ? <VisibilityOff /> : <Visibility />}
+              </IconButton >
+            </InputAdornment >
+          }
+        />
+      </FormControl >
       <br />
       <LoginButton className={s.login_button} />
     </div >
@@ -46,6 +68,7 @@ LoginPage.propTypes = {
   }).isRequired,
   setIdentifier: PropTypes.func.isRequired,
   setPassword: PropTypes.func.isRequired,
+  showPassword: PropTypes.bool.isRequired,
 }
 
 export default LoginPage

@@ -8,7 +8,7 @@ import {
   CHANGE_CHOOSE_LANGUAGE_STATE,
   CHANGE_DECK_LIST_STATE,
   CHANGE_INFO_SWITCHER_STATE,
-  CHANGE_OPEN_LOGIN_FORM,
+  CHANGE_OPEN_LOGIN_FORM, CHANGE_SHOW_PASSWORD,
   CHANGE_THEME_TYPE_STATE,
   CHOOSE_DECK,
   CHOOSE_FROM_LANGUAGE,
@@ -205,6 +205,10 @@ export const changeThemeTypeState = () => ({
   type: CHANGE_THEME_TYPE_STATE,
 })
 
+export const changeShowPassword = () => ({
+  type: CHANGE_SHOW_PASSWORD,
+})
+
 export const changeLoginFormState = anchorEl => ({
   type: CHANGE_OPEN_LOGIN_FORM,
   payload: anchorEl,
@@ -254,7 +258,9 @@ export const setPassword = value => ({
   payload: value,
 })
 
-export const translate = ({ toLanguage, word, fromLanguage, infoProvider }) => {
+export const translate = ({
+  toLanguage, word, fromLanguage, infoProvider,
+}) => {
   if (!word) {
     return Promise.resolve()
   }
