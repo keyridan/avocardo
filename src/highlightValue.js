@@ -113,12 +113,11 @@ function highlightedIfNeedHighlight(splitedValue, highlights, className) {
 
 export function highlightedValue({ highlights, value, className }) {
   const splitedValues = splitValueBySpacesAndAddNeedHighlightProperty({ highlights, value })
-  return (
-    <span >{
-      splitedValues.flatMap((splitedValue) => {
-          const finalValue = highlightedIfNeedHighlight(splitedValue, highlights, className)
-        return (<span>{finalValue}<span> </span></span>)
-        })}
-    </span >
-  )
+  return splitedValues.flatMap((splitedValue) => {
+    const finalValue = highlightedIfNeedHighlight(splitedValue, highlights, className)
+    return {
+      value: splitedValue.word,
+      children: (<span>{finalValue}</span>),
+    }
+  })
 }

@@ -9,7 +9,10 @@ describe('highlightedValue', () => {
       wordPart: 'Apfel',
       value: 'Apfel',
     }]
-    const wrapper = shallow(highlightedValue({ highlights, value, className: 'testClassName' }))
+    const highlightedResult = highlightedValue({ highlights, value, className: 'testClassName' })
+    expect(highlightedResult, 'has 1 item').to.have.lengthOf(1)
+    expect(highlightedResult[0].value, 'has value').to.equal('Apfel')
+    const wrapper = shallow(highlightedResult[0].children)
     expect(wrapper.contains(<span className="testClassName" >Apfel</span >)).to.equal(true)
   })
 
@@ -22,7 +25,10 @@ describe('highlightedValue', () => {
       wordPart: 'lesen',
       value: 'esen',
     }]
-    const wrapper = shallow(highlightedValue({ highlights, value, className: 'testClassName' }))
+    const highlightedResult = highlightedValue({ highlights, value, className: 'testClassName' })
+    expect(highlightedResult, 'has 1 item').to.have.lengthOf(1)
+    expect(highlightedResult[0].value, 'has value').to.equal('gelesen')
+    const wrapper = shallow(highlightedResult[0].children)
     expect(wrapper.contains(<span className="testClassName" >ge</span >)).to.equal(true)
     expect(wrapper.contains(<span className="testClassName" >esen</span >)).to.equal(true)
   })
@@ -36,7 +42,10 @@ describe('highlightedValue', () => {
       wordPart: 'Valu',
       value: 'alu',
     }]
-    const wrapper = shallow(highlightedValue({ highlights, value, className: 'testClassName' }))
+    const highlightedResult = highlightedValue({ highlights, value, className: 'testClassName' })
+    expect(highlightedResult, 'has 6 items').to.have.lengthOf(6)
+    expect(highlightedResult[3].value, 'has value').to.equal('bigTestValue')
+    const wrapper = shallow(highlightedResult[3].children)
     expect(wrapper.contains(<span className="testClassName" >ig</span >)).to.equal(true)
     expect(wrapper.contains(<span className="testClassName" >alu</span >)).to.equal(true)
   })
