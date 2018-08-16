@@ -3,10 +3,16 @@ import { FETCH_DECKS_BEGIN, FETCH_DECKS_FAILURE, FETCH_DECKS_SUCCESS } from '../
 const decks = (state = { pending: false, values: [] }, action) => {
   switch (action.type) {
     case FETCH_DECKS_BEGIN:
+      return {
+        ...state,
+        pending: true,
+        values: [],
+      }
     case FETCH_DECKS_FAILURE:
       return {
         ...state,
         pending: false,
+        values: [],
       }
     case FETCH_DECKS_SUCCESS:
       return {
