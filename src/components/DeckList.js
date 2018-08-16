@@ -6,15 +6,14 @@ import FormControl from '@material-ui/core/FormControl'
 import Select from '@material-ui/core/Select'
 import FormHelperText from '@material-ui/core/FormHelperText'
 import MenuItem from '@material-ui/core/MenuItem'
+import LinearProgress from '@material-ui/core/LinearProgress'
 import DeckItem from './DeckItem'
 import TranslatedTextContainer from '../containers/TranslatedTextContainer'
 import s from './DeckList.css'
 
-const DeckList = ({
-  auth, decks, deck, deckListState, chooseDeck, changeDeckListState, fetchDecks,
-}) => (
-  <div className={s.deck_list}>
-    <FormControl >
+const DeckList = ({ auth, decks, deck, deckListState, chooseDeck, changeDeckListState, fetchDecks }) => (
+  <div className={s.deck_list} >
+    <FormControl required >
       <InputLabel htmlFor="deck-simple" >
         <TranslatedTextContainer value="deck_list_helper" />
       </InputLabel >
@@ -30,10 +29,15 @@ const DeckList = ({
           changeDeckListState()
         }}
         renderValue={value => (<DeckItem deck={value} />)}
-        input={<Input name="deck" id="deck-simple" />}
+        input={
+          <Input
+            name="deck"
+            id="deck-simple"
+          />}
       >
+        {decks.pending && <LinearProgress color="secondary" className={s.decks_progress} />}
         <MenuItem value='' />
-        {decks.map(deckItem => (
+        {decks.values.map(deckItem => (
           <MenuItem key={deckItem.id} value={deckItem} >
             <DeckItem deck={deckItem} />
           </MenuItem >

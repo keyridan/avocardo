@@ -2,12 +2,13 @@ import React from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import SimpleButton from '../components/SimpleButton'
+import Progress from '../components/Progress'
 import { setWordToHistoryOrClearHistory } from '../actions'
 
 const TranslateButton = ({ className, translatePending, onClick }) => (
-  <div className={className} >
+  <div className={`${className}_container`} >
     <SimpleButton
-      className="btn_translate"
+      className={className}
       active={translatePending}
       variant="raised"
       color="primary"
@@ -15,6 +16,7 @@ const TranslateButton = ({ className, translatePending, onClick }) => (
     >
       {translatePending ? 'pending_translation_btn' : 'translation_btn'}
     </SimpleButton >
+    <Progress loading={translatePending} className={`${className}_progress`} />
   </div >
 )
 

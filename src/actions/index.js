@@ -142,7 +142,7 @@ export const setFrontSide = value => ({
 })
 
 const addToRecentIfNotExist = (recentLanguages = [], value, dispatchChooseRecentLanguage) => {
-  if (recentLanguages.indexOf(value) === -1) {
+  if (recentLanguages.indexOf(value) === -1 && value !== 'AUTO') {
     dispatchChooseRecentLanguage([
       value,
       ...recentLanguages,
