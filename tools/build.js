@@ -34,6 +34,10 @@ compiler.run((err, stats) => {
     return
   }
 
+  if (stats.compilation.errors) {
+    console.log(chalk.red(stats.compilation.errors))
+  }
+
   if (stats.hasErrors()) {
     console.log(chalk.red.bold(
       `
