@@ -2,8 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import TableCell from '@material-ui/core/TableCell'
 import TableRow from '@material-ui/core/TableRow'
-import HighlightedValue from './HighlightedValue'
-import InfoDataListLinkItemContainer from '../containers/InfoDataListLinkItemContainer'
+import HighlightedItemLinks from './HighlightedItemLinks'
 import s from './InfoTable.css'
 
 const InfoDataRow = ({ infoData, highlightClassName }) => (
@@ -12,14 +11,10 @@ const InfoDataRow = ({ infoData, highlightClassName }) => (
       <TableCell >{infoData.title}</TableCell >
     )}
     <TableCell >
-      <HighlightedValue
+      <HighlightedItemLinks
         value={infoData.value.trim()}
         highlights={infoData.highlights}
         className={highlightClassName}
-      />
-      <InfoDataListLinkItemContainer
-        className={s.info_table_row_item}
-        value={infoData.value.trim()}
       />
     </TableCell >
   </TableRow >

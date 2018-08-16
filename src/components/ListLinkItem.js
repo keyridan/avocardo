@@ -12,6 +12,7 @@ const ListLinkItem = ({
       fromLanguage={fromLanguage}
       toLanguage={toLanguage}
       value={value}
+      items={value.split(' ').map(item => ({ value: item, children: (<span>{item}</span>) }))}
     />
   </SimpleListItem >
 )

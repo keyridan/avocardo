@@ -6,7 +6,7 @@ import { translationLink } from '../actions'
 import s from './ItemLinks.css'
 
 const ItemLinks = ({
-  value, fromLanguage, toLanguage, className,
+  value, items, fromLanguage, toLanguage, className,
 }) => (
   <div >
     <Link
@@ -19,20 +19,20 @@ const ItemLinks = ({
       })}
     >
       <LinkIcon className={s.item_link_icon} />
-    </Link>
-    <span className={s.item_child_links}>
-      {value.split(' ').map(item => (
+    </Link >
+    <span className={s.item_child_links} >
+      {items.map((item, index) => (
         <Link
           className={`${className} ${s.item_link} ${s.item_child_link}`}
           onClick={event => event.stopPropagation()}
           to={translationLink({
             fromLanguage,
             toLanguage,
-            word: item,
+            word: item.value,
           })}
-          key={fromLanguage + toLanguage + item}
+          key={item.value + index}
         >
-          {item}
+          {item.children || item.value}
         </Link >
       )).flatMap((element, i) => ([element,
         <span key={i} >
@@ -46,8 +46,13 @@ const ItemLinks = ({
 
 ItemLinks.propTypes = {
   value: PropTypes.string.isRequired,
+  items: PropTypes.arrayOf(PropTypes.shape({
+    value: PropTypes.string.isRequired,
+    children: PropTypes.node,
+  })),
   fromLanguage: PropTypes.string.isRequired,
   toLanguage: PropTypes.string.isRequired,
+  className: PropTypes.string.isRequired,
 }
 
 export default ItemLinks
