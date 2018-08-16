@@ -5,7 +5,7 @@ export const CARDS_TRANSLATE_DISMISS_ERROR = 'CARDS_TRANSLATE_DISMISS_ERROR'
 export const DEFAULT_FROM_LANGUAGE = 'EN'
 export const DEFAULT_TO_LANGUAGE = 'DE'
 
-const HEROKU_URL = 'http://cardsbuddy.herokuapp.com/api/'
+const HEROKU_URL = 'https://cardsbuddy.herokuapp.com/api/'
 const LOCAL_URL = 'http://localhost:8080/api/'
 export const API_URL = HEROKU_URL
 export const TRANSLATE_URL = `${API_URL}translate/`

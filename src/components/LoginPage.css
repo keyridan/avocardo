@@ -11,7 +11,7 @@
   flex-direction: column;
 }
 
-.login_form label {
+.login_form label, .login_form input {
   padding-left: 15px;
 }
 

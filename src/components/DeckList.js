@@ -11,7 +11,9 @@ import DeckItem from './DeckItem'
 import TranslatedTextContainer from '../containers/TranslatedTextContainer'
 import s from './DeckList.css'
 
-const DeckList = ({ auth, decks, deck, deckListState, chooseDeck, changeDeckListState, fetchDecks }) => (
+const DeckList = ({
+  auth, decks, deck, deckListState, chooseDeck, changeDeckListState, fetchDecks,
+}) => (
   <div className={s.deck_list} >
     <FormControl required >
       <InputLabel htmlFor="deck-simple" >
@@ -36,7 +38,7 @@ const DeckList = ({ auth, decks, deck, deckListState, chooseDeck, changeDeckList
           />}
       >
         {decks.pending && <LinearProgress color="secondary" className={s.decks_progress} />}
-        <MenuItem value='' />
+        <MenuItem value="" />
         {decks.values.map(deckItem => (
           <MenuItem key={deckItem.id} value={deckItem} >
             <DeckItem deck={deckItem} />
@@ -49,6 +51,7 @@ const DeckList = ({ auth, decks, deck, deckListState, chooseDeck, changeDeckList
         </FormHelperText >
       ) : (
         <FormHelperText >
+          <sup>*</sup>
           <TranslatedTextContainer value="deck_selector_login_helper" />
         </FormHelperText >
       )}
