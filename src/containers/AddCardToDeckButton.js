@@ -11,7 +11,7 @@ const AddCardToDeckButton = ({ className, addCardToDeckPending, addCardToDeck })
       className={className}
       onClick={addCardToDeck}
     >
-      {addCardToDeckPending ? 'pending_add_card_to_deck_btn' : 'add_card_to_deck'}
+      {addCardToDeckPending ? '' : 'add_card_to_deck'}
     </SimpleButton >
     <Progress
       loading={addCardToDeckPending}
