@@ -34,7 +34,6 @@ const styles = theme => ({
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    padding: `${theme.spacing.unit * 2}px ${theme.spacing.unit * 3}px ${theme.spacing.unit * 3}px`,
   },
   formHeader: {
     display: 'flex',
@@ -46,7 +45,9 @@ const styles = theme => ({
   },
 })
 
-const LoginPage = ({ tinyCardsLogin, setIdentifier, setPassword, showPassword, changeShowPassword, login, classes }) => {
+const LoginPage = ({
+  tinyCardsLogin, setIdentifier, setPassword, showPassword, changeShowPassword, login, classes,
+}) => {
   const {
     identifier, password,
   } = tinyCardsLogin
