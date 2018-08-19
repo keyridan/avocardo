@@ -1,1 +1,1 @@
-web: yarn eject
+web: yarn start
