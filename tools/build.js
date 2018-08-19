@@ -39,13 +39,11 @@ compiler.run((err, stats) => {
   }
 
   if (stats.hasErrors()) {
-    console.log(chalk.red.bold(
-      `
+    const errorMessage = `
 :(  ERRORS DURING COMPILATION!
 =>  Fix them and try again!`
-    ))
-
-    return
+    console.log(chalk.red.bold(errorMessage))
+    throw new Error(errorMessage)
   }
 
   console.log(stats.toString({
