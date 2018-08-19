@@ -115,6 +115,8 @@
   "deck_list_helper": "Колоды",
   "deck_selector_helper": "Выберите колоду для сохранения карты",
   "deck_selector_login_helper": "Войдите через Tinycards чтобы выбрать",
+  "tinycards_title": "Tinycards",
+  "additional_info": "Дополнительная информация",
   "card_front_side_title": "Лицевая сторона",
   "card_back_side_title": "Задняя сторона",
   "email": "Логин",

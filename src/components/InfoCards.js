@@ -1,10 +1,22 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import withStyles from '@material-ui/core/styles/withStyles'
+import Typography from '@material-ui/core/Typography'
 import InfoPanel from './InfoPanel'
+import TranslatedTextContainer from '../containers/TranslatedTextContainer'
 import { INFO_PROVIDERS } from '../constants'
 
-const InfoCards = ({ infos, className, infoProvider }) => (
-  <div className={className} >
+const styles = theme => ({
+  container: {
+    paddingTop: theme.spacing.unit * 6,
+  },
+})
+
+const InfoCards = ({ infos, className, infoProvider, classes }) => (
+  <div className={`${className} ${classes.container}`} >
+    <Typography variant="title" gutterBottom>
+      <TranslatedTextContainer value="additional_info" />
+    </Typography>
     {INFO_PROVIDERS.map((provider, index) =>
       (<InfoPanel
           info={infos[provider]}
@@ -20,4 +32,4 @@ InfoCards.propTypes = {
   className: PropTypes.string.isRequired,
 }
 
-export default InfoCards
+export default withStyles(styles)(InfoCards)
