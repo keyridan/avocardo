@@ -6,7 +6,6 @@ import SpriteLoaderPlugin from 'svg-sprite-loader/plugin'
 import MiniCssExtractPlugin from 'mini-css-extract-plugin'
 import ImageminPlugin from 'imagemin-webpack-plugin'
 import CompressionPlugin from 'compression-webpack-plugin'
-import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer'
 import StyleLintPlugin from 'stylelint-webpack-plugin'
 
 import { DIST, SRC } from './paths'

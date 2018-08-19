@@ -11,7 +11,7 @@
     "clean": "rimraf ./dist",
     "prebuild": "run-s clean test",
     "build": "cross-env NODE_ENV=production babel-node ./tools/build.js",
-    "start": "react-scripts start",
+    "start": "npm run serve:dist",
     "lint": "eslint ./src ./tools ./config \"./*.js\"",
     "lint:fix": "eslint --fix ./src ./tools ./config \"./*.js\"",
     "test": "cross-env TEST=true mocha-webpack",
@@ -23,7 +23,10 @@
     "heroku-postbuild": "yarn build"
   },
   "lint-staged": {
-    "*.js": ["eslint --fix", "git add"]
+    "*.js": [
+      "eslint --fix",
+      "git add"
+    ]
   },
   "nyc": {
     "include": [
@@ -59,7 +62,6 @@
     "whatwg-fetch": "2.0.4"
   },
   "devDependencies": {
-    "react-scripts": "^1.1.4",
     "autoprefixer": "8.6.2",
     "babel-cli": "6.26.0",
     "babel-core": "6.26.3",
