@@ -15,39 +15,43 @@ import LoginButton from '../containers/LoginButton'
 import TranslatedTextContainer from '../containers/TranslatedTextContainer'
 import s from './LoginPage.css'
 
-const styles = theme => ({
-  layout: {
-    width: 'auto',
-    marginLeft: theme.spacing.unit * 3,
-    marginRight: theme.spacing.unit * 3,
-    [theme.breakpoints.up(400 + theme.spacing.unit * 3 * 2)]: {
-      width: 400,
-      marginLeft: 'auto',
-      marginRight: 'auto',
+const styles = (theme) => {
+  const padding = `${theme.spacing.unit * 2}px ${theme.spacing.unit * 3}px ${theme.spacing.unit * 3}px`
+  return {
+    layout: {
+      width: 'auto',
+      marginLeft: theme.spacing.unit * 3,
+      marginRight: theme.spacing.unit * 3,
+      [theme.breakpoints.up(400 + theme.spacing.unit * 3 * 2)]: {
+        width: 400,
+        marginLeft: 'auto',
+        marginRight: 'auto',
+      },
     },
-  },
-  avatar: {
-    width: 60,
-    height: 60,
-  },
-  paper: {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-  },
-  formHeader: {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-  },
-  login: {
-    marginBottom: theme.spacing.unit * 3,
-  },
-})
+    avatar: {
+      width: 60,
+      height: 60,
+    },
+    paper: {
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      padding,
+    },
+    formHeader: {
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+    },
+    login: {
+      marginBottom: theme.spacing.unit * 3,
+    },
+  }
+}
 
 const LoginPage = ({
-  tinyCardsLogin, setIdentifier, setPassword, showPassword, changeShowPassword, login, classes,
-}) => {
+                     tinyCardsLogin, setIdentifier, setPassword, showPassword, changeShowPassword, login, classes,
+                   }) => {
   const {
     identifier, password,
   } = tinyCardsLogin
@@ -76,7 +80,7 @@ const LoginPage = ({
             value={identifier}
           />
         </FormControl >
-        <FormControl required fullWidth className={classes.login}>
+        <FormControl required fullWidth className={classes.login} >
           <InputLabel htmlFor="adornment-password" >
             <TranslatedTextContainer value="password" />
           </InputLabel >
