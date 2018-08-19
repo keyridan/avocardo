@@ -3,10 +3,10 @@ import Button from '@material-ui/core/Button'
 import PropTypes from 'prop-types'
 import TranslatedTextContainer from '../containers/TranslatedTextContainer'
 
-const SimpleButton = ({
-  className, active, children, onClick, color, variant, value, size,
-}) => (
+const SimpleButton = ({ className, active, children, onClick, color, variant, value, size, type, fullWidth }) => (
   <Button
+    fullWidth={!!fullWidth}
+    type={type}
     className={className}
     onClick={onClick}
     disabled={active}

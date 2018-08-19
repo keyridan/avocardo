@@ -1,6 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import TextField from '@material-ui/core/TextField'
+import withStyles from '@material-ui/core/styles/withStyles'
+import Paper from '@material-ui/core/Paper'
+import Typography from '@material-ui/core/Typography'
+import Avatar from '@material-ui/core/Avatar'
 import IconButton from '@material-ui/core/IconButton'
 import Input from '@material-ui/core/Input'
 import InputLabel from '@material-ui/core/InputLabel'
@@ -12,25 +15,67 @@ import LoginButton from '../containers/LoginButton'
 import TranslatedTextContainer from '../containers/TranslatedTextContainer'
 import s from './LoginPage.css'
 
-const LoginPage = ({ tinyCardsLogin, setIdentifier, setPassword, showPassword, changeShowPassword, login }) => {
+const styles = theme => ({
+  layout: {
+    width: 'auto',
+    marginLeft: theme.spacing.unit * 3,
+    marginRight: theme.spacing.unit * 3,
+    [theme.breakpoints.up(400 + theme.spacing.unit * 3 * 2)]: {
+      width: 400,
+      marginLeft: 'auto',
+      marginRight: 'auto',
+    },
+  },
+  avatar: {
+    width: 60,
+    height: 60,
+  },
+  paper: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    padding: `${theme.spacing.unit * 2}px ${theme.spacing.unit * 3}px ${theme.spacing.unit * 3}px`,
+  },
+  formHeader: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+  },
+  login: {
+    marginBottom: theme.spacing.unit * 3,
+  },
+})
+
+const LoginPage = ({ tinyCardsLogin, setIdentifier, setPassword, showPassword, changeShowPassword, login, classes }) => {
   const {
     identifier, password,
   } = tinyCardsLogin
   return (
-    <div className={s.login_page} >
-      <div className={s.login_form} >
-        <TextField
-          id="email"
-          key="email"
-          label={<TranslatedTextContainer value="email-address" />}
-          className="tiny-cards-login"
-          type="e-mail"
-          autoComplete="current-e-mail"
-          margin="normal"
-          onChange={event => setIdentifier(event.target.value)}
-          value={identifier}
-        />
-        <FormControl >
+    <div className={classes.layout} >
+      <Paper className={classes.paper} >
+        <div className={classes.formHeader} >
+          <Avatar
+            className={`${s.avatar} ${classes.avatar}`}
+            src="https://upload.wikimedia.org/wikipedia/en/thumb/c/cb/Duolingo_logo_with_owl.svg/229px-Duolingo_logo_with_owl.svg.png"
+          />
+          <Typography variant="headline" >
+            <TranslatedTextContainer value="login_to_tiny_cards_form" />
+          </Typography >
+        </div >
+        <FormControl margin="normal" required fullWidth >
+          <InputLabel htmlFor="email" >
+            <TranslatedTextContainer value="email-address" />
+          </InputLabel >
+          <Input
+            id="email"
+            name="email"
+            autoComplete="email"
+            autoFocus
+            onChange={event => setIdentifier(event.target.value)}
+            value={identifier}
+          />
+        </FormControl >
+        <FormControl required fullWidth className={classes.login}>
           <InputLabel htmlFor="adornment-password" >
             <TranslatedTextContainer value="password" />
           </InputLabel >
@@ -58,8 +103,8 @@ const LoginPage = ({ tinyCardsLogin, setIdentifier, setPassword, showPassword, c
             }
           />
         </FormControl >
-      </div >
-      <LoginButton className={s.login_button} />
+        <LoginButton />
+      </Paper >
     </div >
   )
 }
@@ -75,4 +120,4 @@ LoginPage.propTypes = {
   showPassword: PropTypes.bool.isRequired,
 }
 
-export default LoginPage
+export default withStyles(styles)(LoginPage)

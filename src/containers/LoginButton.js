@@ -1,28 +1,30 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
-import SimpleButton from '../components/SimpleButton'
-import Progress from '../components/Progress'
+import ButtonWithProgress from '../components/ButtonWithProgress'
 import { login } from '../actions'
 
 const LoginButton = ({ className, pending, login }) => (
-  <div className={`${className}_container`} >
-    <SimpleButton
-      className={className}
-      onClick={login}
-      active={pending}
-      color="primary"
-    >
-      {pending ? '' : 'login_btn'}
-    </SimpleButton >
-    <Progress loading={pending} className={`${className}_progress`} />
-  </div >
+  <ButtonWithProgress
+    fullWidth
+    className={className}
+    loading={pending}
+    onClick={login}
+    buttonColor="primary"
+    progressColor="secondary"
+  >
+    login_btn
+  </ButtonWithProgress >
 )
 
 LoginButton.propTypes = {
   login: PropTypes.func.isRequired,
   pending: PropTypes.bool.isRequired,
-  className: PropTypes.string.isRequired,
+  className: PropTypes.string,
+}
+
+LoginButton.defaultProps = {
+  className: '',
 }
 
 const mapStateToProps = state => ({

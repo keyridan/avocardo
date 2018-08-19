@@ -3,9 +3,11 @@ import PropTypes from 'prop-types'
 import TextField from '@material-ui/core/TextField'
 
 const SimpleInput = ({
-  value, className, onChange, onKeyPress, onEnterKey,
+  value, className, onChange, onKeyPress, onEnterKey, fullWidth, label,
 }) => (
   <TextField
+    label={label || ''}
+    fullWidth={!!fullWidth}
     multiline
     className={className}
     onChange={onChange || console.log('onChange')}

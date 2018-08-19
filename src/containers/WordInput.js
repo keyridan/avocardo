@@ -11,6 +11,8 @@ const WordInput = ({
 }) => (
   <div className={className} >
     <SimpleInput
+      label={(<TranslatedTextContainer value="word_input_label" />)}
+      fullWidth
       className="word_input"
       onChange={onChange}
       onEnterKey={onEnterKey}

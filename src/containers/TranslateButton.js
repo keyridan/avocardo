@@ -1,23 +1,20 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
-import SimpleButton from '../components/SimpleButton'
-import Progress from '../components/Progress'
+import ButtonWithProgress from '../components/ButtonWithProgress'
 import { setWordToHistoryOrClearHistory } from '../actions'
 
 const TranslateButton = ({ className, translatePending, onClick }) => (
-  <div className={`${className}_container`} >
-    <SimpleButton
-      className={className}
-      active={translatePending}
-      variant="raised"
-      color="primary"
-      onClick={onClick}
-    >
-      {translatePending ? '' : 'translation_btn'}
-    </SimpleButton >
-    <Progress loading={translatePending} className={`${className}_progress`} />
-  </div >
+  <ButtonWithProgress
+    fullWidth
+    className={className}
+    loading={translatePending}
+    onClick={onClick}
+    buttonColor="primary"
+    progressColor="secondary"
+  >
+    translation_btn
+  </ButtonWithProgress >
 )
 
 TranslateButton.propTypes = {
