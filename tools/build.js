@@ -43,7 +43,7 @@ compiler.run((err, stats) => {
 :(  ERRORS DURING COMPILATION!
 =>  Fix them and try again!`
     console.log(chalk.red.bold(errorMessage))
-    throw new Error(errorMessage)
+    // throw new Error(errorMessage)
   }
 
   console.log(stats.toString({
