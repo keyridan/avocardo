@@ -11,10 +11,17 @@ import TableHead from '@material-ui/core/TableHead'
 import TableBody from '@material-ui/core/TableBody'
 import TableRow from '@material-ui/core/TableRow'
 import Paper from '@material-ui/core/Paper'
+import Grid from '@material-ui/core/Grid'
+import withStyles from '@material-ui/core/styles/withStyles'
 import InfoDataRow from './InfoDataRow'
-import s from './InfoTable.css'
 
-const InfoTable = ({ rows }) => (
+const styles = theme => ({
+  highlightedWord: {
+    color: theme.palette.type === 'dark' ? theme.palette.primary.light : theme.palette.primary.dark,
+  },
+})
+
+const InfoTable = ({ rows, classes }) => (
   <div >
     {rows && (
       <Paper >
@@ -23,24 +30,28 @@ const InfoTable = ({ rows }) => (
             <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />} >
               <Typography >{row.value}</Typography >
             </ExpansionPanelSummary >
-            <ExpansionPanelDetails className={s.info_table_container} >
-              {row.rows && row.rows.map(smalTitledRow => (
-                <Table className={s.info_table} >
-                  <TableHead >
-                    <TableRow >
-                      <TableCell >{smalTitledRow.value}</TableCell >
-                    </TableRow >
-                  </TableHead >
-                  {smalTitledRow.infoData && smalTitledRow.infoData.map(infoData => (
-                    <TableBody className={s.info_table_body} >
-                      <InfoDataRow
-                        infoData={infoData}
-                        highlightClassName={s.info_cell_highlight}
-                      />
-                    </TableBody >
-                  ))}
-                </Table >
-              ))}
+            <ExpansionPanelDetails >
+              <Grid container spacing={6} >
+                {row.rows && row.rows.map((smallTitledRow, index) => (
+                  <Grid key={index} item xs>
+                    <Table >
+                      <TableHead >
+                        <TableRow >
+                          <TableCell >{smallTitledRow.value}</TableCell >
+                        </TableRow >
+                      </TableHead >
+                      {smallTitledRow.infoData && smallTitledRow.infoData.map(infoData => (
+                        <TableBody >
+                          <InfoDataRow
+                            infoData={infoData}
+                            highlightClassName={classes.highlightedWord}
+                          />
+                        </TableBody >
+                      ))}
+                    </Table >
+                  </Grid >
+                ))}
+              </Grid >
             </ExpansionPanelDetails >
           </ExpansionPanel >
         ))}
@@ -57,4 +68,4 @@ InfoTable.propTypes = {
   })),
 }
 
-export default InfoTable
+export default withStyles(styles)(InfoTable)

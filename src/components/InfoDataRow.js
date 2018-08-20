@@ -3,10 +3,9 @@ import PropTypes from 'prop-types'
 import TableCell from '@material-ui/core/TableCell'
 import TableRow from '@material-ui/core/TableRow'
 import HighlightedItemLinks from './HighlightedItemLinks'
-import s from './InfoTable.css'
 
 const InfoDataRow = ({ infoData, highlightClassName }) => (
-  <TableRow className={s.info_table_row} >
+  <TableRow >
     {infoData.title && (
       <TableCell >{infoData.title}</TableCell >
     )}
