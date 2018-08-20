@@ -31,7 +31,7 @@ const InfoTable = ({ rows, classes }) => (
               <Typography >{row.value}</Typography >
             </ExpansionPanelSummary >
             <ExpansionPanelDetails >
-              <Grid container spacing={6} >
+              <Grid container spacing={8} >
                 {row.rows && row.rows.map((smallTitledRow, index) => (
                   <Grid key={index} item xs>
                     <Table >

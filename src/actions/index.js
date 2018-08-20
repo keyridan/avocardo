@@ -5,10 +5,12 @@ import {
   ADD_CARD_TO_DECK_FAILURE,
   ADD_CARD_TO_DECK_SUCCESS,
   ADD_CARD_TO_DECK_URL,
+  BACKSIDE_QUANTITY_ERROR,
   CHANGE_CHOOSE_LANGUAGE_STATE,
   CHANGE_DECK_LIST_STATE,
   CHANGE_INFO_SWITCHER_STATE,
-  CHANGE_OPEN_LOGIN_FORM, CHANGE_SHOW_PASSWORD,
+  CHANGE_OPEN_LOGIN_FORM,
+  CHANGE_SHOW_PASSWORD,
   CHANGE_THEME_TYPE_STATE,
   CHOOSE_DECK,
   CHOOSE_FROM_LANGUAGE,
@@ -33,7 +35,6 @@ import {
   SET_PASSWORD,
   SET_WORD,
   TOGGLE_OPTION,
-  TOGGLE_OPTION_ERROR,
   TRANSLATE_BEGIN,
   TRANSLATE_FAILURE,
   TRANSLATE_SUCCESS,
@@ -42,24 +43,38 @@ import {
 
 import { setCardValues, setTranslationResult } from './setTranslationValues'
 
-export const toggleOption = index => (dispatch, getState) => {
+export const toggleAllOptions = value => (dispatch, getState) => {
   const { backSide } = getState().flashCard
-
-  const newBackSide = backSide.map((backSideItem, itemIndex) => ((itemIndex === index)
-    ? { ...backSideItem, checked: backSideItem.checked === 0 ? 1 : 0 }
-    : backSideItem))
-
-  if (newBackSide.filter(item => item.checked === 1).length > 3) {
-    return dispatch({
-      type: TOGGLE_OPTION_ERROR,
-      payload: backSide,
-      message: 'you can select only 3 values',
-    })
-  }
+  const newBackSideValues = backSide.values.map(item => ({
+    ...item,
+    checked: value ? 1 : 0,
+  }))
 
   return dispatch({
     type: TOGGLE_OPTION,
-    payload: newBackSide,
+    payload: {
+      ...backSide,
+      checkedItems: value ? newBackSideValues.length : 0,
+      values: newBackSideValues,
+    },
+  })
+}
+export const toggleOption = index => (dispatch, getState) => {
+  const { backSide } = getState().flashCard
+
+  const newBackSideValues = backSide.values.map((backSideItem, itemIndex) => ((itemIndex === index)
+    ? { ...backSideItem, checked: backSideItem.checked === 0 ? 1 : 0 }
+    : backSideItem))
+
+  const checkedItems = newBackSideValues.filter(value => value.checked).length
+
+  return dispatch({
+    type: TOGGLE_OPTION,
+    payload: {
+      ...backSide,
+      checkedItems,
+      values: newBackSideValues,
+    },
   })
 }
 
@@ -258,9 +273,7 @@ export const setPassword = value => ({
   payload: value,
 })
 
-export const translate = ({
-  toLanguage, word, fromLanguage, infoProvider,
-}) => {
+export const translate = ({ toLanguage, word, fromLanguage, infoProvider }) => {
   if (!word) {
     return Promise.resolve()
   }
@@ -316,9 +329,8 @@ export const fetchDecks = () => (dispatch, getState) => {
   })
 }
 
-export const addCardToDeck = () => (dispatch, getState) => {
-  const { token, deck, flashCard } = getState()
-  const concepts = flashCard.backSide
+const sendCardToDeck = ({ flashCard, deck, token }) => (dispatch) => {
+  const concepts = flashCard.backSide.values
     .filter(option => option.checked)
     .map(option => ({ fact: { text: option.value, type: 'TEXT' } }))
   const data = {
@@ -345,6 +357,18 @@ export const addCardToDeck = () => (dispatch, getState) => {
       types: [ADD_CARD_TO_DECK_BEGIN, ADD_CARD_TO_DECK_SUCCESS, ADD_CARD_TO_DECK_FAILURE],
     },
   })
+}
+
+const addCardError = quantity => ({
+  type: BACKSIDE_QUANTITY_ERROR,
+  payload: quantity,
+})
+
+export const addCardToDeck = () => (dispatch, getState) => {
+  const { backSide } = getState().flashCard
+  return dispatch(backSide.maxCheckedItems >= backSide.checkedItems
+    ? sendCardToDeck(getState())
+    : addCardError(backSide.checkedItems))
 }
 
 export const translationLink = ({ fromLanguage, toLanguage, word }) => (

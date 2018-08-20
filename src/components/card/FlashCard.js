@@ -9,8 +9,8 @@ import TableRow from '@material-ui/core/TableRow'
 import Paper from '@material-ui/core/Paper'
 import Grid from '@material-ui/core/Grid'
 import withStyles from '@material-ui/core/styles/withStyles'
+import Checkbox from '@material-ui/core/Checkbox'
 import SimpleInput from '../common/SimpleInput'
-import CheckBoxCardItem from '../../containers/CheckBoxCardItem'
 import s from './FlashCard.css'
 import TranslatedTextContainer from '../../containers/TranslatedTextContainer'
 
@@ -21,7 +21,7 @@ const styles = theme => ({
   },
 })
 
-const FlashCard = ({ frontSide, backSide, setFrontSide, setBackSideValue, classes }) => (
+const FlashCard = ({ frontSide, backSide, setFrontSide, setBackSideValue, classes, toggleOption, toggleAllOptions }) => (
   <div className={s.flash_card} >
     <Grid container >
       <Grid item >
@@ -56,6 +56,10 @@ const FlashCard = ({ frontSide, backSide, setFrontSide, setBackSideValue, classe
           <TableHead >
             <TableRow >
               <TableCell >
+                <Checkbox onChange={(_, checked) => toggleAllOptions(checked)} />
+                {`${backSide.checkedItems}/${backSide.maxCheckedItems}`}
+              </TableCell >
+              <TableCell >
                 <Typography color="textSecondary" >
                   <TranslatedTextContainer value="card_back_side_title" />
                 </Typography >
@@ -63,22 +67,23 @@ const FlashCard = ({ frontSide, backSide, setFrontSide, setBackSideValue, classe
             </TableRow >
           </TableHead >
           <TableBody >
-            {backSide
+            {backSide.values
               .map((backSideItem, index) => (
                 <TableRow >
                   <TableCell >
+                    <Checkbox
+                      checked={parseInt(backSideItem.checked)}
+                      onClick={() => toggleOption(index)}
+                      key={index}
+                    />
+                  </TableCell >
+                  <TableCell >
                     <Paper className={classes.card} >
-                      <CheckBoxCardItem
+                      <SimpleInput
                         key={index}
-                        checked={parseInt(backSideItem.checked)}
-                        index={index}
-                      >
-                        <SimpleInput
-                          key={index}
-                          value={backSideItem.value}
-                          onChange={event => setBackSideValue(event.target.value, index)}
-                        />
-                      </CheckBoxCardItem >
+                        value={backSideItem.value}
+                        onChange={event => setBackSideValue(event.target.value, index)}
+                      />
                     </Paper >
                   </TableCell >
                 </TableRow >
@@ -92,13 +97,16 @@ const FlashCard = ({ frontSide, backSide, setFrontSide, setBackSideValue, classe
 
 FlashCard.propTypes = {
   frontSide: PropTypes.string.isRequired,
-  backSide: PropTypes.arrayOf(PropTypes.shape({
-    value: PropTypes.string,
-    checked: PropTypes.number,
-  })).isRequired,
+  backSide: {
+    maxCheckedItems: PropTypes.number.isRequired,
+    checkedItems: PropTypes.number.isRequired,
+    values: PropTypes.arrayOf(PropTypes.shape({
+      value: PropTypes.string,
+      checked: PropTypes.number,
+    })).isRequired,
+  }.isRequired,
   setFrontSide: PropTypes.func.isRequired,
   setBackSideValue: PropTypes.func.isRequired,
-  reverseCardSides: PropTypes.func.isRequired,
 }
 
 export default withStyles(styles)(FlashCard)

@@ -10,7 +10,8 @@ import loginFormState from './loginFormState'
 import decks from './decks'
 import deckListState from './deckListState'
 import deck from './deck'
-import flashCard from './flashCard'
+import frontSide from './frontSide'
+import backSide from './backSide'
 import addCardToDeckPending from './addCardToDeckPending'
 import recentToLanguages from './recentToLanguages'
 import recentFromLanguages from './recentFromLanguages'
@@ -32,7 +33,10 @@ export default combineReducers({
   deck,
   decks,
   deckListState,
-  flashCard,
+  flashCard: combineReducers({
+    frontSide,
+    backSide,
+  }),
   addCardToDeckPending,
   recentToLanguages,
   recentFromLanguages,
