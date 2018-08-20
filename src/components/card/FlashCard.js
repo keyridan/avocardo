@@ -6,21 +6,16 @@ import Typography from '@material-ui/core/Typography'
 import SimpleInput from '../common/SimpleInput'
 import CheckBoxCardItem from '../../containers/CheckBoxCardItem'
 import s from './FlashCard.css'
-import SimpleButton from '../common/SimpleButton'
-import SwapHoriz from '@material-ui/icons/SwapHoriz'
 import TranslatedTextContainer from '../../containers/TranslatedTextContainer'
 
-const FlashCard = ({
-  frontSide, backSide, setFrontSide, setBackSideValue, reverseCardSides,
-}) => (
+const FlashCard = ({ frontSide, backSide, setFrontSide, setBackSideValue }) => (
   <div className={s.flash_card} >
-    <Card className={s.front_side_card} >
+    <Card >
       <CardContent >
         <Typography color="textSecondary" >
           <TranslatedTextContainer value="card_front_side_title" />
         </Typography >
         <SimpleInput
-          className={s.front_side_card_input}
           value={frontSide}
           onChange={(event) => {
             setFrontSide(event.target.value)
@@ -28,12 +23,7 @@ const FlashCard = ({
         />
       </CardContent >
     </Card >
-    <div >
-      <SimpleButton onClick={reverseCardSides} active={backSide.size} color="primary" >
-        <SwapHoriz />
-      </SimpleButton >
-    </div >
-    <Card className={s.back_side_card} >
+    <Card >
       <CardContent >
         <Typography color="textSecondary" >
           <TranslatedTextContainer value="card_back_side_title" />

@@ -1,21 +1,11 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
-import withStyles from '@material-ui/core/styles/withStyles'
 import ButtonWithProgress from '../../components/common/ButtonWithProgress'
 import { addCardToDeck } from '../../actions/index'
 
-const styles = () => ({
-  button: {
-    gridTemplate: '1fr/ 1fr 1fr 1fr',
-  },
-})
-
-const AddCardToDeckButton = ({
-  className, addCardToDeckPending, addCardToDeck, classes,
-}) => (
+const AddCardToDeckButton = ({ addCardToDeckPending, addCardToDeck }) => (
   <ButtonWithProgress
-    className={`${className} ${classes.button}`}
     loading={addCardToDeckPending}
     onClick={addCardToDeck}
   >
@@ -26,7 +16,6 @@ const AddCardToDeckButton = ({
 AddCardToDeckButton.propTypes = {
   addCardToDeck: PropTypes.func.isRequired,
   addCardToDeckPending: PropTypes.bool.isRequired,
-  className: PropTypes.string.isRequired,
 }
 
 const mapStateToProps = state => ({
@@ -40,4 +29,4 @@ const mapDispatchToProps = {
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
-)(withStyles(styles)(AddCardToDeckButton))
+)(AddCardToDeckButton)

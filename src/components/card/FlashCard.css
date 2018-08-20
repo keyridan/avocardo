@@ -1,15 +1,3 @@
 .flash_card {
   display: flex;
 }
-
-.front_side_card {
-  max-width: 500px;
-}
-
-.front_side_card_input{
-
-}
-
-.back_side_card {
-  max-width: 500px;
-}

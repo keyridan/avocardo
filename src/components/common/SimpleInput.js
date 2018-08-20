@@ -23,10 +23,14 @@ const SimpleInput = ({
 
 SimpleInput.propTypes = {
   value: PropTypes.string.isRequired,
-  className: PropTypes.string.isRequired,
+  className: PropTypes.string,
   onChange: PropTypes.func,
   onKeyPress: PropTypes.func,
   onEnterKey: PropTypes.func,
+}
+
+SimpleInput.defaultProps = {
+  className: '',
 }
 
 export default SimpleInput
