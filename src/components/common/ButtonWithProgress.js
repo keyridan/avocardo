@@ -21,11 +21,11 @@ const style = () => ({
 })
 
 const ButtonWithProgress = ({
-  className, loading, onClick, classes, progressColor, buttonColor, children, fullWidth,
+  className, disabled, loading, onClick, classes, progressColor, buttonColor, children, fullWidth,
 }) => (
   <div className={`${className} ${classes.container}`} >
     <SimpleButton
-      active={loading}
+      active={loading || disabled}
       fullWidth={fullWidth}
       color={buttonColor}
       className={classes.button}
@@ -43,6 +43,7 @@ const ButtonWithProgress = ({
 ButtonWithProgress.propTypes = {
   onClick: PropTypes.func.isRequired,
   loading: PropTypes.bool.isRequired,
+  disabled: PropTypes.bool,
   className: PropTypes.string,
   progressColor: PropTypes.string,
   buttonColor: PropTypes.string,
@@ -55,6 +56,7 @@ ButtonWithProgress.defaultProps = {
   buttonColor: 'secondary',
   fullWidth: false,
   className: '',
+  disabled: false,
 }
 
 export default withStyles(style)(ButtonWithProgress)

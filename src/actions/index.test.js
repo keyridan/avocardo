@@ -23,22 +23,30 @@ describe('actions', () => {
   it('toggleOption should create TOGGLE_OPTION action with new checked value', () => {
     const store = mockStore({
       flashCard: {
-        backSide: [{
-          value: 'word1',
-          checked: 0,
-        }, {
-          value: 'word2',
-          checked: 0,
-        }],
+        backSide: {
+          maxCheckedItems: 3,
+          checkedItems: 0,
+          values: [{
+            value: 'word1',
+            checked: 0,
+          }, {
+            value: 'word2',
+            checked: 0,
+          }],
+        },
       },
     })
-    const expected = [{
-      value: 'word1',
-      checked: 1,
-    }, {
-      value: 'word2',
-      checked: 0,
-    }]
+    const expected = {
+      maxCheckedItems: 3,
+      checkedItems: 1,
+      values: [{
+        value: 'word1',
+        checked: 1,
+      }, {
+        value: 'word2',
+        checked: 0,
+      }],
+    }
     expect(store.dispatch(actions.toggleOption(0))).to.eql({
       type: TOGGLE_OPTION,
       payload: expected,

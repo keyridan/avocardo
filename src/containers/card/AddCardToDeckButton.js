@@ -4,8 +4,9 @@ import PropTypes from 'prop-types'
 import ButtonWithProgress from '../../components/common/ButtonWithProgress'
 import { addCardToDeck } from '../../actions/index'
 
-const AddCardToDeckButton = ({ addCardToDeckPending, addCardToDeck }) => (
+const AddCardToDeckButton = ({ disabled, addCardToDeckPending, addCardToDeck }) => (
   <ButtonWithProgress
+    disabled={disabled}
     loading={addCardToDeckPending}
     onClick={addCardToDeck}
   >
@@ -16,10 +17,12 @@ const AddCardToDeckButton = ({ addCardToDeckPending, addCardToDeck }) => (
 AddCardToDeckButton.propTypes = {
   addCardToDeck: PropTypes.func.isRequired,
   addCardToDeckPending: PropTypes.bool.isRequired,
+  disabled: PropTypes.bool.isRequired,
 }
 
 const mapStateToProps = state => ({
   addCardToDeckPending: state.addCardToDeckPending,
+  disabled: !state.tinyCardsLogin.auth,
 })
 
 const mapDispatchToProps = {

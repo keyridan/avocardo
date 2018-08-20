@@ -21,10 +21,12 @@ const styles = theme => ({
   },
 })
 
-const FlashCard = ({ frontSide, backSide, setFrontSide, setBackSideValue, classes, toggleOption, toggleAllOptions }) => (
+const FlashCard = ({
+  frontSide, backSide, setFrontSide, setBackSideValue, classes, toggleOption, toggleAllOptions,
+}) => (
   <div className={s.flash_card} >
     <Grid container >
-      <Grid item >
+      <Grid item xs={12} sm={2} >
         <Table >
           <TableHead >
             <TableRow >
@@ -51,7 +53,7 @@ const FlashCard = ({ frontSide, backSide, setFrontSide, setBackSideValue, classe
           </TableBody >
         </Table >
       </Grid >
-      <Grid item >
+      <Grid item xs={12} sm={4} >
         <Table >
           <TableHead >
             <TableRow >
