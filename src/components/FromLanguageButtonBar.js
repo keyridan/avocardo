@@ -3,10 +3,10 @@ import PropTypes from 'prop-types'
 import FromLanguageButton from '../containers/FromLanguageButton'
 import { stringKey } from '../translation'
 
-const FromLanguageButtonBar = ({ className, recentFromLanguages }) => {
+const FromLanguageButtonBar = ({ recentFromLanguages }) => {
   const languages = [...recentFromLanguages, 'AUTO']
   return (
-    <div className={className} >
+    <div >
       {languages.map(item => (
         <FromLanguageButton
           key={item}
@@ -22,7 +22,6 @@ const FromLanguageButtonBar = ({ className, recentFromLanguages }) => {
 }
 
 FromLanguageButtonBar.propTypes = {
-  className: PropTypes.string.isRequired,
   recentFromLanguages: PropTypes.arrayOf(PropTypes.string).isRequired,
 }
 

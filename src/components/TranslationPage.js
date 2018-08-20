@@ -1,4 +1,6 @@
 import React from 'react'
+import Grid from '@material-ui/core/Grid'
+import withStyles from '@material-ui/core/styles/withStyles'
 import FromLanguageButtonBarContainer from '../containers/FromLanguageButtonBarContainer'
 import LanguageFromSelectorContainer from '../containers/LanguageFromSelectorContainer'
 import TranslationResultContainer from '../containers/TranslationResultContainer'
@@ -11,23 +13,38 @@ import InfoCardsContainer from '../containers/InfoCardsContainer'
 import Card from './Card'
 import s from './TranslationPage.css'
 
-const TranslationPage = () => (
-  <div>
+const styles = () => ({
+  root: {
+    flexGrow: 1,
+  },
+  translationContainer: {
+    justifyContent: 'space-around',
+  },
+})
+
+const TranslationPage = ({ classes }) => (
+  <div >
     <CardsAppBar />
-    <div className={s.cards_content}>
-      <LanguageFromSelectorContainer className={s.from_translation_language_selector} />
-      <FromLanguageButtonBarContainer className={s.from_language_bar} />
-      <WordInput className={s.word_input_container} />
-      <InfoCardsContainer className={s.infocards} />
-      <TranslateButton className={s.btn_translate} />
-
-      <LanguageToSelectorContainer className={s.to_translation_language_selector} />
-      <ToLanguageButtonBarContainer className={s.to_language_bar} />
-      <TranslationResultContainer className={s.translation_result} />
-
-      <Card className={s.flash_card_content} />
-    </div>
-  </div>
+    <div className={`${s.cards_content} ${classes.root}`} >
+      <Grid container spacing={8} className={classes.translationContainer} >
+        <Grid item xs={12} sm={5}>
+          <LanguageFromSelectorContainer />
+          <FromLanguageButtonBarContainer />
+          <WordInput />
+        </Grid >
+        <Grid item >
+          <TranslateButton />
+        </Grid >
+        <Grid item xs={12} sm={5} >
+          <LanguageToSelectorContainer />
+          <ToLanguageButtonBarContainer />
+          <TranslationResultContainer />
+        </Grid >
+      </Grid >
+    </div >
+    <InfoCardsContainer className={s.infocards} />
+    <Card className={s.flash_card_content} />
+  </div >
 )
 
-export default TranslationPage
+export default withStyles(styles)(TranslationPage)

@@ -1,64 +1,11 @@
 .cards_content {
   padding: 0 15px;
-  display: grid;
-  grid-template: 25% 25% 25% 25% 25% 25%/45% 10% 45%;
-}
-
-.word_input_container {
-  margin-top: 10px;
-  grid-column: 1/2;
-  grid-row: 3/4;
-}
-
-.word_input {
-  flex-grow: 1;
 }
 
 .infocards {
-  grid-column: 1/3;
-  grid-row: 4/5;
-}
-
-.btn_translate {
-  padding: 0 15px;
-  grid-column: 2/3;
-  grid-row: 2/3;
 }
 
 .flash_card_content {
   display: flex;
   flex-direction: column;
-  grid-column: 1/3;
-  grid-row: 5/6;
-}
-
-.from_language_bar {
-  justify-content: center;
-  grid-column: 1/2;
-  grid-row: 2/3;
-}
-
-.from_translation_language_selector {
-  grid-column: 1/2;
-  grid-row: 1/2;
-}
-
-.to_translation_language_selector {
-  grid-column: 3/4;
-  grid-row: 1/2;
-}
-
-.from_translation_input {
-  grid-column: 1/2;
-  grid-row: 3/4;
-}
-
-.to_language_bar {
-  grid-column: 3/4;
-  grid-row: 2/3;
-}
-
-.translation_result {
-  grid-column: 3/4;
-  grid-row: 3/6;
 }

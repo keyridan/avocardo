@@ -7,13 +7,12 @@ import SimpleInput from '../components/SimpleInput'
 import TranslatedTextContainer from '../containers/TranslatedTextContainer'
 
 const WordInput = ({
-  value, className, onChange, onEnterKey,
+  value, onChange, onEnterKey,
 }) => (
-  <div className={className} >
+  <div >
     <SimpleInput
       label={(<TranslatedTextContainer value="word_input_label" />)}
       fullWidth
-      className="word_input"
       onChange={onChange}
       onEnterKey={onEnterKey}
       value={value}
@@ -26,7 +25,6 @@ const WordInput = ({
 
 WordInput.propTypes = {
   value: PropTypes.string.isRequired,
-  className: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
   onEnterKey: PropTypes.func.isRequired,
 }

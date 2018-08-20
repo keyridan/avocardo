@@ -1,7 +1,6 @@
 import React from 'react'
 import Select from 'react-select'
 import PropTypes from 'prop-types'
-import Typography from '@material-ui/core/Typography'
 import TextField from '@material-ui/core/TextField'
 import Chip from '@material-ui/core/Chip'
 import MenuItem from '@material-ui/core/MenuItem'
@@ -98,6 +97,7 @@ LanguageSelector.propTypes = {
   color: PropTypes.string,
   variant: PropTypes.string,
   value: PropTypes.string,
+  className: PropTypes.string,
   chooseRecentLanguage: PropTypes.func.isRequired,
 }
 
@@ -107,6 +107,7 @@ LanguageSelector.defaultProps = {
   active: false,
   size: 'medium',
   value: '',
+  className: '',
 }
 
 export default LanguageSelector

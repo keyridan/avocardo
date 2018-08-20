@@ -3,8 +3,8 @@ import PropTypes from 'prop-types'
 import ToLanguageButton from '../containers/ToLanguageButton'
 import { stringKey } from '../translation'
 
-const ToLanguageButtonBar = ({ className, recentToLanguages }) => (
-  <div className={className} >
+const ToLanguageButtonBar = ({ recentToLanguages }) => (
+  <div >
     {recentToLanguages.map(item => (
       <ToLanguageButton
         key={item}
@@ -19,7 +19,6 @@ const ToLanguageButtonBar = ({ className, recentToLanguages }) => (
 )
 
 ToLanguageButtonBar.propTypes = {
-  className: PropTypes.string.isRequired,
   recentToLanguages: PropTypes.arrayOf(PropTypes.string).isRequired,
 }
 

@@ -3,9 +3,9 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import TranslationItemContainer from '../containers/TranslationItemContainer'
 
-const TranslationResult = ({ translationResult, className }) => (
-  <div className={className}>
-    <List>
+const TranslationResult = ({ translationResult }) => (
+  <div >
+    <List >
       {translationResult.options.length > 0
       && translationResult.options.map((item, index) => (
         <TranslationItemContainer
@@ -15,8 +15,8 @@ const TranslationResult = ({ translationResult, className }) => (
           className="translation-item"
         />
       ))}
-    </List>
-  </div>
+    </List >
+  </div >
 )
 
 TranslationResult.propTypes = {
@@ -24,7 +24,6 @@ TranslationResult.propTypes = {
     wordTo: PropTypes.string.isRequired,
     options: PropTypes.array.isRequired,
   }).isRequired,
-  className: PropTypes.string.isRequired,
 }
 
 export default TranslationResult

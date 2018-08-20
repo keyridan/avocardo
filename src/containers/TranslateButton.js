@@ -4,10 +4,9 @@ import PropTypes from 'prop-types'
 import ButtonWithProgress from '../components/ButtonWithProgress'
 import { setWordToHistoryOrClearHistory } from '../actions'
 
-const TranslateButton = ({ className, translatePending, onClick }) => (
+const TranslateButton = ({ translatePending, onClick }) => (
   <ButtonWithProgress
     fullWidth
-    className={className}
     loading={translatePending}
     onClick={onClick}
     buttonColor="primary"
@@ -18,7 +17,6 @@ const TranslateButton = ({ className, translatePending, onClick }) => (
 )
 
 TranslateButton.propTypes = {
-  className: PropTypes.string.isRequired,
   translatePending: PropTypes.bool.isRequired,
   onClick: PropTypes.func.isRequired,
 }

@@ -20,7 +20,7 @@ const style = () => ({
   },
 })
 
-const AddCardToDeckButton = ({ className, loading, onClick, classes, progressColor, buttonColor, children, fullWidth }) => (
+const ButtonWithProgress = ({ className, loading, onClick, classes, progressColor, buttonColor, children, fullWidth }) => (
   <div className={`${className} ${classes.container}`} >
     <SimpleButton
       active={loading}
@@ -38,7 +38,7 @@ const AddCardToDeckButton = ({ className, loading, onClick, classes, progressCol
   </div >
 )
 
-AddCardToDeckButton.propTypes = {
+ButtonWithProgress.propTypes = {
   onClick: PropTypes.func.isRequired,
   loading: PropTypes.bool.isRequired,
   className: PropTypes.string,
@@ -48,10 +48,11 @@ AddCardToDeckButton.propTypes = {
   fullWidth: PropTypes.bool,
 }
 
-AddCardToDeckButton.defaultProps = {
+ButtonWithProgress.defaultProps = {
   progressColor: 'primary',
   buttonColor: 'secondary',
   fullWidth: false,
+  className: '',
 }
 
-export default withStyles(style)(AddCardToDeckButton)
+export default withStyles(style)(ButtonWithProgress)
