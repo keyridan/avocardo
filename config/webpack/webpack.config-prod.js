@@ -65,7 +65,7 @@ export default {
   plugins: [
     new webpack.DefinePlugin(GLOBALS),
     new HtmlWebpackPlugin({
-      template: `${SRC}/index.html`,
+      template: '../public/index.html',
       favicon: 'favicon.ico',
     }),
     new SpriteLoaderPlugin(),
