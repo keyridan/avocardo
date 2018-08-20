@@ -10,7 +10,7 @@ import InfoCard from './InfoCard'
 import InfoTable from './InfoTable'
 import s from './InfoPanel.css'
 
-const InfoPanel = ({ info, expand, type, className, checked }) => (
+const InfoPanel = ({ info, type, checked }) => (
   <div >
     <ExpansionPanel >
       <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />} className={s.info_panel} >
@@ -36,7 +36,9 @@ InfoPanel.propTypes = {
     title: PropTypes.string,
     url: PropTypes.string,
     description: PropTypes.string,
-  }),
+  }).isRequired,
+  type: PropTypes.string.isRequired,
+  checked: PropTypes.bool.isRequired,
 }
 
 export default InfoPanel
