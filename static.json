@@ -1,0 +1,8 @@
+{
+  "root": "src",
+  "clean_urls": true,
+  "error_page": "error",
+  "routes": {
+    "/**": "index.html"
+  }
+}
