@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import LinstLinkItem from '../components/ListLinkItem'
+import LinstLinkItem from '../components/common/ListLinkItem'
 import { setWordToHistoryAndReverseLanguages } from '../actions'
 
 const mapStateToProps = state => ({

@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 import { setToLanguage } from '../actions'
-import SimpleButton from '../components/SimpleButton'
+import SimpleButton from '../components/common/SimpleButton'
 
 const mapStateToProps = (state, ownProps) => ({
   active: ownProps.value === state.toLanguage,

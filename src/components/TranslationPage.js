@@ -8,9 +8,9 @@ import ToLanguageButtonBarContainer from '../containers/ToLanguageButtonBarConta
 import LanguageToSelectorContainer from '../containers/LanguageToSelectorContainer'
 import WordInput from '../containers/WordInput'
 import TranslateButton from '../containers/TranslateButton'
-import CardsAppBar from '../containers/CardsAppBar'
-import InfoCardsContainer from '../containers/InfoCardsContainer'
-import Card from './Card'
+import CardsAppBar from '../containers/appbar/CardsAppBar'
+import InfoCardsContainer from '../containers/info/InfoCardsContainer'
+import Card from './card/Card'
 import s from './TranslationPage.css'
 
 const styles = () => ({

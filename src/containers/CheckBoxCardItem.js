@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import CheckBoxItem from '../components/CheckBoxItem'
+import CheckBoxItem from '../components/common/CheckBoxItem'
 import { toggleOption } from '../actions'
 
 const mapStateToProps = () => ({

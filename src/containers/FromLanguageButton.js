@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import SimpleButton from '../components/SimpleButton'
+import SimpleButton from '../components/common/SimpleButton'
 import { setFromLanguage } from '../actions'
 
 const mapStateToProps = (state, ownProps) => ({

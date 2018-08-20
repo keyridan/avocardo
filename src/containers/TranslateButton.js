@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
-import ButtonWithProgress from '../components/ButtonWithProgress'
+import ButtonWithProgress from '../components/common/ButtonWithProgress'
 import { setWordToHistoryOrClearHistory } from '../actions'
 
 const TranslateButton = ({ translatePending, onClick }) => (

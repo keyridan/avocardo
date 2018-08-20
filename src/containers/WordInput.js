@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import FormHelperText from '@material-ui/core/FormHelperText'
 import PropTypes from 'prop-types'
 import { setWord, setWordToHistoryOrClearHistory } from '../actions'
-import SimpleInput from '../components/SimpleInput'
+import SimpleInput from '../components/common/SimpleInput'
 import TranslatedTextContainer from '../containers/TranslatedTextContainer'
 
 const WordInput = ({
