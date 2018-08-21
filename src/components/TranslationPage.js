@@ -11,23 +11,28 @@ import TranslateButton from '../containers/TranslateButton'
 import CardsAppBar from '../containers/appbar/CardsAppBar'
 import InfoCardsContainer from '../containers/info/InfoCardsContainer'
 import Card from './card/Card'
-import s from './TranslationPage.css'
 
-const styles = () => ({
+const styles = theme => ({
   root: {
     flexGrow: 1,
+    padding: 15,
   },
   translationContainer: {
     justifyContent: 'space-around',
+  },
+  result: {
+    [theme.breakpoints.up('sm')]: {
+      order: 1,
+    },
   },
 })
 
 const TranslationPage = ({ classes }) => (
   <div >
     <CardsAppBar />
-    <div className={`${s.cards_content} ${classes.root}`} >
+    <div className={classes.root} >
       <Grid container spacing={8} className={classes.translationContainer} >
-        <Grid item xs={12} sm={5}>
+        <Grid item xs={12} sm={5} >
           <LanguageFromSelectorContainer />
           <FromLanguageButtonBarContainer />
           <WordInput />
@@ -38,12 +43,18 @@ const TranslationPage = ({ classes }) => (
         <Grid item xs={12} sm={5} >
           <LanguageToSelectorContainer />
           <ToLanguageButtonBarContainer />
+        </Grid >
+      </Grid >
+      <Grid container spacing={8} >
+        <Grid item xs={12} sm={5} className={classes.result} >
           <TranslationResultContainer />
+        </Grid >
+        <Grid item xs={12} sm={7} >
+          <InfoCardsContainer />
+          <Card />
         </Grid >
       </Grid >
     </div >
-    <InfoCardsContainer className={s.infocards} />
-    <Card className={s.flash_card_content} />
   </div >
 )
 

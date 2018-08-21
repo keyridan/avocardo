@@ -11,11 +11,13 @@ const styles = theme => ({
   container: {
     paddingTop: theme.spacing.unit * 6,
   },
-  cardContainer: {},
+  cardContainer: {
+    flexDirection: 'column',
+  },
 })
 
-const Card = ({ className, classes }) => (
-  <div className={`${className} ${classes.container}`} >
+const Card = ({ classes }) => (
+  <div className={classes.container} >
     <Typography variant="title" >
       <TranslatedTextContainer value="tinycards_title" />
     </Typography >

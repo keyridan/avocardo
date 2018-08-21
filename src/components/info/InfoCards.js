@@ -13,9 +13,9 @@ const styles = theme => ({
 })
 
 const InfoCards = ({
-  infos, className, infoProvider, classes,
+  infos, infoProvider, classes,
 }) => (
-  <div className={`${className} ${classes.container}`} >
+  <div className={classes.container} >
     <Typography variant="title" gutterBottom >
       <TranslatedTextContainer value="additional_info" />
     </Typography >
@@ -34,7 +34,6 @@ InfoCards.propTypes = {
   infos: PropTypes.arrayOf(PropTypes.shape({
     info: PropTypes.object,
   })).isRequired,
-  className: PropTypes.string.isRequired,
   infoProvider: PropTypes.object.isRequired,
 }
 

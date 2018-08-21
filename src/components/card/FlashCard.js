@@ -11,7 +11,6 @@ import Grid from '@material-ui/core/Grid'
 import withStyles from '@material-ui/core/styles/withStyles'
 import Checkbox from '@material-ui/core/Checkbox'
 import SimpleInput from '../common/SimpleInput'
-import s from './FlashCard.css'
 import TranslatedTextContainer from '../../containers/TranslatedTextContainer'
 
 const styles = theme => ({
@@ -24,9 +23,9 @@ const styles = theme => ({
 const FlashCard = ({
                      frontSide, backSide, setFrontSideValue, setBackSideValue, classes, toggleOption, toggleAllOptions,
                    }) => (
-  <div className={s.flash_card} >
+  <div >
     <Grid container >
-      <Grid item xs={12} sm={2} >
+      <Grid item xs={12} sm={5} >
         <Table >
           <TableHead >
             <TableRow >
@@ -57,7 +56,7 @@ const FlashCard = ({
           </TableBody >
         </Table >
       </Grid >
-      <Grid item xs={12} sm={4} >
+      <Grid item xs={12} sm={7} >
         <Table >
           <TableHead >
             <TableRow >
