@@ -12,12 +12,6 @@ const defaultBackSide = {
   values: [{
     value: '',
     checked: 0,
-  }, {
-    value: '',
-    checked: 0,
-  }, {
-    value: '',
-    checked: 0,
   }],
 }
 

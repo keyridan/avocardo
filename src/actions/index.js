@@ -151,11 +151,6 @@ export const setInfos = (value) => {
   }
 }
 
-export const setFrontSide = value => ({
-  type: SET_FRONT_SIDE,
-  payload: value,
-})
-
 const addToRecentIfNotExist = (recentLanguages = [], value, dispatchChooseRecentLanguage) => {
   if (recentLanguages.indexOf(value) === -1 && value !== 'AUTO') {
     dispatchChooseRecentLanguage([
@@ -189,15 +184,33 @@ const addToRecentFromIfNotExist = value => (dispatch, getState) => {
   )
 }
 
+export const setFrontSideValue = (value, index) => (dispatch, getState) => {
+  const { frontSide } = getState().flashCard
+  const newValues = frontSide.values.map((item, itemIndex) => ((index === itemIndex)
+    ? value
+    : item))
+
+  return dispatch({
+    type: SET_FRONT_SIDE,
+    payload: {
+      ...frontSide,
+      values: newValues,
+    },
+  })
+}
+
 export const setBackSideValue = (value, index) => (dispatch, getState) => {
   const { backSide } = getState().flashCard
-  const newBackSide = backSide.map((backSideItem, itemIndex) => ((index === itemIndex)
-    ? { ...backSideItem, value }
-    : backSideItem))
+  const newValues = backSide.values.map((item, itemIndex) => ((index === itemIndex)
+    ? { ...item, value }
+    : item))
 
   return dispatch({
     type: SET_BACK_SIDE,
-    payload: newBackSide,
+    payload: {
+      ...backSide,
+      values: newValues,
+    },
   })
 }
 
@@ -336,7 +349,7 @@ const sendCardToDeck = ({ flashCard, deck, token }) => (dispatch) => {
   const data = {
     sides: [
       {
-        concepts: [{ fact: { text: flashCard.frontSide, type: 'TEXT' } }],
+        concepts: [{ fact: { text: flashCard.frontSide.values[0], type: 'TEXT' } }],
       },
       {
         concepts,

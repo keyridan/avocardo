@@ -11,6 +11,7 @@
 .deck_item {
   display: flex;
   flex-direction: row-reverse;
+  justify-content: flex-end;
   line-height: 40px;
 }
 

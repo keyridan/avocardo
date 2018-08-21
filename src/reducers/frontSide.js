@@ -1,16 +1,22 @@
 import { ADD_CARD_TO_DECK_SUCCESS, SET_CARD_VALUES, SET_FRONT_SIDE } from '../constants'
 
-const frontSide = (state = '', action) => {
+const defaultValue = {
+  checkedItems: 0,
+  maxCheckedItems: 1,
+  values: [''],
+}
+
+const frontSide = (state = defaultValue, action) => {
   switch (action.type) {
     case SET_CARD_VALUES:
-      return action.payload.frontSide
-    case SET_FRONT_SIDE:
       return {
         ...state,
-        frontSide: action.payload,
+        values: [action.payload.frontSide],
       }
+    case SET_FRONT_SIDE:
+      return action.payload
     case ADD_CARD_TO_DECK_SUCCESS:
-      return ''
+      return defaultValue
     default:
       return state
   }

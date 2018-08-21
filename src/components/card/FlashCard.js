@@ -22,8 +22,8 @@ const styles = theme => ({
 })
 
 const FlashCard = ({
-  frontSide, backSide, setFrontSide, setBackSideValue, classes, toggleOption, toggleAllOptions,
-}) => (
+                     frontSide, backSide, setFrontSideValue, setBackSideValue, classes, toggleOption, toggleAllOptions,
+                   }) => (
   <div className={s.flash_card} >
     <Grid container >
       <Grid item xs={12} sm={2} >
@@ -38,18 +38,22 @@ const FlashCard = ({
             </TableRow >
           </TableHead >
           <TableBody >
-            <TableRow >
-              <TableCell >
-                <Paper className={classes.card} >
-                  <SimpleInput
-                    value={frontSide}
-                    onChange={(event) => {
-                      setFrontSide(event.target.value)
-                    }}
-                  />
-                </Paper >
-              </TableCell >
-            </TableRow >
+            {frontSide.values
+              .map((item, index) => (
+                <TableRow >
+                  <TableCell >
+                    <Paper className={classes.card} >
+                      <SimpleInput
+                        value={item}
+                        key={index}
+                        onChange={(event) => {
+                          setFrontSideValue(event.target.value, index)
+                        }}
+                      />
+                    </Paper >
+                  </TableCell >
+                </TableRow >
+              ))}
           </TableBody >
         </Table >
       </Grid >
@@ -70,11 +74,11 @@ const FlashCard = ({
           </TableHead >
           <TableBody >
             {backSide.values
-              .map((backSideItem, index) => (
+              .map((item, index) => (
                 <TableRow >
                   <TableCell >
                     <Checkbox
-                      checked={parseInt(backSideItem.checked)}
+                      checked={parseInt(item.checked)}
                       onClick={() => toggleOption(index)}
                       key={index}
                     />
@@ -83,7 +87,7 @@ const FlashCard = ({
                     <Paper className={classes.card} >
                       <SimpleInput
                         key={index}
-                        value={backSideItem.value}
+                        value={item.value}
                         onChange={event => setBackSideValue(event.target.value, index)}
                       />
                     </Paper >
@@ -107,7 +111,7 @@ FlashCard.propTypes = {
       checked: PropTypes.number,
     })).isRequired,
   }.isRequired,
-  setFrontSide: PropTypes.func.isRequired,
+  setFrontSideValue: PropTypes.func.isRequired,
   setBackSideValue: PropTypes.func.isRequired,
 }
 
