@@ -4,7 +4,7 @@ import {
   CHOOSE_FROM_LANGUAGE,
   CHOOSE_RECENT_FROM_LANGUAGE,
   CHOOSE_RECENT_TO_LANGUAGE,
-  CHOOSE_TO_LANGUAGE,
+  CHOOSE_TO_LANGUAGE, FACT_TYPE,
   LOGIN_BEGIN,
   LOGIN_SUCCESS,
   LOGIN_URL,
@@ -212,9 +212,11 @@ describe('async actions', () => {
       backSide: [{
         value: 'Apfel',
         checked: 0,
+        type: FACT_TYPE.TEXT,
       }, {
         value: 'der Apfel',
         checked: 0,
+        type: FACT_TYPE.TEXT,
       }],
     }
 

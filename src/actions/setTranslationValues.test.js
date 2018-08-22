@@ -1,4 +1,4 @@
-import { SET_CARD_VALUES, SET_TRANSLATION_RESULT } from '../constants'
+import { FACT_TYPE, SET_CARD_VALUES, SET_TRANSLATION_RESULT } from '../constants'
 import { setCardValues, setTranslationResult } from './setTranslationValues'
 
 describe('setTranslationResult action', () => {
@@ -130,6 +130,7 @@ describe('setCardValues action', () => {
       payload: {
         frontSide: wordFrom,
         backSide: [{
+          type: FACT_TYPE.TEXT,
           value: wordTo,
           checked: 0,
         }],
@@ -159,12 +160,15 @@ describe('setCardValues action', () => {
         backSide: [{
           value: 'Apfel',
           checked: 0,
+          type: FACT_TYPE.TEXT,
         }, {
           value: 'der Apfel',
           checked: 0,
+          type: FACT_TYPE.TEXT,
         }, {
           value: 'wordWithoutArticle',
           checked: 0,
+          type: FACT_TYPE.TEXT,
         }],
       },
     }
@@ -195,12 +199,15 @@ describe('setCardValues action', () => {
         backSide: [{
           value: wordTo,
           checked: 0,
+          type: FACT_TYPE.TEXT,
         }, {
           value: 'der Apfel',
           checked: 0,
+          type: FACT_TYPE.TEXT,
         }, {
           value: 'wordWithoutArticle',
           checked: 0,
+          type: FACT_TYPE.TEXT,
         }],
       },
     }
@@ -222,6 +229,7 @@ describe('setCardValues action', () => {
         frontSide: 'apple',
         backSide: [{
           value: 'Apfel',
+          type: FACT_TYPE.TEXT,
           checked: 0,
         }],
       },
