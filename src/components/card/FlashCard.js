@@ -13,7 +13,7 @@ import Checkbox from '@material-ui/core/Checkbox'
 import SimpleInput from '../common/SimpleInput'
 import TranslatedTextContainer from '../../containers/TranslatedTextContainer'
 import CardSpeedDialContainer from '../../containers/card/CardSpeedDialContainer'
-import { FACT_TYPE } from '../../constants'
+import Concept from './Concept'
 
 const styles = theme => ({
   card: {
@@ -22,9 +22,6 @@ const styles = theme => ({
   },
   back_side_title: {
     flexDirection: 'row',
-  },
-  img: {
-    maxWidth: 200,
   },
 })
 
@@ -66,7 +63,9 @@ const FlashCard = ({ frontSide, backSide, setFrontSideValue, setBackSideValue, c
         <Table >
           <TableHead >
             <TableRow >
-              <TableCell >
+              <TableCell
+                padding="none"
+              >
                 <Checkbox onChange={(_, checked) => toggleAllOptions(checked)} />
                 {`${backSide.checkedItems}/${backSide.maxCheckedItems}`}
               </TableCell >
@@ -84,30 +83,21 @@ const FlashCard = ({ frontSide, backSide, setFrontSideValue, setBackSideValue, c
             {backSide.values
               .map((item, index) => (
                 <TableRow >
-                  <TableCell >
+                  <TableCell
+                    padding="none"
+                  >
                     <Checkbox
                       checked={parseInt(item.checked)}
                       onClick={() => toggleOption(index)}
                       key={index}
                     />
                   </TableCell >
-                  <TableCell colspan={2}>
-                    <Paper className={classes.card} >
-                      {item.type === FACT_TYPE.TEXT && (
-                      <SimpleInput
-                        key={index}
-                        value={item.value}
-                        onChange={event => setBackSideValue(event.target.value, index)}
-                      />
-                      )}
-                      {item.type === FACT_TYPE.IMAGE && (
-                        <img
-                          src={item.value}
-                          alt="Cropped"
-                          className={classes.img}
-                        />
-                      )}
-                    </Paper >
+                  <TableCell colspan={2} >
+                    <Concept
+                      item={item}
+                      index={index}
+                      setValue={setBackSideValue}
+                    />
                   </TableCell >
                 </TableRow >
               ))}

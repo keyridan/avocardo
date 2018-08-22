@@ -9,25 +9,24 @@ import AddAPhoto from '@material-ui/icons/AddAPhotoOutlined'
 import NoteAdd from '@material-ui/icons/NoteAddOutlined'
 import Dialog from '@material-ui/core/Dialog'
 import DialogContent from '@material-ui/core/DialogContent'
-import IconButton from '@material-ui/core/IconButton'
+import Button from '@material-ui/core/Button'
 import Close from '@material-ui/icons/Close'
 import Check from '@material-ui/icons/Check'
 import ImageCropperContainer from '../../containers/ImageCropperContainer'
 
-const styles = theme => ({
+const styles = () => ({
   root: {
-    marginTop: '-350%',
+    position: 'relative',
   },
   speedDial: {
-    // position: 'absolute',
-    bottom: theme.spacing.unit * 2,
-    right: theme.spacing.unit * 3,
+    position: 'absolute',
+    bottom: '-26px',
+    left: '-26px',
   },
   dialogButtons: {
     position: 'fixed',
     right: 25,
     zIndex: 4,
-    backgroundColor: 'RGBA(255,255,255,0.7)',
   },
   dialog: {
     paddingLeft: 0,
@@ -45,7 +44,7 @@ const CardSpeedDial = ({
       hidden={hidden}
       icon={<SpeedDialIcon />}
       onBlur={closeSpeedDialState}
-      onClick={addBackSideValue}
+      onClick={changeSpeedDialState}
       onClose={openSpeedDialState}
       onFocus={isTouch ? undefined : openSpeedDialState}
       onMouseEnter={isTouch ? undefined : openSpeedDialState}
@@ -76,20 +75,22 @@ const CardSpeedDial = ({
     >
       <DialogContent className={classes.dialog} >
         <div className={classes.dialogButtons} >
-          <IconButton
-            color="inherit"
+          <Button
+            variant="fab"
+            color="primary"
             onClick={closeAndClean}
             aria-label="Close"
           >
             <Close />
-          </IconButton >
-          <IconButton
-            color="inherit"
+          </Button >
+          <Button
+            variant="fab"
+            color="primary"
             onClick={addBackSideImageValueAndClean}
             aria-label="OK"
           >
             <Check />
-          </IconButton >
+          </Button >
         </div >
         <ImageCropperContainer />
       </DialogContent >
