@@ -73,8 +73,6 @@ const FlashCard = ({ frontSide, backSide, setFrontSideValue, setBackSideValue, c
                 <Typography color="textSecondary" >
                   <TranslatedTextContainer value="card_back_side_title" />
                 </Typography >
-              </TableCell >
-              <TableCell >
                 <CardSpeedDialContainer />
               </TableCell >
             </TableRow >
@@ -92,7 +90,7 @@ const FlashCard = ({ frontSide, backSide, setFrontSideValue, setBackSideValue, c
                       key={index}
                     />
                   </TableCell >
-                  <TableCell colspan={2} >
+                  <TableCell  >
                     <Concept
                       item={item}
                       index={index}

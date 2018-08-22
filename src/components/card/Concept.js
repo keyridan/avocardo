@@ -9,9 +9,9 @@ const styles = theme => ({
   card: {
     ...theme.mixins.gutters(),
     padding: theme.spacing.unit * 2,
-    display: 'inline-flex',
   },
   imgContainer: {
+    display: 'flex',
     justifyContent: 'center',
   },
   img: {

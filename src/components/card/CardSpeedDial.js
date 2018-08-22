@@ -20,8 +20,8 @@ const styles = () => ({
   },
   speedDial: {
     position: 'absolute',
-    bottom: '-26px',
-    left: '-26px',
+    bottom: '-13px',
+    right: '0px',
   },
   dialogButtons: {
     position: 'fixed',
