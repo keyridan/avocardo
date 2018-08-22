@@ -4,6 +4,7 @@ import withStyles from '@material-ui/core/styles/withStyles'
 import Paper from '@material-ui/core/Paper'
 import IconButton from '@material-ui/core/IconButton'
 import Close from '@material-ui/icons/Close'
+import Crop from '@material-ui/icons/Crop'
 import SimpleInput from '../common/SimpleInput'
 import { FACT_TYPE } from '../../constants'
 
@@ -14,6 +15,7 @@ const styles = theme => ({
     position: 'relative',
   },
   imgContainer: {
+    position: 'relative',
     display: 'flex',
     justifyContent: 'center',
   },
@@ -25,12 +27,20 @@ const styles = theme => ({
     right: '-12px',
     top: '-12px',
     '&:hover': {
-      backgroundColor: theme.palette.background.default,
+      backgroundColor: 'transparent',
+    },
+  },
+  cropButton: {
+    position: 'absolute',
+    right: '28px',
+    top: '-10px',
+    '&:hover': {
+      backgroundColor: 'transparent',
     },
   },
 })
 
-const Concept = ({ classes, item, index, setValue, removeItem }) => (
+const Concept = ({ classes, item, index, setValue, removeItem, cropImage }) => (
   <Paper className={classes.card} >
     {item.type === FACT_TYPE.TEXT && (
       <SimpleInput
@@ -41,11 +51,19 @@ const Concept = ({ classes, item, index, setValue, removeItem }) => (
     )}
     {item.type === FACT_TYPE.IMAGE && (
       <div className={classes.imgContainer} >
-        <img
-          src={item.value}
-          alt="Cropped"
-          className={classes.img}
-        />
+        <div >
+          <img
+            src={item.value}
+            alt="Cropped"
+            className={classes.img}
+          />
+          <IconButton
+            onClick={() => cropImage(item, index)}
+            className={classes.cropButton}
+          >
+            <Crop />
+          </IconButton >
+        </div >
       </div >
     )}
     <IconButton
@@ -65,6 +83,7 @@ Concept.propTypes = {
   }).isRequired,
   setValue: PropTypes.func.isRequired,
   removeItem: PropTypes.func.isRequired,
+  cropImage: PropTypes.func.isRequired,
 }
 
 export default withStyles(styles)(Concept)

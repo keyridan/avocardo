@@ -7,6 +7,7 @@ import {
   setFrontSideValue,
   toggleAllOptions,
   toggleOption,
+  openImageToCrop,
 } from '../../actions'
 
 const mapStateToProps = state => ({
@@ -20,6 +21,7 @@ const mapDispatchToProps = ({
   toggleOption,
   toggleAllOptions,
   removeBackSideItem,
+  openImageToCrop,
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(FlashCard)

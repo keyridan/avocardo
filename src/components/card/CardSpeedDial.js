@@ -35,7 +35,7 @@ const styles = () => ({
 })
 
 const CardSpeedDial = ({
-                         classes, open, isTouch, hidden, openSpeedDialState, closeSpeedDialState, changeSpeedDialState, addBackSideValue, openInputImage, changeOpenInputImageState, addBackSideImageValueAndClean, closeAndClean,
+                         classes, open, isTouch, hidden, openSpeedDialState, closeSpeedDialState, changeSpeedDialState, addBackSideValue, openInputImage, changeOpenInputImageState, addOrUpdateBackSideImageValueAndClean, closeAndClean,
                        }) => (
   <div className={classes.root} >
     <SpeedDial
@@ -71,7 +71,6 @@ const CardSpeedDial = ({
       fullScreen
       aria-labelledby="simple-dialog-title"
       open={openInputImage}
-      onClose={addBackSideImageValueAndClean}
     >
       <DialogContent className={classes.dialog} >
         <div className={classes.dialogButtons} >
@@ -86,7 +85,7 @@ const CardSpeedDial = ({
           <Button
             variant="fab"
             color="primary"
-            onClick={addBackSideImageValueAndClean}
+            onClick={addOrUpdateBackSideImageValueAndClean}
             aria-label="OK"
           >
             <Check />
@@ -108,7 +107,7 @@ CardSpeedDial.propTypes = {
   changeSpeedDialState: PropTypes.func.isRequired,
   addBackSideValue: PropTypes.func.isRequired,
   changeOpenInputImageState: PropTypes.func.isRequired,
-  addBackSideImageValueAndClean: PropTypes.func.isRequired,
+  addOrUpdateBackSideImageValueAndClean: PropTypes.func.isRequired,
   closeAndClean: PropTypes.func.isRequired,
 }
 

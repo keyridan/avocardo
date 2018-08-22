@@ -25,7 +25,7 @@ const styles = theme => ({
   },
 })
 
-const FlashCard = ({ frontSide, backSide, setFrontSideValue, setBackSideValue, classes, toggleOption, toggleAllOptions, removeBackSideItem }) => (
+const FlashCard = ({ frontSide, backSide, setFrontSideValue, setBackSideValue, classes, toggleOption, toggleAllOptions, removeBackSideItem, openImageToCrop }) => (
   <div >
     <Grid container >
       <Grid item xs={12} sm={5} >
@@ -96,6 +96,7 @@ const FlashCard = ({ frontSide, backSide, setFrontSideValue, setBackSideValue, c
                       index={index}
                       setValue={setBackSideValue}
                       removeItem={removeBackSideItem}
+                      cropImage={openImageToCrop}
                     />
                   </TableCell >
                 </TableRow >
@@ -120,6 +121,7 @@ FlashCard.propTypes = {
   setFrontSideValue: PropTypes.func.isRequired,
   setBackSideValue: PropTypes.func.isRequired,
   removeBackSideItem: PropTypes.func.isRequired,
+  openImageToCrop: PropTypes.func.isRequired,
 }
 
 export default withStyles(styles)(FlashCard)

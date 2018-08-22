@@ -36,6 +36,7 @@ import {
   SET_CARD_VALUES,
   SET_FRONT_SIDE,
   SET_IDENTIFIER,
+  SET_IMAGE,
   SET_INFO_VALUES,
   SET_PASSWORD,
   SET_WORD,
@@ -50,7 +51,7 @@ import {
   croppedImageSelector,
   hiddenSpeedDialSelector,
   imageSelector,
-  openSpeedDialSelector
+  openSpeedDialSelector,
 } from '../selectors'
 import { setCardValues, setTranslationResult } from './setTranslationValues'
 
@@ -213,12 +214,10 @@ export const setFrontSideValue = (value, index) => (dispatch, getState) => {
 }
 
 
-export const openSpeedDialState = () => (dispatch, getState) => {
-  return dispatch({
-    type: CHANGE_OPEN_CARD_SPEED_DIAL_STATE,
-    payload: !hiddenSpeedDialSelector(getState()),
-  })
-}
+export const openSpeedDialState = () => (dispatch, getState) => dispatch({
+  type: CHANGE_OPEN_CARD_SPEED_DIAL_STATE,
+  payload: !hiddenSpeedDialSelector(getState()),
+})
 
 export const closeSpeedDialState = () => ({
   type: CHANGE_OPEN_CARD_SPEED_DIAL_STATE,
@@ -259,25 +258,52 @@ const cleanImage = () => ({
   type: IMAGE_CLEAN,
 })
 
-const addBackSideImageValue = () => (dispatch, getState) => {
+const setImage = (value, itemIndex) => ({
+  type: SET_IMAGE,
+  payload: {
+    ...value,
+    itemIndex,
+  },
+})
+
+export const openImageToCrop = (item, index) => (dispatch) => {
+  dispatch(setImage(item.image, index))
+  dispatch(changeOpenInputImageState())
+}
+
+const addOrUpdateBackSideImageValue = () => (dispatch, getState) => {
   const state = getState()
   const backSide = backSideSelector(state)
   const value = croppedImageSelector(state)
   const image = imageSelector(state)
 
   if (value) {
+    let newValues
+    let { checkedItems } = backSide
+    const { values } = backSide
     const newValue = {
       checked: 1,
       type: FACT_TYPE.IMAGE,
       image,
       value,
     }
+    if (image.itemIndex !== undefined && image.itemIndex !== null) {
+      newValues = values.map((item, index) => ((image.itemIndex === index)
+        ? {
+          ...item,
+          ...newValue,
+        }
+        : item))
+    } else {
+      newValues = [newValue, ...values]
+      checkedItems += 1
+    }
     return dispatch({
       type: SET_BACK_SIDE,
       payload: {
         ...backSide,
-        checkedItems: backSide.checkedItems + 1,
-        values: [newValue, ...backSide.values],
+        checkedItems,
+        values: newValues,
       },
     })
   }
@@ -288,8 +314,8 @@ export const closeAndClean = () => (dispatch) => {
   dispatch(cleanImage())
 }
 
-export const addBackSideImageValueAndClean = () => (dispatch) => {
-  dispatch(addBackSideImageValue())
+export const addOrUpdateBackSideImageValueAndClean = () => (dispatch) => {
+  dispatch(addOrUpdateBackSideImageValue())
   dispatch(changeOpenInputImageState())
   dispatch(cleanImage())
 }
@@ -395,7 +421,9 @@ export const setPassword = value => ({
   payload: value,
 })
 
-export const translate = ({ toLanguage, word, fromLanguage, infoProvider }) => {
+export const translate = ({
+  toLanguage, word, fromLanguage, infoProvider,
+}) => {
   if (!word) {
     return Promise.resolve()
   }

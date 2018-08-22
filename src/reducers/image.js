@@ -1,4 +1,4 @@
-import { CHANGE_CROP, CHANGE_ZOOM, READ_FILE, CROP_COMPLETED, IMAGE_CLEAN } from '../constants'
+import { CHANGE_CROP, CHANGE_ZOOM, READ_FILE, CROP_COMPLETED, IMAGE_CLEAN, SET_IMAGE } from '../constants'
 
 const defaultState = {
   imageSrc: null,
@@ -10,6 +10,8 @@ const defaultState = {
 
 const image = (state = defaultState, action) => {
   switch (action.type) {
+    case SET_IMAGE:
+      return action.payload
     case READ_FILE:
       return {
         ...state,
