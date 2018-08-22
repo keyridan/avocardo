@@ -2,6 +2,8 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import withStyles from '@material-ui/core/styles/withStyles'
 import Paper from '@material-ui/core/Paper'
+import IconButton from '@material-ui/core/IconButton'
+import Close from '@material-ui/icons/Close'
 import SimpleInput from '../common/SimpleInput'
 import { FACT_TYPE } from '../../constants'
 
@@ -9,6 +11,7 @@ const styles = theme => ({
   card: {
     ...theme.mixins.gutters(),
     padding: theme.spacing.unit * 2,
+    position: 'relative',
   },
   imgContainer: {
     display: 'flex',
@@ -17,9 +20,17 @@ const styles = theme => ({
   img: {
     maxWidth: 200,
   },
+  removeButton: {
+    position: 'absolute',
+    right: '-12px',
+    top: '-12px',
+    '&:hover': {
+      backgroundColor: theme.palette.background.default,
+    },
+  },
 })
 
-const Concept = ({ classes, item, index, setValue }) => (
+const Concept = ({ classes, item, index, setValue, removeItem }) => (
   <Paper className={classes.card} >
     {item.type === FACT_TYPE.TEXT && (
       <SimpleInput
@@ -37,6 +48,12 @@ const Concept = ({ classes, item, index, setValue }) => (
         />
       </div >
     )}
+    <IconButton
+      className={classes.removeButton}
+      onClick={() => removeItem(index)}
+    >
+      <Close />
+    </IconButton >
   </Paper >
 )
 
@@ -47,6 +64,7 @@ Concept.propTypes = {
     checked: PropTypes.number,
   }).isRequired,
   setValue: PropTypes.func.isRequired,
+  removeItem: PropTypes.func.isRequired,
 }
 
 export default withStyles(styles)(Concept)

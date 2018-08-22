@@ -309,6 +309,20 @@ export const setBackSideValue = (value, index) => (dispatch, getState) => {
   })
 }
 
+export const removeBackSideItem = index => (dispatch, getState) => {
+  const backSide = backSideSelector(getState())
+  const newValues = backSide.values.filter((item, itemIndex) => index !== itemIndex)
+
+  return dispatch({
+    type: SET_BACK_SIDE,
+    payload: {
+      ...backSide,
+      checkedItems: backSide.checkedItems - 1,
+      values: newValues,
+    },
+  })
+}
+
 export const reverseCardSides = () => (dispatch, getState) => {
   const { backSide, frontSide } = getState().flashCard
   const reversedCard = {

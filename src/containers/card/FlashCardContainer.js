@@ -1,6 +1,13 @@
 import { connect } from 'react-redux'
 import FlashCard from '../../components/card/FlashCard'
-import { reverseCardSides, setBackSideValue, setFrontSideValue, toggleOption, toggleAllOptions } from '../../actions/index'
+import {
+  removeBackSideItem,
+  reverseCardSides,
+  setBackSideValue,
+  setFrontSideValue,
+  toggleAllOptions,
+  toggleOption,
+} from '../../actions'
 
 const mapStateToProps = state => ({
   ...state.flashCard,
@@ -12,6 +19,7 @@ const mapDispatchToProps = ({
   reverseCardSides,
   toggleOption,
   toggleAllOptions,
+  removeBackSideItem,
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(FlashCard)
