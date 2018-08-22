@@ -3,12 +3,13 @@ import PropTypes from 'prop-types'
 import TextField from '@material-ui/core/TextField'
 
 const SimpleInput = ({
-  value, className, onChange, onKeyPress, onEnterKey, fullWidth, label,
+  value, className, onChange, onKeyPress, onEnterKey, fullWidth, label, autoFocus
 }) => (
   <TextField
     label={label || ''}
     fullWidth={!!fullWidth}
     multiline
+    autoFocus={!!autoFocus}
     className={className}
     onChange={onChange || console.log('onChange')}
     onKeyPress={onKeyPress || ((event) => {

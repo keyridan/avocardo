@@ -20,6 +20,8 @@ import infos from './infos'
 import infoProvider from './infoProvider'
 import chooseLanguageState from './chooseLanguageState'
 import themeType from './themeType'
+import cardSpeedDialState from './cardSpeedDialState'
+import image from './image'
 
 export default combineReducers({
   toLanguage,
@@ -45,5 +47,7 @@ export default combineReducers({
   infoProvider,
   chooseLanguageState,
   themeType,
+  cardSpeedDialState,
+  image,
 })
 

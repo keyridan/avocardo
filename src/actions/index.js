@@ -8,7 +8,10 @@ import {
   BACKSIDE_QUANTITY_ERROR,
   CHANGE_CHOOSE_LANGUAGE_STATE,
   CHANGE_DECK_LIST_STATE,
+  CHANGE_HIDDEN_CARD_SPEED_DIAL_STATE,
   CHANGE_INFO_SWITCHER_STATE,
+  CHANGE_OPEN_CARD_SPEED_DIAL_STATE,
+  CHANGE_OPEN_INPUT_IMAGE_STATE,
   CHANGE_OPEN_LOGIN_FORM,
   CHANGE_SHOW_PASSWORD,
   CHANGE_THEME_TYPE_STATE,
@@ -18,10 +21,12 @@ import {
   CHOOSE_RECENT_FROM_LANGUAGE,
   CHOOSE_RECENT_TO_LANGUAGE,
   CHOOSE_TO_LANGUAGE,
+  FACT_TYPE,
   FETCH_DECKS_BEGIN,
   FETCH_DECKS_FAILURE,
   FETCH_DECKS_SUCCESS,
   FETCH_DECKS_URL,
+  IMAGE_CLEAN,
   INFO_PROVIDERS,
   LOGIN_BEGIN,
   LOGIN_FAILURE,
@@ -40,8 +45,16 @@ import {
   TRANSLATE_SUCCESS,
   TRANSLATE_URL,
 } from '../constants'
-
+import {
+  backSideSelector,
+  croppedImageSelector,
+  hiddenSpeedDialSelector,
+  imageSelector,
+  openSpeedDialSelector
+} from '../selectors'
 import { setCardValues, setTranslationResult } from './setTranslationValues'
+
+export * from './image'
 
 export const toggleAllOptions = value => (dispatch, getState) => {
   const { backSide } = getState().flashCard
@@ -199,6 +212,88 @@ export const setFrontSideValue = (value, index) => (dispatch, getState) => {
   })
 }
 
+
+export const openSpeedDialState = () => (dispatch, getState) => {
+  return dispatch({
+    type: CHANGE_OPEN_CARD_SPEED_DIAL_STATE,
+    payload: !hiddenSpeedDialSelector(getState()),
+  })
+}
+
+export const closeSpeedDialState = () => ({
+  type: CHANGE_OPEN_CARD_SPEED_DIAL_STATE,
+  payload: false,
+})
+
+export const changeSpeedDialState = () => (dispatch, getState) => dispatch({
+  payload: openSpeedDialSelector(getState()),
+  type: CHANGE_OPEN_CARD_SPEED_DIAL_STATE,
+})
+
+export const changeOpenInputImageState = () => ({
+  type: CHANGE_OPEN_INPUT_IMAGE_STATE,
+})
+
+export const changeVisibilitySpeedDialState = () => ({
+  type: CHANGE_HIDDEN_CARD_SPEED_DIAL_STATE,
+})
+
+export const addBackSideValue = () => (dispatch, getState) => {
+  const backSide = backSideSelector(getState())
+  const newValue = {
+    checked: 1,
+    type: FACT_TYPE.TEXT,
+    value: '',
+  }
+  return dispatch({
+    type: SET_BACK_SIDE,
+    payload: {
+      ...backSide,
+      checkedItems: backSide.checkedItems + 1,
+      values: [newValue, ...backSide.values],
+    },
+  })
+}
+
+const cleanImage = () => ({
+  type: IMAGE_CLEAN,
+})
+
+const addBackSideImageValue = () => (dispatch, getState) => {
+  const state = getState()
+  const backSide = backSideSelector(state)
+  const value = croppedImageSelector(state)
+  const image = imageSelector(state)
+
+  if (value) {
+    const newValue = {
+      checked: 1,
+      type: FACT_TYPE.IMAGE,
+      image,
+      value,
+    }
+    return dispatch({
+      type: SET_BACK_SIDE,
+      payload: {
+        ...backSide,
+        checkedItems: backSide.checkedItems + 1,
+        values: [newValue, ...backSide.values],
+      },
+    })
+  }
+}
+
+export const closeAndClean = () => (dispatch) => {
+  dispatch(changeOpenInputImageState())
+  dispatch(cleanImage())
+}
+
+export const addBackSideImageValueAndClean = () => (dispatch) => {
+  dispatch(addBackSideImageValue())
+  dispatch(changeOpenInputImageState())
+  dispatch(cleanImage())
+}
+
 export const setBackSideValue = (value, index) => (dispatch, getState) => {
   const { backSide } = getState().flashCard
   const newValues = backSide.values.map((item, itemIndex) => ((index === itemIndex)
@@ -273,7 +368,7 @@ export const chooseToLanguage = toLanguage => ({
 
 export const setWord = value => ({
   type: SET_WORD,
-  payload: value,
+  payload: decodeURIComponent(value),
 })
 
 export const setIdentifier = value => ({
@@ -345,11 +440,31 @@ export const fetchDecks = () => (dispatch, getState) => {
 const sendCardToDeck = ({ flashCard, deck, token }) => (dispatch) => {
   const concepts = flashCard.backSide.values
     .filter(option => option.checked)
-    .map(option => ({ fact: { text: option.value, type: 'TEXT' } }))
+    .map((option) => {
+      switch (option.type) {
+        case FACT_TYPE.IMAGE: {
+          const imageValues = option.value.split(',')
+          const mime = imageValues[0].match(/:(.*?);/)[1]
+          return {
+            fact: {
+              type: option.type,
+              details: {
+                data: imageValues[1],
+                imageType: mime,
+              },
+            },
+          }
+        }
+        default:
+          return {
+            fact: { text: option.value, type: option.type },
+          }
+      }
+    })
   const data = {
     sides: [
       {
-        concepts: [{ fact: { text: flashCard.frontSide.values[0], type: 'TEXT' } }],
+        concepts: [{ fact: { text: flashCard.frontSide.values[0], type: FACT_TYPE.TEXT } }],
       },
       {
         concepts,
@@ -384,8 +499,12 @@ export const addCardToDeck = () => (dispatch, getState) => {
     : addCardError(backSide.checkedItems))
 }
 
+function fixedEncodeURI(str) {
+  return encodeURIComponent(str).replace(/%5B/g, '[').replace(/%5D/g, ']')
+}
+
 export const translationLink = ({ fromLanguage, toLanguage, word }) => (
-  `/${fromLanguage.toLowerCase()}/${toLanguage.toLowerCase()}/${word}`
+  `/${fromLanguage.toLowerCase()}/${toLanguage.toLowerCase()}/${fixedEncodeURI(word)}`
 )
 
 export const translateAndSetValues = () => (dispatch, getState) =>

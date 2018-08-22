@@ -12,6 +12,10 @@ export const TRANSLATE_URL = `${API_URL}translate/`
 export const LOGIN_URL = `${API_URL}auth/login`
 export const FETCH_DECKS_URL = `${API_URL}v1/me/decks`
 export const ADD_CARD_TO_DECK_URL = `${API_URL}v1/me/cards/add/?deckId=`
+export const FACT_TYPE = {
+  IMAGE: 'IMAGE',
+  TEXT: 'TEXT',
+}
 export const CHOOSE_TO_LANGUAGE = 'CHOOSE_TO_LANGUAGE'
 export const SET_WORD = 'SET_WORD'
 export const SET_PASSWORD = 'SET_PASSWORD'
@@ -45,6 +49,14 @@ export const CHANGE_INFO_SWITCHER_STATE = 'CHANGE_INFO_SWITCHER_STATE'
 export const CHANGE_CHOOSE_LANGUAGE_STATE = 'CHANGE_CHOOSE_LANGUAGE_STATE'
 export const CHOOSE_LANGUAGE = 'CHOOSE_LANGUAGE'
 export const CHANGE_THEME_TYPE_STATE = 'CHANGE_THEME_TYPE_STATE'
+export const CHANGE_OPEN_CARD_SPEED_DIAL_STATE = 'CHANGE_OPEN_CARD_SPEED_DIAL_STATE'
+export const CHANGE_HIDDEN_CARD_SPEED_DIAL_STATE = 'CHANGE_HIDDEN_CARD_SPEED_DIAL_STATE'
+export const CHANGE_OPEN_INPUT_IMAGE_STATE = 'CHANGE_OPEN_INPUT_IMAGE_STATE'
+export const READ_FILE = 'READ_FILE'
+export const CHANGE_CROP = 'CHANGE_CROP'
+export const CHANGE_ZOOM = 'CHANGE_ZOOM'
+export const CROP_COMPLETED = 'CROP_COMPLETED'
+export const IMAGE_CLEAN = 'IMAGE_CLEAN'
 export const INFO_PROVIDERS = ['LEO']
 export const THEME_TYPES = {
   DARK: { value: 'dark', isDark: true },

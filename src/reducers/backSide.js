@@ -9,10 +9,7 @@ import {
 const defaultBackSide = {
   checkedItems: 0,
   maxCheckedItems: 3,
-  values: [{
-    value: '',
-    checked: 0,
-  }],
+  values: [],
 }
 
 const flashCard = (state = defaultBackSide, action) => {

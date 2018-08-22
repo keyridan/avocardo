@@ -1,4 +1,4 @@
-import { SET_CARD_VALUES, SET_TRANSLATION_RESULT } from '../constants'
+import { FACT_TYPE, SET_CARD_VALUES, SET_TRANSLATION_RESULT } from '../constants'
 
 function getWord(item) {
   return item.article ? `${item.article} ${item.word}` : item.word
@@ -18,6 +18,7 @@ const option = word => ({
 const backside = value => ({
   value,
   checked: 0,
+  type: FACT_TYPE.TEXT,
 })
 
 const optionFromPair = ({ wordTo }) => (
