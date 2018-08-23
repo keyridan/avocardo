@@ -34,16 +34,15 @@ const styles = () => ({
   },
 })
 
-const CardSpeedDial = ({ classes, open, isTouch, hidden, openSpeedDialState, closeSpeedDialState, changeSpeedDialState, addBackSideValue, openInputImage, changeOpenInputImageState, addOrUpdateBackSideImageValueAndClean, closeAndClean, imageNotEmpty }) => (
+const CardSpeedDial = ({ classes, open, isTouch, openSpeedDialState, closeSpeedDialState, changeSpeedDialState, addBackSideValue, openInputImage, changeOpenInputImageState, addOrUpdateBackSideImageValueAndClean, closeAndClean, imageNotEmpty }) => (
   <div className={classes.root} >
     <SpeedDial
       ariaLabel="SpeedDial example"
       className={classes.speedDial}
-      hidden={hidden}
       icon={<SpeedDialIcon />}
       onBlur={closeSpeedDialState}
       onClick={changeSpeedDialState}
-      onClose={openSpeedDialState}
+      onClose={closeSpeedDialState}
       onFocus={isTouch ? undefined : openSpeedDialState}
       onMouseEnter={isTouch ? undefined : openSpeedDialState}
       onMouseLeave={closeSpeedDialState}

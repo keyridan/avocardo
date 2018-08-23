@@ -8,7 +8,6 @@ import {
   BACKSIDE_QUANTITY_ERROR,
   CHANGE_CHOOSE_LANGUAGE_STATE,
   CHANGE_DECK_LIST_STATE,
-  CHANGE_HIDDEN_CARD_SPEED_DIAL_STATE,
   CHANGE_INFO_SWITCHER_STATE,
   CHANGE_OPEN_CARD_SPEED_DIAL_STATE,
   CHANGE_OPEN_INPUT_IMAGE_STATE,
@@ -49,7 +48,6 @@ import {
 import {
   backSideSelector,
   croppedImageSelector,
-  hiddenSpeedDialSelector,
   imageSelector,
   openSpeedDialSelector,
 } from '../selectors'
@@ -214,9 +212,9 @@ export const setFrontSideValue = (value, index) => (dispatch, getState) => {
 }
 
 
-export const openSpeedDialState = () => (dispatch, getState) => dispatch({
+export const openSpeedDialState = () => ({
   type: CHANGE_OPEN_CARD_SPEED_DIAL_STATE,
-  payload: !hiddenSpeedDialSelector(getState()),
+  payload: true,
 })
 
 export const closeSpeedDialState = () => ({
@@ -225,16 +223,12 @@ export const closeSpeedDialState = () => ({
 })
 
 export const changeSpeedDialState = () => (dispatch, getState) => dispatch({
-  payload: openSpeedDialSelector(getState()),
+  payload: !openSpeedDialSelector(getState()),
   type: CHANGE_OPEN_CARD_SPEED_DIAL_STATE,
 })
 
 export const changeOpenInputImageState = () => ({
   type: CHANGE_OPEN_INPUT_IMAGE_STATE,
-})
-
-export const changeVisibilitySpeedDialState = () => ({
-  type: CHANGE_HIDDEN_CARD_SPEED_DIAL_STATE,
 })
 
 export const addBackSideValue = () => (dispatch, getState) => {

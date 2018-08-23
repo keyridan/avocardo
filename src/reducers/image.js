@@ -14,7 +14,7 @@ const defaultState = {
   zoom: 1,
   aspect: 20 / 23,
   croppedImage: null,
-  imageUrl: '',
+  imageUrl: 'https://pixabay.com/get/ea34b00c2bf5093ed1584d05fb1d4f9fe374e1d011ac104496f5c17ba2eab7b1_640.jpg',
 }
 
 const image = (state = defaultState, action) => {

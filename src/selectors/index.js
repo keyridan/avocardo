@@ -1,5 +1,4 @@
 export const openSpeedDialSelector = state => state.cardSpeedDialState.open
-export const hiddenSpeedDialSelector = state => state.cardSpeedDialState.hidden
 export const openInputImageSelector = state => state.cardSpeedDialState.openInputImage
 export const imageSrcSelector = state => state.image.imageSrc
 export const imageUrlSelector = state => state.image.imageUrl

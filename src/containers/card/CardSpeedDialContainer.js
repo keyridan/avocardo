@@ -1,16 +1,16 @@
 import { connect } from 'react-redux'
 import CardSpeedDial from '../../components/card/CardSpeedDial'
 import {
-  hiddenSpeedDialSelector,
   imageNotEmptySelector,
   openInputImageSelector,
   openSpeedDialSelector
 } from '../../selectors'
 import {
-  addOrUpdateBackSideImageValueAndClean,
   addBackSideValue,
+  addOrUpdateBackSideImageValueAndClean,
   changeOpenInputImageState,
-  changeSpeedDialState, closeAndClean,
+  changeSpeedDialState,
+  closeAndClean,
   closeSpeedDialState,
   openSpeedDialState,
 } from '../../actions'
@@ -22,7 +22,6 @@ const mapStateToProps = (state) => {
   }
   return {
     open: openSpeedDialSelector(state),
-    hidden: hiddenSpeedDialSelector(state),
     openInputImage: openInputImageSelector(state),
     isTouch,
     imageNotEmpty: imageNotEmptySelector(state),
