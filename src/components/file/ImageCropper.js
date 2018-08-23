@@ -36,7 +36,7 @@ const styles = () => ({
 const ImageCropper = ({
                         classes, zoom, crop, imageSrc, aspect, cropCompleted, changeZoom, changeCrop, changeFile,
                       }) => (
-  <div className={classes.inputCropContainer}>
+  <div className={classes.inputCropContainer} >
     <input
       accept="image/*"
       type="file"
@@ -83,6 +83,16 @@ const ImageCropper = ({
 
 ImageCropper.propTypes = {
   classes: PropTypes.object.isRequired,
+  zoom: PropTypes.number.isRequired,
+  aspect: PropTypes.number.isRequired,
+  crop: PropTypes.shape({
+    x: PropTypes.number,
+    y: PropTypes.number,
+  }).isRequired,
+  cropCompleted: PropTypes.func.isRequired,
+  changeZoom: PropTypes.func.isRequired,
+  changeCrop: PropTypes.func.isRequired,
+  changeFile: PropTypes.func.isRequired,
 }
 
 export default withStyles(styles)(ImageCropper)

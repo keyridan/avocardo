@@ -122,5 +122,7 @@
   "email": "Логин",
   "password": "Пароль",
   "select_multiple_languages": "Выберите несколько языков",
-  "info_provider_switcher": "Отправлять запрос"
+  "info_provider_switcher": "Отправлять запрос",
+  "add_note": "Добавить текст",
+  "add_image": "Добавить изображение"
 }

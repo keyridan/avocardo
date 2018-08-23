@@ -122,5 +122,7 @@
   "email-address": "Email address",
   "password": "Password",
   "select_multiple_languages": "Select multiple languages",
-  "info_provider_switcher": "Send info request"
+  "info_provider_switcher": "Send info request",
+  "add_note": "Add note",
+  "add_image": "Add image"
 }

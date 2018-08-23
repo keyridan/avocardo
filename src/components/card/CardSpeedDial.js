@@ -5,7 +5,6 @@ import SpeedDial from '@material-ui/lab/SpeedDial'
 import SpeedDialIcon from '@material-ui/lab/SpeedDialIcon'
 import SpeedDialAction from '@material-ui/lab/SpeedDialAction'
 import AddPhotoAlternate from '@material-ui/icons/AddPhotoAlternateOutlined'
-import AddAPhoto from '@material-ui/icons/AddAPhotoOutlined'
 import NoteAdd from '@material-ui/icons/NoteAddOutlined'
 import Dialog from '@material-ui/core/Dialog'
 import DialogContent from '@material-ui/core/DialogContent'
@@ -13,6 +12,7 @@ import Button from '@material-ui/core/Button'
 import Close from '@material-ui/icons/Close'
 import Check from '@material-ui/icons/Check'
 import ImageCropperContainer from '../../containers/ImageCropperContainer'
+import TranslatedTextContainer from '../../containers/TranslatedTextContainer'
 
 const styles = () => ({
   root: {
@@ -34,9 +34,7 @@ const styles = () => ({
   },
 })
 
-const CardSpeedDial = ({
-                         classes, open, isTouch, hidden, openSpeedDialState, closeSpeedDialState, changeSpeedDialState, addBackSideValue, openInputImage, changeOpenInputImageState, addOrUpdateBackSideImageValueAndClean, closeAndClean,
-                       }) => (
+const CardSpeedDial = ({ classes, open, isTouch, hidden, openSpeedDialState, closeSpeedDialState, changeSpeedDialState, addBackSideValue, openInputImage, changeOpenInputImageState, addOrUpdateBackSideImageValueAndClean, closeAndClean, imageNotEmpty }) => (
   <div className={classes.root} >
     <SpeedDial
       ariaLabel="SpeedDial example"
@@ -53,17 +51,12 @@ const CardSpeedDial = ({
     >
       <SpeedDialAction
         icon={(<NoteAdd />)}
-        tooltipTitle="Note"
+        tooltipTitle={(<TranslatedTextContainer value="add_note" />)}
         onClick={addBackSideValue}
       />
       <SpeedDialAction
         icon={(<AddPhotoAlternate />)}
-        tooltipTitle="Photo1"
-        onClick={changeSpeedDialState}
-      />
-      <SpeedDialAction
-        icon={(<AddAPhoto />)}
-        tooltipTitle="Photo2"
+        tooltipTitle={(<TranslatedTextContainer value="add_image" />)}
         onClick={changeOpenInputImageState}
       />
     </SpeedDial >
@@ -85,6 +78,7 @@ const CardSpeedDial = ({
           <Button
             variant="fab"
             color="primary"
+            disabled={!imageNotEmpty}
             onClick={addOrUpdateBackSideImageValueAndClean}
             aria-label="OK"
           >
@@ -102,6 +96,7 @@ CardSpeedDial.propTypes = {
   open: PropTypes.bool.isRequired,
   hidden: PropTypes.bool.isRequired,
   openInputImage: PropTypes.bool.isRequired,
+  imageNotEmpty: PropTypes.bool.isRequired,
   closeSpeedDialState: PropTypes.func.isRequired,
   openSpeedDialState: PropTypes.func.isRequired,
   changeSpeedDialState: PropTypes.func.isRequired,
