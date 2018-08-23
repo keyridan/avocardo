@@ -338,12 +338,13 @@ export const setBackSideValue = (value, index) => (dispatch, getState) => {
 export const removeBackSideItem = index => (dispatch, getState) => {
   const backSide = backSideSelector(getState())
   const newValues = backSide.values.filter((item, itemIndex) => index !== itemIndex)
+  const checkedItems = newValues.filter(item => item.checked && item.checked === 1).length
 
   return dispatch({
     type: SET_BACK_SIDE,
     payload: {
       ...backSide,
-      checkedItems: backSide.checkedItems - 1,
+      checkedItems,
       values: newValues,
     },
   })
