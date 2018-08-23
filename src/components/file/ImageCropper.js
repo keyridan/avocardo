@@ -3,6 +3,8 @@ import PropTypes from 'prop-types'
 import withStyles from '@material-ui/core/styles/withStyles'
 import Slider from '@material-ui/lab/Slider'
 import Cropper from 'react-easy-crop'
+import Grid from '@material-ui/core/Grid'
+import ImageLoaderContainer from '../../containers/file/ImageLoaderContainer'
 import { getCroppedImg, readFile } from '../../utils/image'
 
 const styles = () => ({
@@ -37,17 +39,24 @@ const ImageCropper = ({
                         classes, zoom, crop, imageSrc, aspect, cropCompleted, changeZoom, changeCrop, changeFile,
                       }) => (
   <div className={classes.inputCropContainer} >
-    <input
-      accept="image/*"
-      type="file"
-      className={classes.input}
-      onChange={async (event) => {
-        if (event.target.files && event.target.files.length > 0) {
-          const imageDataUrl = await readFile(event.target.files[0])
-          changeFile(imageDataUrl)
-        }
-      }}
-    />
+    <Grid container >
+      <Grid item >
+        <input
+          accept="image/*"
+          type="file"
+          className={classes.input}
+          onChange={async (event) => {
+            if (event.target.files && event.target.files.length > 0) {
+              const imageDataUrl = await readFile(event.target.files[0])
+              changeFile(imageDataUrl)
+            }
+          }}
+        />
+      </Grid >
+      <Grid item >
+        <ImageLoaderContainer />
+      </Grid >
+    </Grid >
     {imageSrc && (
       <div className={classes.cropContainer} >
         <Fragment >

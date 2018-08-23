@@ -1,4 +1,12 @@
-import { CHANGE_CROP, CHANGE_ZOOM, READ_FILE, CROP_COMPLETED, IMAGE_CLEAN, SET_IMAGE } from '../constants'
+import {
+  CHANGE_CROP,
+  CHANGE_ZOOM,
+  READ_FILE,
+  CROP_COMPLETED,
+  IMAGE_CLEAN,
+  SET_IMAGE,
+  SET_IMAGE_URL
+} from '../constants'
 
 const defaultState = {
   imageSrc: null,
@@ -6,10 +14,16 @@ const defaultState = {
   zoom: 1,
   aspect: 20 / 23,
   croppedImage: null,
+  imageUrl: '',
 }
 
 const image = (state = defaultState, action) => {
   switch (action.type) {
+    case SET_IMAGE_URL:
+      return {
+        ...state,
+        imageUrl: action.payload,
+      }
     case SET_IMAGE:
       return action.payload
     case READ_FILE:

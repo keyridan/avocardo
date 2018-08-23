@@ -18,7 +18,7 @@ const WordInput = ({
       value={value}
     />
     <FormHelperText >
-      <TranslatedTextContainer value="translate_text_helper" />
+      <TranslatedTextContainer value="enter_text_helper" />
     </FormHelperText >
   </div >
 )

@@ -1,10 +1,13 @@
 import { connect } from 'react-redux'
-import ImageCropper from '../components/file/ImageCropper'
+import ImageCropper from '../../components/file/ImageCropper'
+import { changeCrop, changeFile, changeZoom, cropCompleted } from '../../actions/index'
 import {
-  changeCrop, changeFile,
-  changeZoom, cropCompleted,
-} from '../actions'
-import { aspectSelector, cropSelector, croppedImageSelector, imageSrcSelector, zoomSelector } from '../selectors'
+  aspectSelector,
+  croppedImageSelector,
+  cropSelector,
+  imageSrcSelector,
+  zoomSelector,
+} from '../../selectors/index'
 
 const mapStateToProps = state => ({
   imageSrc: imageSrcSelector(state),

@@ -11,7 +11,7 @@ import DialogContent from '@material-ui/core/DialogContent'
 import Button from '@material-ui/core/Button'
 import Close from '@material-ui/icons/Close'
 import Check from '@material-ui/icons/Check'
-import ImageCropperContainer from '../../containers/ImageCropperContainer'
+import ImageCropperContainer from '../../containers/file/ImageCropperContainer'
 import TranslatedTextContainer from '../../containers/TranslatedTextContainer'
 
 const styles = () => ({
