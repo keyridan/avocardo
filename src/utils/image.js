@@ -45,14 +45,13 @@ export async function getCroppedImg(imageSrc, pixelCrop) {
 export function getImage(url, cb) {
   const canvas = document.createElement('canvas')
   const img = document.createElement('img')
+  console.log('url: ', url)
 
   img.onload = () => {
     const ctx = canvas.getContext('2d')
-
     // match size of image
     canvas.width = img.width
     canvas.height = img.height
-
     // Copy the image contents to the canvas
     ctx.drawImage(img, 0, 0)
 
@@ -60,8 +59,9 @@ export function getImage(url, cb) {
     cb(null, canvas.toDataURL('image/png'))
   }
 
-  img.ononerror = () => {
-    cb(new Error('FailedToLoadImage'))
+  img.onerror = (error) => {
+    console.log('onError: ', error)
+    cb(new Error(error))
   }
 
   // canvas is not supported

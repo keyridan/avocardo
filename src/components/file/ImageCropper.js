@@ -13,9 +13,14 @@ const styles = () => ({
     display: 'flex',
     flexFlow: 'column',
   },
+  inputContainer: {
+    position: 'relative',
+    display: 'flex',
+    flex: '1 0 30px',
+  },
   input: {
     display: 'flex',
-    flex: '0 1 30px',
+    flex: '0 1 15px',
   },
   cropContainer: {
     display: 'flex',
@@ -39,7 +44,7 @@ const ImageCropper = ({
                         classes, zoom, crop, imageSrc, aspect, cropCompleted, changeZoom, changeCrop, changeFile,
                       }) => (
   <div className={classes.inputCropContainer} >
-    <Grid container >
+    <Grid container className={classes.inputContainer}>
       <Grid item >
         <input
           accept="image/*"

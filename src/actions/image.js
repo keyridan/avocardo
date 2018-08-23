@@ -30,6 +30,10 @@ export const setImageUrl = value => ({
 export const setFileWithImageUrl = () => (dispatch, getState) => {
   const imageUrl = imageUrlSelector(getState())
   getImage(imageUrl, (err, uri) => {
-    dispatch(changeFile(uri))
+    if (!err) {
+      dispatch(changeFile(uri))
+    } else {
+      console.log('Error: ', err)
+    }
   })
 }
