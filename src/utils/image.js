@@ -44,8 +44,7 @@ export async function getCroppedImg(imageSrc, pixelCrop) {
 
 export function getImage(url, cb) {
   const canvas = document.createElement('canvas')
-  const img = document.createElement('img')
-  console.log('url: ', url)
+  const img = new Image()
 
   img.onload = () => {
     const ctx = canvas.getContext('2d')
@@ -60,15 +59,14 @@ export function getImage(url, cb) {
   }
 
   img.onerror = (error) => {
-    console.log('onError: ', error)
-    cb(new Error(error))
+    cb(new Error(`Error: ${error}`))
   }
 
   // canvas is not supported
   if (!canvas.getContext) {
     setTimeout(cb, 0, new Error('CanvasIsNotSupported'))
   } else {
-    img.setAttribute('crossOrigin', 'anonymous')
+    img.crossOrigin = 'Anonymous'
     img.src = url
   }
 }

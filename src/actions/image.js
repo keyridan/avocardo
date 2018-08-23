@@ -1,4 +1,4 @@
-import { CHANGE_CROP, CHANGE_ZOOM, CROP_COMPLETED, READ_FILE, SET_IMAGE_URL } from '../constants'
+import { CHANGE_CROP, CHANGE_ZOOM, CROP_COMPLETED, READ_FILE, READ_FILE_ERROR, SET_IMAGE_URL } from '../constants'
 import { imageUrlSelector } from '../selectors'
 import { getImage } from '../utils/image'
 
@@ -10,6 +10,10 @@ export const changeZoom = value => ({
 export const changeCrop = value => ({
   type: CHANGE_CROP,
   payload: value,
+})
+
+export const readFileError = () => ({
+  type: READ_FILE_ERROR,
 })
 
 export const changeFile = imageDataUrl => ({
@@ -34,6 +38,7 @@ export const setFileWithImageUrl = () => (dispatch, getState) => {
       dispatch(changeFile(uri))
     } else {
       console.log('Error: ', err)
+      dispatch(readFileError())
     }
   })
 }

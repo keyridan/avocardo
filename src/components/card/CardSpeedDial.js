@@ -20,8 +20,8 @@ const styles = theme => ({
   },
   speedDial: {
     position: 'absolute',
-    bottom: '-13px',
-    right: '0px',
+    bottom: '-17px',
+    right: '-25px',
   },
   dialogButtons: {
     [theme.breakpoints.down('sm')]: {
@@ -39,29 +39,30 @@ const styles = theme => ({
 
 const CardSpeedDial = ({ classes, open, isTouch, openSpeedDialState, closeSpeedDialState, changeSpeedDialState, addBackSideValue, openInputImage, changeOpenInputImageState, addOrUpdateBackSideImageValueAndClean, closeAndClean, imageNotEmpty }) => (
   <div className={classes.root} >
-    <SpeedDial
-      ariaLabel="SpeedDial example"
-      className={classes.speedDial}
-      icon={<SpeedDialIcon />}
-      onBlur={closeSpeedDialState}
-      onClick={changeSpeedDialState}
-      onClose={closeSpeedDialState}
-      onFocus={isTouch ? undefined : openSpeedDialState}
-      onMouseEnter={isTouch ? undefined : openSpeedDialState}
-      onMouseLeave={closeSpeedDialState}
-      open={open}
-    >
-      <SpeedDialAction
-        icon={(<NoteAdd />)}
-        tooltipTitle={(<TranslatedTextContainer value="add_note" />)}
-        onClick={addBackSideValue}
-      />
-      <SpeedDialAction
-        icon={(<AddPhotoAlternate />)}
-        tooltipTitle={(<TranslatedTextContainer value="add_image" />)}
-        onClick={changeOpenInputImageState}
-      />
-    </SpeedDial >
+    <div className={classes.speedDial} >
+      <SpeedDial
+        ariaLabel="SpeedDial example"
+        icon={<SpeedDialIcon />}
+        onBlur={closeSpeedDialState}
+        onClick={changeSpeedDialState}
+        onClose={closeSpeedDialState}
+        onFocus={isTouch ? undefined : openSpeedDialState}
+        onMouseEnter={isTouch ? undefined : openSpeedDialState}
+        onMouseLeave={closeSpeedDialState}
+        open={open}
+      >
+        <SpeedDialAction
+          icon={(<NoteAdd />)}
+          tooltipTitle={(<TranslatedTextContainer value="add_note" />)}
+          onClick={addBackSideValue}
+        />
+        <SpeedDialAction
+          icon={(<AddPhotoAlternate />)}
+          tooltipTitle={(<TranslatedTextContainer value="add_image" />)}
+          onClick={changeOpenInputImageState}
+        />
+      </SpeedDial >
+    </div >
     <Dialog
       fullScreen
       aria-labelledby="simple-dialog-title"
