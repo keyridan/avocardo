@@ -14,7 +14,7 @@ import Check from '@material-ui/icons/Check'
 import ImageCropperContainer from '../../containers/file/ImageCropperContainer'
 import TranslatedTextContainer from '../../containers/TranslatedTextContainer'
 
-const styles = () => ({
+const styles = theme => ({
   root: {
     position: 'relative',
   },
@@ -24,6 +24,9 @@ const styles = () => ({
     right: '0px',
   },
   dialogButtons: {
+    [theme.breakpoints.down('sm')]: {
+      bottom: 20,
+    },
     position: 'fixed',
     right: 25,
     zIndex: 4,

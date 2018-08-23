@@ -15,20 +15,19 @@ const styles = () => ({
 
 const ImageLoader = ({ classes, imageUrl, setImageUrl, setFileWithImageUrl }) => (
   <Grid container >
-    <Grid item >
-      <div >
-        <SimpleInput
-          label={(<TranslatedTextContainer value="image_url_input_label" />)}
-          value={imageUrl}
-          onChange={event => setImageUrl(event.target.value)}
-          onEnterKey={setFileWithImageUrl}
-        />
-        <FormHelperText >
-          <TranslatedTextContainer value="enter_text_helper" />
-        </FormHelperText >
-      </div >
+    <Grid item xs={10}>
+      <SimpleInput
+        fullWidth
+        label={(<TranslatedTextContainer value="image_url_input_label" />)}
+        value={imageUrl}
+        onChange={event => setImageUrl(event.target.value)}
+        onEnterKey={setFileWithImageUrl}
+      />
+      <FormHelperText >
+        <TranslatedTextContainer value="enter_text_helper" />
+      </FormHelperText >
     </Grid >
-    <Grid item >
+    <Grid item xs={2}>
       <SimpleButton
         onClick={setFileWithImageUrl}
       >

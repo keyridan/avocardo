@@ -7,45 +7,35 @@ import Grid from '@material-ui/core/Grid'
 import ImageLoaderContainer from '../../containers/file/ImageLoaderContainer'
 import { getCroppedImg, readFile } from '../../utils/image'
 
-const styles = () => ({
-  inputCropContainer: {
-    height: '100%',
-    display: 'flex',
-    flexFlow: 'column',
-  },
-  inputContainer: {
-    position: 'relative',
-    display: 'flex',
-    flex: '1 0 30px',
-  },
-  input: {
-    display: 'flex',
-    flex: '0 1 15px',
-  },
-  cropContainer: {
-    display: 'flex',
-    flex: '1 0 auto',
-    flexFlow: 'column',
-  },
+const styles = theme => ({
+  input: {},
   crop: {
+    width: '100%',
+    height: 500,
     position: 'relative',
-    display: 'flex',
-    flex: '1 0 auto',
+  },
+  controls: {
+    [theme.breakpoints.up('sm')]: {
+      margin: 'auto',
+      width: '50%',
+      height: 80,
+      display: 'flex',
+      alignItems: 'center',
+    },
+    display: 'none',
   },
   slider: {
-    alignSelf: 'center',
-    display: 'flex',
-    flex: '0 1 30px',
-    width: '50%',
+    width: 200,
+    height: 10,
   },
 })
 
 const ImageCropper = ({
                         classes, zoom, crop, imageSrc, aspect, cropCompleted, changeZoom, changeCrop, changeFile,
                       }) => (
-  <div className={classes.inputCropContainer} >
-    <Grid container className={classes.inputContainer}>
-      <Grid item >
+  <div >
+    <Grid container >
+      <Grid item xs={12} sm={2} >
         <input
           accept="image/*"
           type="file"
@@ -58,40 +48,40 @@ const ImageCropper = ({
           }}
         />
       </Grid >
-      <Grid item >
+      <Grid item xs={12} sm={9} >
         <ImageLoaderContainer />
       </Grid >
+      {imageSrc && (
+        <Grid item xs={12} >
+          <Fragment >
+            <div className={classes.crop} >
+              <Cropper
+                image={imageSrc}
+                crop={crop}
+                zoom={zoom}
+                aspect={aspect}
+                onCropChange={changeCrop}
+                onCropComplete={async (_, croppedAreaPixels) => {
+                  const croppedImage = await getCroppedImg(imageSrc, croppedAreaPixels)
+                  cropCompleted(croppedImage)
+                }}
+                onZoomChange={changeZoom}
+              />
+            </div >
+            <div className={classes.controls} >
+              <Slider
+                value={zoom}
+                min={1}
+                max={3}
+                step={0.1}
+                aria-labelledby="Zoom"
+                onChange={(_, zoomValue) => changeZoom(zoomValue)}
+              />
+            </div >
+          </Fragment >
+        </Grid >
+      )}
     </Grid >
-    {imageSrc && (
-      <div className={classes.cropContainer} >
-        <Fragment >
-          <div className={classes.crop} >
-            <Cropper
-              image={imageSrc}
-              crop={crop}
-              zoom={zoom}
-              aspect={aspect}
-              onCropChange={changeCrop}
-              onCropComplete={async (_, croppedAreaPixels) => {
-                const croppedImage = await getCroppedImg(imageSrc, croppedAreaPixels)
-                cropCompleted(croppedImage)
-              }}
-              onZoomChange={changeZoom}
-            />
-          </div >
-          <div className={classes.slider} >
-            <Slider
-              value={zoom}
-              min={1}
-              max={3}
-              step={0.1}
-              aria-labelledby="Zoom"
-              onChange={(_, zoomValue) => changeZoom(zoomValue)}
-            />
-          </div >
-        </Fragment >
-      </div >
-    )}
   </div >
 )
 
