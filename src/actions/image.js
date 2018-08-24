@@ -4,16 +4,24 @@ import {
   CHANGE_IMAGE_SELECTOR_DIALOG_STATE,
   CHANGE_ZOOM,
   CROP_COMPLETED,
-  IMAGE_REQUEST_BEGIN,
-  IMAGE_REQUEST_FAILURE,
-  IMAGE_REQUEST_SUCCESS,
   IMAGE_URL,
+  IMAGES_REQUEST_BEGIN,
+  IMAGES_REQUEST_FAILURE,
+  IMAGES_REQUEST_SUCCESS,
+  LOAD_NEXT_PAGE_IMAGES_REQUEST_BEGIN,
+  LOAD_NEXT_PAGE_IMAGES_REQUEST_FAILURE,
+  LOAD_NEXT_PAGE_IMAGES_REQUEST_SUCCESS,
   READ_FILE,
   READ_FILE_ERROR,
   SET_IMAGE_URL,
   SET_PHOTOS
 } from '../constants'
-import { imageUrlSelector, photosSelector, requestedImagesSelector } from '../selectors'
+import {
+  imageUrlSelector, pageImagesSelector,
+  photosFromRequestedImagesSelector,
+  photosSelector,
+  requestedImagesSelector
+} from '../selectors'
 import { getImage } from '../utils/image'
 
 export const changeZoom = value => ({
@@ -76,20 +84,37 @@ export const searchImages = (value) => {
       endpoint,
       method: 'GET',
       headers: { 'Content-Type': 'application/json' },
-      types: [IMAGE_REQUEST_BEGIN, IMAGE_REQUEST_SUCCESS, IMAGE_REQUEST_FAILURE],
+      types: [IMAGES_REQUEST_BEGIN, IMAGES_REQUEST_SUCCESS, IMAGES_REQUEST_FAILURE],
     },
   }
 }
 
-export const searchImagesAndSetPhotos = value => (dispatch, getState) => {
-  dispatch(searchImages(value)).then(() => {
-    const photos = requestedImagesSelector(getState()).map(image => ({
-      src: image.webformatURL,
-      width: 1,
-      height: 1,
-    }))
-    dispatch(setPhotos(photos))
+export const loadNextPageImages = () => (dispatch, getState) => {
+  const state = getState()
+  const value = imageUrlSelector(state)
+  const pageNumber = pageImagesSelector(state) + 1
+  const endpoint = `${IMAGE_URL}${decodeURIComponent(value)}&pageNumber=${pageNumber}`
+  return dispatch({
+    [RSAA]: {
+      endpoint,
+      method: 'GET',
+      headers: { 'Content-Type': 'application/json' },
+      types: [
+        LOAD_NEXT_PAGE_IMAGES_REQUEST_BEGIN,
+        LOAD_NEXT_PAGE_IMAGES_REQUEST_SUCCESS,
+        LOAD_NEXT_PAGE_IMAGES_REQUEST_FAILURE],
+    },
   })
+    .then(() => {
+      dispatch(setPhotos(photosFromRequestedImagesSelector(getState())))
+    })
+}
+
+export const searchImagesAndSetPhotos = value => (dispatch, getState) => {
+  dispatch(searchImages(value))
+    .then(() => {
+      dispatch(setPhotos(photosFromRequestedImagesSelector(getState())))
+    })
 }
 
 export const setFileWithImageUrl = () => (dispatch, getState) => {

@@ -22,6 +22,7 @@ import chooseLanguageState from './chooseLanguageState'
 import themeType from './themeType'
 import cardSpeedDialState from './cardSpeedDialState'
 import image from './image'
+import images from './images'
 import userFormState from './userFormState'
 
 export default combineReducers({
@@ -51,5 +52,6 @@ export default combineReducers({
   themeType,
   cardSpeedDialState,
   image,
+  images,
 })
 

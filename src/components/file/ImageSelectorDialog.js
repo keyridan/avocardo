@@ -1,13 +1,12 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import Gallery from 'react-photo-gallery'
 import withStyles from '@material-ui/core/styles/withStyles'
 import Dialog from '@material-ui/core/Dialog'
 import DialogContent from '@material-ui/core/DialogContent'
+import ImagesLoaderContainer from '../../containers/file/ImagesLoaderContainer'
 
-const styles = theme => ({
-  dialog: {
-  },
+const styles = () => ({
+  dialog: {},
 })
 
 const ImageSelectorDialog = ({ classes, imageSelectorDialogState, photos, selectPhoto, changeImageSelectorDialogState }) => (
@@ -17,10 +16,7 @@ const ImageSelectorDialog = ({ classes, imageSelectorDialogState, photos, select
     onClose={changeImageSelectorDialogState}
   >
     <DialogContent className={classes.dialog} >
-      <Gallery
-        photos={photos}
-        onClick={(event, obj) => selectPhoto(obj)}
-      />
+      <ImagesLoaderContainer />
     </DialogContent >
   </Dialog >
 )
