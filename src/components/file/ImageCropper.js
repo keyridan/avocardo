@@ -31,8 +31,8 @@ const styles = theme => ({
 })
 
 const ImageCropper = ({
-                        classes, zoom, crop, imageSrc, aspect, cropCompleted, changeZoom, changeCrop, changeFile,
-                      }) => (
+  classes, zoom, crop, imageSrc, aspect, cropCompleted, changeZoom, changeCrop, changeFile,
+}) => (
   <div >
     <Grid container >
       <Grid item xs={12} sm={2} >
@@ -52,34 +52,34 @@ const ImageCropper = ({
         <ImageLoaderContainer />
       </Grid >
       {imageSrc && (
-        <Grid item xs={12} >
-          <Fragment >
-            <div className={classes.crop} >
-              <Cropper
-                image={imageSrc}
-                crop={crop}
-                zoom={zoom}
-                aspect={aspect}
-                onCropChange={changeCrop}
-                onCropComplete={async (_, croppedAreaPixels) => {
+      <Grid item xs={12} >
+        <Fragment >
+          <div className={classes.crop} >
+            <Cropper
+              image={imageSrc}
+              crop={crop}
+              zoom={zoom}
+              aspect={aspect}
+              onCropChange={changeCrop}
+              onCropComplete={async (_, croppedAreaPixels) => {
                   const croppedImage = await getCroppedImg(imageSrc, croppedAreaPixels)
                   cropCompleted(croppedImage)
                 }}
-                onZoomChange={changeZoom}
-              />
-            </div >
-            <div className={classes.controls} >
-              <Slider
-                value={zoom}
-                min={1}
-                max={3}
-                step={0.1}
-                aria-labelledby="Zoom"
-                onChange={(_, zoomValue) => changeZoom(zoomValue)}
-              />
-            </div >
-          </Fragment >
-        </Grid >
+              onZoomChange={changeZoom}
+            />
+          </div >
+          <div className={classes.controls} >
+            <Slider
+              value={zoom}
+              min={1}
+              max={3}
+              step={0.1}
+              aria-labelledby="Zoom"
+              onChange={(_, zoomValue) => changeZoom(zoomValue)}
+            />
+          </div >
+        </Fragment >
+      </Grid >
       )}
     </Grid >
   </div >

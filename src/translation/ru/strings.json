@@ -112,7 +112,7 @@
   "translation_btn": "Перевести",
   "enter_text_helper": "Ctrl+⏎/⌘+⏎ тоже работает",
   "word_input_label": "Текст для перевода",
-  "image_url_input_label": "Ссылка на изображение",
+  "image_url_input_label": "Ссылка на изображение или текст для поиска изображения",
   "deck_list_helper": "Колоды",
   "deck_selector_helper": "Выберите колоду для сохранения карты",
   "deck_selector_login_helper": "Войдите через Tinycards чтобы выбрать",

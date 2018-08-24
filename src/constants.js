@@ -9,6 +9,7 @@ const HEROKU_URL = 'https://cardsbuddy.herokuapp.com/api/'
 const LOCAL_URL = 'http://localhost:8080/api/'
 export const API_URL = HEROKU_URL
 export const TRANSLATE_URL = `${API_URL}translate/`
+export const IMAGE_URL = `${API_URL}image/?query=`
 export const LOGIN_URL = `${API_URL}auth/login`
 export const FETCH_DECKS_URL = `${API_URL}v1/me/decks`
 export const ADD_CARD_TO_DECK_URL = `${API_URL}v1/me/cards/add/?deckId=`
@@ -54,6 +55,11 @@ export const CHANGE_OPEN_INPUT_IMAGE_STATE = 'CHANGE_OPEN_INPUT_IMAGE_STATE'
 export const READ_FILE = 'READ_FILE'
 export const READ_FILE_ERROR = 'READ_FILE_ERROR'
 export const SET_IMAGE = 'SET_IMAGE'
+export const SET_PHOTOS = 'SET_PHOTOS'
+export const IMAGE_REQUEST_BEGIN = 'IMAGE_REQUEST_BEGIN'
+export const IMAGE_REQUEST_SUCCESS = 'IMAGE_REQUEST_SUCCESS'
+export const IMAGE_REQUEST_FAILURE = 'IMAGE_REQUEST_FAILURE'
+export const CHANGE_IMAGE_SELECTOR_DIALOG_STATE = 'CHANGE_IMAGE_SELECTOR_DIALOG_STATE'
 export const SET_IMAGE_URL = 'SET_IMAGE_URL'
 export const CHANGE_CROP = 'CHANGE_CROP'
 export const CHANGE_ZOOM = 'CHANGE_ZOOM'

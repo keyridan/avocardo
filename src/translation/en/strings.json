@@ -112,7 +112,7 @@
   "translation_btn": "Translate",
   "enter_text_helper": "Ctrl+⏎/⌘+⏎ also works",
   "word_input_label": "Text to translate",
-  "image_url_input_label": "Image url",
+  "image_url_input_label": "Image url or text to search image",
   "deck_list_helper": "Decks",
   "deck_selector_helper": "Choose deck to save card",
   "deck_selector_login_helper": "Login to Tinycards to enable",

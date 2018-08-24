@@ -6,6 +6,7 @@ import FormHelperText from '@material-ui/core/es/FormHelperText/FormHelperText'
 import SimpleInput from '../common/SimpleInput'
 import SimpleButton from '../common/SimpleButton'
 import TranslatedTextContainer from '../../containers/TranslatedTextContainer'
+import ImageSelectorDialogContainer from '../../containers/file/ImageSelectorDialogContainer'
 
 const styles = () => ({
   imageUrlContainer: {
@@ -34,6 +35,7 @@ const ImageLoader = ({ classes, imageUrl, setImageUrl, setFileWithImageUrl }) =>
         Go
       </SimpleButton >
     </Grid >
+    <ImageSelectorDialogContainer />
   </Grid >
 )
 

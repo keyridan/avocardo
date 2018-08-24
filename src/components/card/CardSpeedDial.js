@@ -6,13 +6,8 @@ import SpeedDialIcon from '@material-ui/lab/SpeedDialIcon'
 import SpeedDialAction from '@material-ui/lab/SpeedDialAction'
 import AddPhotoAlternate from '@material-ui/icons/AddPhotoAlternateOutlined'
 import NoteAdd from '@material-ui/icons/NoteAddOutlined'
-import Dialog from '@material-ui/core/Dialog'
-import DialogContent from '@material-ui/core/DialogContent'
-import Button from '@material-ui/core/Button'
-import Close from '@material-ui/icons/Close'
-import Check from '@material-ui/icons/Check'
-import ImageCropperContainer from '../../containers/file/ImageCropperContainer'
 import TranslatedTextContainer from '../../containers/TranslatedTextContainer'
+import FileDialogContainer from '../../containers/file/FileDialogContainer'
 
 const styles = theme => ({
   root: {
@@ -37,7 +32,7 @@ const styles = theme => ({
   },
 })
 
-const CardSpeedDial = ({ classes, open, isTouch, openSpeedDialState, closeSpeedDialState, changeSpeedDialState, addBackSideValue, openInputImage, changeOpenInputImageState, addOrUpdateBackSideImageValueAndClean, closeAndClean, imageNotEmpty }) => (
+const CardSpeedDial = ({ classes, open, isTouch, openSpeedDialState, closeSpeedDialState, changeSpeedDialState, addBackSideValue, changeOpenInputImageState }) => (
   <div className={classes.root} >
     <div className={classes.speedDial} >
       <SpeedDial
@@ -63,50 +58,18 @@ const CardSpeedDial = ({ classes, open, isTouch, openSpeedDialState, closeSpeedD
         />
       </SpeedDial >
     </div >
-    <Dialog
-      fullScreen
-      aria-labelledby="simple-dialog-title"
-      open={openInputImage}
-    >
-      <DialogContent className={classes.dialog} >
-        <div className={classes.dialogButtons} >
-          <Button
-            variant="fab"
-            color="primary"
-            onClick={closeAndClean}
-            aria-label="Close"
-          >
-            <Close />
-          </Button >
-          <Button
-            variant="fab"
-            color="primary"
-            disabled={!imageNotEmpty}
-            onClick={addOrUpdateBackSideImageValueAndClean}
-            aria-label="OK"
-          >
-            <Check />
-          </Button >
-        </div >
-        <ImageCropperContainer />
-      </DialogContent >
-    </Dialog >
+    <FileDialogContainer />
   </div >
 )
 
 CardSpeedDial.propTypes = {
   classes: PropTypes.object.isRequired,
   open: PropTypes.bool.isRequired,
-  hidden: PropTypes.bool.isRequired,
-  openInputImage: PropTypes.bool.isRequired,
-  imageNotEmpty: PropTypes.bool.isRequired,
   closeSpeedDialState: PropTypes.func.isRequired,
   openSpeedDialState: PropTypes.func.isRequired,
   changeSpeedDialState: PropTypes.func.isRequired,
   addBackSideValue: PropTypes.func.isRequired,
   changeOpenInputImageState: PropTypes.func.isRequired,
-  addOrUpdateBackSideImageValueAndClean: PropTypes.func.isRequired,
-  closeAndClean: PropTypes.func.isRequired,
 }
 
 export default withStyles(styles)(CardSpeedDial)
