@@ -10,6 +10,7 @@ const SimpleInput = ({
     fullWidth={!!fullWidth}
     multiline
     autoFocus={!!autoFocus}
+    onFocus={event => event.target.select()}
     className={className}
     onChange={onChange || console.log('onChange')}
     onKeyPress={onKeyPress || ((event) => {
