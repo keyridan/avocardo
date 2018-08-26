@@ -22,6 +22,7 @@ import chooseLanguageState from './chooseLanguageState'
 import themeType from './themeType'
 import cardSpeedDialState from './cardSpeedDialState'
 import image from './image'
+import userFormState from './userFormState'
 
 export default combineReducers({
   toLanguage,
@@ -32,6 +33,7 @@ export default combineReducers({
   tinyCardsLogin,
   token,
   loginFormState,
+  userFormState,
   deck,
   decks,
   deckListState,

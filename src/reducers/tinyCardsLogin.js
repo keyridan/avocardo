@@ -1,8 +1,9 @@
-import { LOGIN_BEGIN, LOGIN_FAILURE, LOGIN_SUCCESS, SET_IDENTIFIER, SET_PASSWORD } from '../constants'
+import { LOGIN_BEGIN, LOGIN_FAILURE, LOGIN_SUCCESS, LOGOUT, SET_IDENTIFIER, SET_PASSWORD } from '../constants'
 
-const tinyCardsLogin = (state = {
+const initState = {
   identifier: '', password: '', pending: false, auth: false,
-}, action) => {
+}
+const tinyCardsLogin = (state = initState, action) => {
   switch (action.type) {
     case SET_IDENTIFIER:
       return {
@@ -31,6 +32,8 @@ const tinyCardsLogin = (state = {
         ...state,
         pending: false,
       }
+    case LOGOUT:
+      return initState
     default:
       return state
   }

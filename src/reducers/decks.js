@@ -1,6 +1,7 @@
-import { FETCH_DECKS_BEGIN, FETCH_DECKS_FAILURE, FETCH_DECKS_SUCCESS } from '../constants'
+import { FETCH_DECKS_BEGIN, FETCH_DECKS_FAILURE, FETCH_DECKS_SUCCESS, LOGOUT } from '../constants'
 
-const decks = (state = { pending: false, values: [] }, action) => {
+const initState = { pending: false, values: [] }
+const decks = (state = initState, action) => {
   switch (action.type) {
     case FETCH_DECKS_BEGIN:
       return {
@@ -18,6 +19,8 @@ const decks = (state = { pending: false, values: [] }, action) => {
         pending: false,
         values: action.payload,
       }
+    case LOGOUT:
+      return initState
     default:
       return state
   }

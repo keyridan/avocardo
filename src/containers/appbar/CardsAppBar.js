@@ -4,7 +4,6 @@ import PropTypes from 'prop-types'
 import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
 import IconButton from '@material-ui/core/IconButton'
-import AccountCircle from '@material-ui/icons/AccountCircle'
 import MenuItem from '@material-ui/core/MenuItem'
 import Menu from '@material-ui/core/Menu'
 import AppBarLogin from '../../components/appbar/AppBarLogin'
@@ -14,6 +13,7 @@ import { stringKey } from '../../translation/index'
 import s from './CardsAppBar.css'
 import { changeChooseLanguageState, changeLoginFormState, chooseLanguage } from '../../actions/index'
 import { SUPPORTED_LOCALISATION_LANGUAGES } from '../../constants'
+import AppBarUser from '../../components/appbar/AppBarUser'
 
 const CardsAppBar = ({
   auth, language, classes, changeChooseLanguageState, chooseLanguage, chooseLanguageState,
@@ -21,18 +21,7 @@ const CardsAppBar = ({
   <div className={s.cards_app_bar} >
     <AppBar position="static" >
       <Toolbar >
-        {auth ? (
-          <div >
-            <IconButton
-              aria-owns="menu-appbar"
-              aria-haspopup="true"
-              onClick={() => console.log('onClick')}
-              color="inherit"
-            >
-              <AccountCircle />
-            </IconButton >
-          </div >
-        ) : (<AppBarLogin />)}
+        {auth ? (<AppBarUser />) : (<AppBarLogin />)}
         <IconButton
           aria-owns="menu-appbar"
           aria-haspopup="true"

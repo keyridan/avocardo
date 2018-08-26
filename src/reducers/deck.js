@@ -1,9 +1,12 @@
-import { CHOOSE_DECK } from '../constants'
+import { CHOOSE_DECK, LOGOUT } from '../constants'
 
-const deck = (state = '', action) => {
+const initState = ''
+const deck = (state = initState, action) => {
   switch (action.type) {
     case CHOOSE_DECK:
       return action.payload
+    case LOGOUT:
+      return initState
     default:
       return state
   }

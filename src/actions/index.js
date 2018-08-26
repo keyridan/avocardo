@@ -12,6 +12,7 @@ import {
   CHANGE_OPEN_CARD_SPEED_DIAL_STATE,
   CHANGE_OPEN_INPUT_IMAGE_STATE,
   CHANGE_OPEN_LOGIN_FORM,
+  CHANGE_OPEN_USER_FORM,
   CHANGE_SHOW_PASSWORD,
   CHANGE_THEME_TYPE_STATE,
   CHOOSE_DECK,
@@ -31,6 +32,7 @@ import {
   LOGIN_FAILURE,
   LOGIN_SUCCESS,
   LOGIN_URL,
+  LOGOUT,
   SET_BACK_SIDE,
   SET_CARD_VALUES,
   SET_FRONT_SIDE,
@@ -372,6 +374,11 @@ export const changeLoginFormState = anchorEl => ({
   payload: anchorEl,
 })
 
+export const changeUserFormState = anchorEl => ({
+  type: CHANGE_OPEN_USER_FORM,
+  payload: anchorEl,
+})
+
 export const changeDeckListState = () => ({
   type: CHANGE_DECK_LIST_STATE,
 })
@@ -639,4 +646,8 @@ export const setWordToHistoryOrClearHistory = () => (dispatch, getState) => {
   return dispatch(word
     ? setWordToHistory()
     : clearHistoryAndValues())
+}
+
+export const logout = () => (dispatch) => {
+  dispatch({ type: LOGOUT })
 }

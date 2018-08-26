@@ -1,9 +1,13 @@
-import { CHANGE_DECK_LIST_STATE } from '../constants'
+import { CHANGE_DECK_LIST_STATE, LOGOUT } from '../constants'
 
-const deckListState = (deckListOpenState = false, action) => {
+
+const initState = false
+const deckListState = (deckListOpenState = initState, action) => {
   switch (action.type) {
     case CHANGE_DECK_LIST_STATE:
       return !deckListOpenState
+    case LOGOUT:
+      return initState
     default:
       return deckListOpenState
   }
