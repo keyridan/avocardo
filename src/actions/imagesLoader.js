@@ -1,4 +1,5 @@
 import range from 'lodash'
+import { createMasonryCellPositioner } from 'react-virtualized'
 import { SET_CELL_POSITIONER, SET_IMAGE_LOADER_COLUMN_COUNT, SET_IMAGE_LOADER_WIDTH } from '../constants'
 import {
   imageLoaderCacheSelector,
@@ -8,7 +9,6 @@ import {
   imageLoaderColumnWidthSelector,
   imageLoaderGutterSizeSelector,
 } from '../selectors'
-import createCellPositioner from '../utils/createCellPositioner'
 
 export const setImageLoaderWidth = value => ({
   type: SET_IMAGE_LOADER_WIDTH,
@@ -16,11 +16,9 @@ export const setImageLoaderWidth = value => ({
 })
 
 export const calculateImageLoaderColumnCount = () => (dispatch, getState) => {
-  const columnCount = imageLoaderCalculatedColumnCountSelector(getState())
-  console.log('columnCount111: ', columnCount)
   return dispatch({
     type: SET_IMAGE_LOADER_COLUMN_COUNT,
-    payload: columnCount,
+    payload: imageLoaderCalculatedColumnCountSelector(getState()),
   })
 }
 
@@ -33,7 +31,7 @@ export const initCellPositioner2 = () => (dispatch, getState) => {
     const cache = imageLoaderCacheSelector(state)
     const columnCount = imageLoaderColumnCountSelector(state)
 
-    const newCellPositioner = createCellPositioner({
+    const newCellPositioner = createMasonryCellPositioner({
       cellMeasurerCache: cache,
       columnCount,
       columnWidth,
@@ -57,12 +55,12 @@ export const resetCellPositioner = () => (dispatch, getState) => {
   const gutterSize = imageLoaderGutterSizeSelector(state)
   const columnCount = imageLoaderColumnCountSelector(state)
   const columnHeights = range(columnCount).map(() => 0)
-  const newCellPositioner = {
+  const newCellPositioner = createMasonryCellPositioner({
     columnCount,
     columnWidth,
     spacer: gutterSize,
     columnHeights,
-  }
+  })
   return dispatch({
     type: SET_CELL_POSITIONER,
     payload: newCellPositioner,

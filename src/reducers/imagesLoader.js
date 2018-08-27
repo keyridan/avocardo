@@ -1,19 +1,17 @@
 import { CellMeasurerCache } from 'react-virtualized'
-import {
-  SET_CELL_POSITIONER,
-  SET_IMAGE_LOADER_COLUMN_COUNT,
-  SET_IMAGE_LOADER_WIDTH,
-} from '../constants'
+import { SET_CELL_POSITIONER, SET_IMAGE_LOADER_COLUMN_COUNT, SET_IMAGE_LOADER_WIDTH, } from '../constants'
+
+const defaultWidth = 550
+const defaultHeight = 500
 
 const defaultState = {
-  columnWidth: 600,
-  height: 300,
+  columnWidth: 250,
+  height: defaultHeight,
   gutterSize: 10,
-  overscanByPixels: 0,
-  width: 800,
+  width: defaultWidth,
   cache: new CellMeasurerCache({
-    defaultHeight: 250,
-    defaultWidth: 200,
+    defaultHeight,
+    defaultWidth,
     fixedWidth: true,
   }),
   cellPositioner: undefined,
