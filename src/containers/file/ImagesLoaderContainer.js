@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 import ImagesLoader from '../../components/file/ImagesLoader'
 import { hasNextPageImagesSelector, imageUrlSelector, nextPageLoadingSelector, photosSelector, } from '../../selectors'
-import { loadNextPageImages } from '../../actions'
+import { loadNextPageImages, selectPhoto } from '../../actions'
 
 const mapStateToProps = state => ({
   nextPageLoading: nextPageLoadingSelector(state),
@@ -12,6 +12,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
   loadNextPageImages,
+  selectPhoto,
 }
 
 export default connect(
