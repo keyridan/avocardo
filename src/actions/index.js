@@ -56,7 +56,6 @@ import {
 import { setCardValues, setTranslationResult } from './setTranslationValues'
 
 export * from './image'
-export * from './imagesLoader'
 
 export const toggleAllOptions = value => (dispatch, getState) => {
   const { backSide } = getState().flashCard

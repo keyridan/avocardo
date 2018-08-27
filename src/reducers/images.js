@@ -49,6 +49,8 @@ const images = (state = defaultState, action) => {
     case CLOSE_IMAGE_SELECTOR_DIALOG:
       return {
         ...state,
+        photos: [],
+        page: 0,
         imageSelectorDialogState: false,
       }
     case SET_PHOTOS:

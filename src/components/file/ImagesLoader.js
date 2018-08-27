@@ -1,27 +1,33 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import ImageMeasurer from 'react-virtualized-image-measurer'
 import withStyles from '@material-ui/core/styles/withStyles'
-import MasonryContainer from '../../containers/file/MasonryContainer'
+import MasonryInfiniteScroller from 'react-masonry-infinite'
 
-const styles = () => ({})
+const styles = () => ({
+  root: {
+    height: 600,
+    width: 600,
+  },
+})
 
 const ImagesLoader = (
   {
-    classes, hasNextPage, isNextPageLoading, loadNextPageImages, photos, defaultHeight, defaultWidth,
+    classes, hasNextPage, isNextPageLoading, loadNextPageImages, photos,
   }) => {
 
   return (
-    <ImageMeasurer
-      items={photos}
-      image={item => item.src}
-      defaultHeight={defaultHeight}
-      defaultWidth={defaultWidth}
-    >
-      {({ itemsWithSizes }) => (
-        <MasonryContainer itemsWithSizes={itemsWithSizes} />
-      )}
-    </ImageMeasurer >
+    <div className={classes.root} >
+      <MasonryInfiniteScroller
+        hasMore={hasNextPage}
+        loadMore={loadNextPageImages}
+      >
+        {
+          photos.map(photo => (
+            <img key={photo.src} src={photo.src} />
+          ))
+        }
+      </MasonryInfiniteScroller >
+    </div >
   )
 }
 
@@ -30,8 +36,6 @@ ImagesLoader.propTypes = {
   hasNextPage: PropTypes.bool.isRequired,
   isNextPageLoading: PropTypes.bool.isRequired,
   loadNextPageImages: PropTypes.func.isRequired,
-  defaultHeight: PropTypes.number.isRequired,
-  defaultWidth: PropTypes.number.isRequired,
 }
 
 export default withStyles(styles)(ImagesLoader)
