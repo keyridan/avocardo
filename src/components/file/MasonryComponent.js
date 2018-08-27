@@ -15,10 +15,9 @@ const MasonryComponent = (
   function cellRenderer({ index, key, parent, style }) {
     const { item, size } = itemsWithSizes[index]
     const height = columnWidth * (size.height / size.width) || defaultHeight
-
     return (
       <CellMeasurer cache={cache} index={index} key={key} parent={parent} >
-        <div style={style} >
+        <div style={style}>
           <img
             src={item.src}
             style={{

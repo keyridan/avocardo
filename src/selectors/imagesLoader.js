@@ -1,5 +1,6 @@
 import { createSelector } from 'reselect'
 
+export const imageLoaderInitSelector = state => state.imagesLoader.init
 export const imageLoaderHeightSelector = state => state.imagesLoader.height
 export const imageLoaderWidthSelector = state => state.imagesLoader.width
 export const imageLoaderColumnCountSelector = state => state.imagesLoader.columnCount

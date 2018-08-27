@@ -7,7 +7,7 @@ import {
   imageLoaderCellPositionerSelector,
   imageLoaderColumnCountSelector,
   imageLoaderColumnWidthSelector,
-  imageLoaderGutterSizeSelector,
+  imageLoaderGutterSizeSelector, imageLoaderInitSelector,
 } from '../selectors'
 
 export const setImageLoaderWidth = value => ({
@@ -22,31 +22,34 @@ export const calculateImageLoaderColumnCount = () => (dispatch, getState) => {
   })
 }
 
-export const initCellPositioner2 = () => (dispatch, getState) => {
+export const initNewCellPositioner = () => (dispatch, getState) => {
   const state = getState()
-  const cellPositioner = imageLoaderCellPositionerSelector(state)
-  if (typeof cellPositioner === 'undefined') {
-    const columnWidth = imageLoaderColumnWidthSelector(state)
-    const gutterSize = imageLoaderGutterSizeSelector(state)
-    const cache = imageLoaderCacheSelector(state)
-    const columnCount = imageLoaderColumnCountSelector(state)
+  const columnWidth = imageLoaderColumnWidthSelector(state)
+  const gutterSize = imageLoaderGutterSizeSelector(state)
+  const cache = imageLoaderCacheSelector(state)
+  const columnCount = imageLoaderColumnCountSelector(state)
 
-    const newCellPositioner = createMasonryCellPositioner({
-      cellMeasurerCache: cache,
-      columnCount,
-      columnWidth,
-      spacer: gutterSize,
-    })
-    return dispatch({
-      type: SET_CELL_POSITIONER,
-      payload: newCellPositioner,
-    })
-  }
+  const newCellPositioner = createMasonryCellPositioner({
+    cellMeasurerCache: cache,
+    columnCount,
+    columnWidth,
+    spacer: gutterSize,
+  })
+  return dispatch({
+    type: SET_CELL_POSITIONER,
+    payload: newCellPositioner,
+  })
 }
 
-export const initCellPositioner = () => (dispatch) => {
-  dispatch(calculateImageLoaderColumnCount())
-  dispatch(initCellPositioner2())
+export const initCellPositioner = () => (dispatch, getState) => {
+  const state = getState();
+  const cellPositioner = imageLoaderCellPositionerSelector(state)
+  const init = imageLoaderInitSelector(state)
+  if (init && typeof cellPositioner === 'undefined') {
+    console.log('initCellPositioner')
+    dispatch(calculateImageLoaderColumnCount())
+    dispatch(initNewCellPositioner())
+  }
 }
 
 export const resetCellPositioner = () => (dispatch, getState) => {
@@ -68,6 +71,7 @@ export const resetCellPositioner = () => (dispatch, getState) => {
 }
 
 export const onResize = width => (dispatch) => {
+  console.log('onResize')
   dispatch(setImageLoaderWidth(width))
   dispatch(calculateImageLoaderColumnCount())
   dispatch(resetCellPositioner())
