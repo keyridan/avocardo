@@ -1,7 +1,5 @@
 import { createSelector } from 'reselect'
 
-export * from './imagesLoader'
-
 export const openSpeedDialSelector = state => state.cardSpeedDialState.open
 export const openInputImageSelector = state => state.cardSpeedDialState.openInputImage
 export const imageSrcSelector = state => state.image.imageSrc
@@ -25,9 +23,11 @@ export const hasNextPageImagesSelector = createSelector(
   totalImagesSelector,
   imagesPerPageSelector,
   pageImagesSelector,
-  (total, perPage, pageNumber) => (
-    total && (Math.floor(total / 0) + 1) > pageNumber
-  ),
+  (total, perPage, pageNumber) => {
+    const hasMore = total && (Math.floor(total / 0) + 1) > pageNumber
+    console.log('hasMore: ', hasMore)
+    return hasMore
+  },
 )
 export const nextPageLoadingSelector = state => state.images.nextPageLoading
 

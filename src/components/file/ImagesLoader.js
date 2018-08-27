@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import withStyles from '@material-ui/core/styles/withStyles'
-import MasonryInfiniteScroller from 'react-masonry-infinite'
+import Masonry from 'react-masonry-infinite'
 
 const styles = () => ({
   root: {
@@ -16,18 +16,21 @@ const ImagesLoader = (
   }) => {
 
   return (
-    <div className={classes.root} >
-      <MasonryInfiniteScroller
-        hasMore={hasNextPage}
-        loadMore={loadNextPageImages}
-      >
-        {
-          photos.map(photo => (
-            <img key={photo.src} src={photo.src} />
-          ))
-        }
-      </MasonryInfiniteScroller >
-    </div >
+    <Masonry
+      pack={true}
+      hasMore={hasNextPage}
+      loadMore={loadNextPageImages}
+      sizes={[
+        { columns: 1, gutter: 20 },
+        { mq: '768px', columns: 2, gutter: 10 },
+      ]}
+    >
+      {
+        photos.map((photo, index) => (
+          <img key={index} src={photo.src} />
+        ))
+      }
+    </Masonry >
   )
 }
 

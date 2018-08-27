@@ -9,8 +9,9 @@ const styles = () => ({
   dialog: {},
 })
 
-const ImageSelectorDialog = ({ classes, imageSelectorDialogState, photos, selectPhoto, closeImageSelectorDialog }) => (
+const ImageSelectorDialog = ({ classes, imageSelectorDialogState, closeImageSelectorDialog }) => (
   <Dialog
+    fullScreen
     aria-labelledby="image-selector-dialog-title"
     open={imageSelectorDialogState}
     onClose={closeImageSelectorDialog}
@@ -24,10 +25,6 @@ const ImageSelectorDialog = ({ classes, imageSelectorDialogState, photos, select
 ImageSelectorDialog.propTypes = {
   classes: PropTypes.object.isRequired,
   imageSelectorDialogState: PropTypes.bool.isRequired,
-  photos: PropTypes.arrayOf(PropTypes.shape({
-    src: PropTypes.string,
-  })).isRequired,
-  selectPhoto: PropTypes.func.isRequired,
   closeImageSelectorDialog: PropTypes.func.isRequired,
 }
 
