@@ -1,7 +1,5 @@
 import { createSelector } from 'reselect'
 
-export * from './imagesLoader'
-
 export const openSpeedDialSelector = state => state.cardSpeedDialState.open
 export const openInputImageSelector = state => state.cardSpeedDialState.openInputImage
 export const imageSrcSelector = state => state.image.imageSrc
@@ -21,15 +19,17 @@ export const photosFromRequestedImagesSelector = createSelector(
 export const imagesPerPageSelector = state => state.images.perPage
 export const totalImagesSelector = state => state.images.total
 export const pageImagesSelector = state => state.images.page
+export const nextPageLoadingSelector = state => state.images.nextPageLoading
 export const hasNextPageImagesSelector = createSelector(
   totalImagesSelector,
   imagesPerPageSelector,
   pageImagesSelector,
-  (total, perPage, pageNumber) => (
-    total && (Math.floor(total / 0) + 1) > pageNumber
-  ),
+  (total, perPage, pageNumber) => {
+    const hasMore = total && (Math.floor(total / 0) + 1) > pageNumber
+    console.log('hasmore: ', hasMore)
+    return hasMore
+  },
 )
-export const nextPageLoadingSelector = state => state.images.nextPageLoading
 
 export const imageSelector = state => state.image
 export const cropSelector = state => state.image.crop

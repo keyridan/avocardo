@@ -6,28 +6,30 @@ import DialogContent from '@material-ui/core/DialogContent'
 import ImagesLoaderContainer from '../../containers/file/ImagesLoaderContainer'
 
 const styles = () => ({
-  dialog: {},
+  rootDialog: {
+  },
+  dialog: {
+  },
 })
 
-const ImageSelectorDialog = ({ classes, imageSelectorDialogState, photos, selectPhoto, closeImageSelectorDialog }) => (
-  <Dialog
-    aria-labelledby="image-selector-dialog-title"
-    open={imageSelectorDialogState}
-    onClose={closeImageSelectorDialog}
-  >
-    <DialogContent className={classes.dialog} >
-      <ImagesLoaderContainer />
-    </DialogContent >
-  </Dialog >
+const ImageSelectorDialog = ({ classes, imageSelectorDialogState, closeImageSelectorDialog }) => (
+  <div className={classes.rootDialog} >
+    <Dialog
+      fullScreen
+      aria-labelledby="image-selector-dialog-title"
+      open={imageSelectorDialogState}
+      onClose={closeImageSelectorDialog}
+    >
+      <DialogContent >
+        <ImagesLoaderContainer className={classes.dialog} />
+      </DialogContent >
+    </Dialog >
+  </div >
 )
 
 ImageSelectorDialog.propTypes = {
   classes: PropTypes.object.isRequired,
   imageSelectorDialogState: PropTypes.bool.isRequired,
-  photos: PropTypes.arrayOf(PropTypes.shape({
-    src: PropTypes.string,
-  })).isRequired,
-  selectPhoto: PropTypes.func.isRequired,
   closeImageSelectorDialog: PropTypes.func.isRequired,
 }
 

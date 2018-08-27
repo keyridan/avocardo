@@ -5,21 +5,27 @@ import MasonryInfiniteScroller from 'react-masonry-infinite'
 
 const styles = () => ({
   root: {
-    height: 600,
-    width: 600,
   },
 })
 
 const ImagesLoader = (
   {
-    classes, hasNextPage, isNextPageLoading, loadNextPageImages, photos,
+    classes, hasNextPage, loadNextPageImages, photos,
   }) => {
 
   return (
     <div className={classes.root} >
       <MasonryInfiniteScroller
+        pack={true}
         hasMore={hasNextPage}
-        loadMore={loadNextPageImages}
+        loadMore={() => {
+          console.log('load------------------------')
+          loadNextPageImages()
+        }}
+        sizes={[
+          { columns: 1, gutter: 10 },
+          { mq: '768px', columns: 2, gutter: 10 },
+        ]}
       >
         {
           photos.map(photo => (
@@ -34,7 +40,9 @@ const ImagesLoader = (
 ImagesLoader.propTypes = {
   classes: PropTypes.object.isRequired,
   hasNextPage: PropTypes.bool.isRequired,
-  isNextPageLoading: PropTypes.bool.isRequired,
+  photos: PropTypes.arrayOf(PropTypes.shape({
+    src: PropTypes.string,
+  })).isRequired,
   loadNextPageImages: PropTypes.func.isRequired,
 }
 

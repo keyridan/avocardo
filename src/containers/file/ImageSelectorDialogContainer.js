@@ -1,15 +1,13 @@
 import { connect } from 'react-redux'
 import ImageSelectorDialog from '../../components/file/ImageSelectorDialog'
-import { imageSelectorDialogStateSelector, photosSelector } from '../../selectors'
-import { selectPhoto, closeImageSelectorDialog } from '../../actions'
+import { imageSelectorDialogStateSelector } from '../../selectors'
+import { closeImageSelectorDialog } from '../../actions'
 
 const mapStateToProps = (state) => ({
   imageSelectorDialogState: imageSelectorDialogStateSelector(state),
-  photos: photosSelector(state),
 })
 
 const mapDispatchToProps = {
-  selectPhoto,
   closeImageSelectorDialog,
 }
 
