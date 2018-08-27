@@ -17,8 +17,11 @@ const ImagesLoader = (
 
   return (
     <Masonry
+      position
+      pageStart={0}
+      initialLoad={false}
       pack={true}
-      hasMore={hasNextPage}
+      hasMore={!isNextPageLoading && hasNextPage}
       loadMore={loadNextPageImages}
       sizes={[
         { columns: 1, gutter: 20 },
