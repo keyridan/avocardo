@@ -1,5 +1,7 @@
 import { createSelector } from 'reselect'
 
+export * from './imagesLoader'
+
 export const openSpeedDialSelector = state => state.cardSpeedDialState.open
 export const openInputImageSelector = state => state.cardSpeedDialState.openInputImage
 export const imageSrcSelector = state => state.image.imageSrc

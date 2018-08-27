@@ -16,12 +16,7 @@ import {
   SET_IMAGE_URL,
   SET_PHOTOS
 } from '../constants'
-import {
-  imageUrlSelector, pageImagesSelector,
-  photosFromRequestedImagesSelector,
-  photosSelector,
-  requestedImagesSelector
-} from '../selectors'
+import { imageUrlSelector, pageImagesSelector, photosFromRequestedImagesSelector, photosSelector } from '../selectors'
 import { getImage } from '../utils/image'
 
 export const changeZoom = value => ({
@@ -106,7 +101,12 @@ export const loadNextPageImages = () => (dispatch, getState) => {
     },
   })
     .then(() => {
-      dispatch(setPhotos(photosFromRequestedImagesSelector(getState())))
+      const newState = getState()
+      const newPhotos = [
+        ...photosSelector(newState),
+        ...photosFromRequestedImagesSelector(newState),
+      ]
+      dispatch(setPhotos(newPhotos))
     })
 }
 
@@ -124,8 +124,8 @@ export const setFileWithImageUrl = () => (dispatch, getState) => {
     : searchImagesAndSetPhotos(imageUrl))
 }
 
-export const selectPhoto = obj => (dispatch, getState) => {
+export const selectPhoto = index => (dispatch, getState) => {
   const photos = photosSelector(getState())
-  dispatch(changeFileWithUrl(photos[obj.index].src))
+  dispatch(changeFileWithUrl(photos[index].src))
   dispatch(changeImageSelectorDialogState())
 }

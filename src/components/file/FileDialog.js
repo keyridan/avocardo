@@ -58,8 +58,6 @@ FileDialog.propTypes = {
   classes: PropTypes.object.isRequired,
   openInputImage: PropTypes.bool.isRequired,
   imageNotEmpty: PropTypes.bool.isRequired,
-  addBackSideValue: PropTypes.func.isRequired,
-  changeOpenInputImageState: PropTypes.func.isRequired,
   addOrUpdateBackSideImageValueAndClean: PropTypes.func.isRequired,
   closeAndClean: PropTypes.func.isRequired,
 }

@@ -1,73 +1,71 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import Gallery from 'react-photo-gallery'
+import { AutoSizer, CellMeasurer, Masonry } from 'react-virtualized'
 import withStyles from '@material-ui/core/styles/withStyles'
 
 const styles = () => ({})
 
-const ImagesLoader = ({ classes, hasNextPage, photos, isNextPageLoading, loadNextPageImages, selectPhoto }) => {
-  // If there are more items to be loaded then add an extra row to hold a loading indicator.
-  const rowCount = hasNextPage
-    ? photos.length + 1
-    : photos.length
-
-  // Only load 1 page of items at a time.
-  // Pass an empty callback to InfiniteLoader in case it asks us to load more than once.
-  const loadMoreRows = isNextPageLoading
-    ? () => {
-    }
-    : loadNextPageImages
-
-  // Every row is loaded except for our loading indicator row.
-  const isRowLoaded = ({ index }) => {
-    console.log('index: ', index)
-    return !hasNextPage || index < photos.length
-  }
-
-  // Render a list item or a loading indicator.
-  const rowRenderer = ({ index, key, style }) => {
-    console.log('render:!!!!!!!!')
-
-    let content
-    if (!isRowLoaded({ index })) {
-      content = 'Loading...'
-    } else {
-      console.log('ssssssss')
-      content = (
-        <Gallery
-          photos={photos}
-          onClick={(event, obj) => selectPhoto(obj)}
-        />
-      )
-    }
+const ImagesLoader = ({
+                        classes, hasNextPage, isNextPageLoading, loadNextPageImages, photos,
+                        cache, cellPositioner, onResize, initCellPositioner,
+                      }) => {
+  function cellRenderer({ index, key, parent, style }) {
+    const photo = photos[index % photos.length]
 
     return (
-      <div
+      <CellMeasurer
+        cache={cache}
+        index={index}
         key={key}
-        style={style}
+        parent={parent}
       >
-        {content}
-      </div >
+        <div style={style} >
+          <img
+            src={photo.src}
+            style={{
+              height: 500,
+              width: 500,
+            }}
+          />
+        </div >
+      </CellMeasurer >
     )
   }
 
+  initCellPositioner()
+  let masonryRef
   return (
-    <Gallery
-      photos={photos}
-      onClick={(event, obj) => selectPhoto(obj)}
-    />
+    <AutoSizer
+      onResize={({ width }) => {
+        onResize(width)
+        masonryRef.recomputeCellPositions()
+      }}
+      overscanByPixels={0}
+    >
+      {({ width, height }) => (
+        <Masonry
+          autoHeight={false}
+          cellCount={photos.length}
+          cellMeasurerCache={cache}
+          cellPositioner={cellPositioner}
+          cellRenderer={cellRenderer}
+          height={height}
+          overscanByPixels={0}
+          ref={ref => masonryRef = ref}
+          width={width}
+        />
+      )}
+    </AutoSizer >
   )
 }
 
 ImagesLoader.propTypes = {
   classes: PropTypes.object.isRequired,
   hasNextPage: PropTypes.bool.isRequired,
-  photos: PropTypes.arrayOf(PropTypes.shape({
-    src: PropTypes.string,
-  })).isRequired,
   isNextPageLoading: PropTypes.bool.isRequired,
-  selectPhoto: PropTypes.func.isRequired,
   loadNextPageImages: PropTypes.func.isRequired,
+  onResize: PropTypes.func.isRequired,
+  initCellPositioner: PropTypes.func.isRequired,
 }
 
 export default withStyles(styles)(ImagesLoader)
