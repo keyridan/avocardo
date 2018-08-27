@@ -39,6 +39,7 @@
     "yarn": "^1.7.0"
   },
   "dependencies": {
+    "@egjs/react-infinitegrid": "^1.2.1",
     "@material-ui/core": "latest",
     "@material-ui/icons": "latest",
     "@material-ui/lab": "^1.0.0-alpha.11",

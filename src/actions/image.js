@@ -1,8 +1,8 @@
 import { RSAA } from 'redux-api-middleware'
 import {
   CHANGE_CROP,
-  CLOSE_IMAGE_SELECTOR_DIALOG,
   CHANGE_ZOOM,
+  CLOSE_IMAGE_SELECTOR_DIALOG,
   CROP_COMPLETED,
   IMAGE_URL,
   IMAGES_REQUEST_BEGIN,
@@ -13,6 +13,7 @@ import {
   LOAD_NEXT_PAGE_IMAGES_REQUEST_SUCCESS,
   READ_FILE,
   READ_FILE_ERROR,
+  SET_GROUP_KEY,
   SET_IMAGE_URL,
   SET_PHOTOS
 } from '../constants'
@@ -84,7 +85,12 @@ export const searchImages = (value) => {
   }
 }
 
-export const loadNextPageImages = () => (dispatch, getState) => {
+export const changeGroupKey = groupKey => ({
+  type: SET_GROUP_KEY,
+  payload: groupKey,
+})
+
+export const loadNextPageImages = groupKey => (dispatch, getState) => {
   const state = getState()
   const value = imageUrlSelector(state)
   const pageNumber = pageImagesSelector(state) + 1
@@ -101,6 +107,7 @@ export const loadNextPageImages = () => (dispatch, getState) => {
     },
   })
     .then(() => {
+      dispatch(changeGroupKey(groupKey))
       const newState = getState()
       const newPhotos = [
         ...photosSelector(newState),

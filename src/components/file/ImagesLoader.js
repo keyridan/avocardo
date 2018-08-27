@@ -1,38 +1,43 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import withStyles from '@material-ui/core/styles/withStyles'
-import MasonryInfiniteScroller from 'react-masonry-infinite'
+import { GridLayout } from '@egjs/react-infinitegrid'
 
 const styles = () => ({
-  root: {
-  },
+  root: {},
 })
 
 const ImagesLoader = (
   {
-    classes, hasNextPage, loadNextPageImages, photos,
+    classes, nextPageLoading, hasNextPage, loadNextPageImages, photos,
   }) => {
 
   return (
     <div className={classes.root} >
-      <MasonryInfiniteScroller
-        pack={true}
-        hasMore={hasNextPage}
-        loadMore={() => {
-          console.log('load------------------------')
-          loadNextPageImages()
+      <GridLayout
+        threshold={100}
+        isOverflowScroll={false}
+        isEqualSize={false}
+        horizontal={false}
+        loading={<div className="loading" >LOADING...</div >}
+        onLayoutComplete={(e) => {
+          !e.isLayout && e.endLoading()
         }}
-        sizes={[
-          { columns: 1, gutter: 10 },
-          { mq: '768px', columns: 2, gutter: 10 },
-        ]}
+        onAppend={(e) => {
+          const groupKey = parseFloat(e.groupKey || 0) + 2
+          e.startLoading()
+          loadNextPageImages(groupKey)
+          !hasNextPage && e.endLoading()
+        }}
       >
         {
           photos.map(photo => (
-            <img key={photo.src} src={photo.src} />
+            <div className="item" groupKey={photo.groupKey} >
+              <img key={photo.src} src={photo.src} />
+            </div >
           ))
         }
-      </MasonryInfiniteScroller >
+      </GridLayout >
     </div >
   )
 }

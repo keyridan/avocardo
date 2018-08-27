@@ -1,8 +1,11 @@
 import {
   CLOSE_IMAGE_SELECTOR_DIALOG,
-  IMAGE_CLEAN, IMAGES_REQUEST_BEGIN,
-  IMAGES_REQUEST_SUCCESS, LOAD_NEXT_PAGE_IMAGES_REQUEST_BEGIN,
+  IMAGE_CLEAN,
+  IMAGES_REQUEST_BEGIN,
+  IMAGES_REQUEST_SUCCESS,
+  LOAD_NEXT_PAGE_IMAGES_REQUEST_BEGIN,
   LOAD_NEXT_PAGE_IMAGES_REQUEST_SUCCESS,
+  SET_GROUP_KEY,
   SET_PHOTOS,
 } from '../constants'
 
@@ -14,10 +17,16 @@ const defaultState = {
   page: 0,
   nextPageLoading: false,
   requestedImages: [],
+  groupKey: 1,
 }
 
 const images = (state = defaultState, action) => {
   switch (action.type) {
+    case SET_GROUP_KEY:
+      return {
+        ...state,
+        groupKey: action.payload,
+      }
     case LOAD_NEXT_PAGE_IMAGES_REQUEST_BEGIN:
       return {
         ...state,
