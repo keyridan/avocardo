@@ -1,5 +1,5 @@
 import {
-  CHANGE_IMAGE_SELECTOR_DIALOG_STATE,
+  CLOSE_IMAGE_SELECTOR_DIALOG,
   IMAGE_CLEAN,
   IMAGES_REQUEST_BEGIN,
   IMAGES_REQUEST_SUCCESS,
@@ -46,10 +46,10 @@ const images = (state = defaultState, action) => {
         nextPageLoading: false,
         imageSelectorDialogState: true,
       }
-    case CHANGE_IMAGE_SELECTOR_DIALOG_STATE:
+    case CLOSE_IMAGE_SELECTOR_DIALOG:
       return {
         ...state,
-        imageSelectorDialogState: !state.imageSelectorDialogState,
+        imageSelectorDialogState: false,
       }
     case SET_PHOTOS:
       return {

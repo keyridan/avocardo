@@ -9,11 +9,11 @@ const styles = () => ({
   dialog: {},
 })
 
-const ImageSelectorDialog = ({ classes, imageSelectorDialogState, photos, selectPhoto, changeImageSelectorDialogState }) => (
+const ImageSelectorDialog = ({ classes, imageSelectorDialogState, photos, selectPhoto, closeImageSelectorDialog }) => (
   <Dialog
     aria-labelledby="image-selector-dialog-title"
     open={imageSelectorDialogState}
-    onClose={changeImageSelectorDialogState}
+    onClose={closeImageSelectorDialog}
   >
     <DialogContent className={classes.dialog} >
       <ImagesLoaderContainer />
@@ -28,7 +28,7 @@ ImageSelectorDialog.propTypes = {
     src: PropTypes.string,
   })).isRequired,
   selectPhoto: PropTypes.func.isRequired,
-  changeImageSelectorDialogState: PropTypes.func.isRequired,
+  closeImageSelectorDialog: PropTypes.func.isRequired,
 }
 
 export default withStyles(styles)(ImageSelectorDialog)

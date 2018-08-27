@@ -25,6 +25,7 @@ const MasonryComponent = (
               height,
               width: columnWidth,
             }}
+            onClick={() => selectPhoto(item)}
           />
         </div >
       </CellMeasurer >

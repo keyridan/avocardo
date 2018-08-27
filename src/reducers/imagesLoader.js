@@ -1,5 +1,10 @@
 import { CellMeasurerCache } from 'react-virtualized'
-import { SET_CELL_POSITIONER, SET_IMAGE_LOADER_COLUMN_COUNT, SET_IMAGE_LOADER_WIDTH, } from '../constants'
+import {
+  CLOSE_IMAGE_SELECTOR_DIALOG,
+  SET_CELL_POSITIONER,
+  SET_IMAGE_LOADER_COLUMN_COUNT,
+  SET_IMAGE_LOADER_WIDTH,
+} from '../constants'
 
 const defaultWidth = 550
 const defaultHeight = 500
@@ -19,6 +24,8 @@ const defaultState = {
 
 const imagesLoader = (state = defaultState, action) => {
   switch (action.type) {
+    case CLOSE_IMAGE_SELECTOR_DIALOG:
+      return defaultState
     case SET_CELL_POSITIONER:
       return {
         ...state,

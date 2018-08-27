@@ -1,7 +1,7 @@
 import { RSAA } from 'redux-api-middleware'
 import {
   CHANGE_CROP,
-  CHANGE_IMAGE_SELECTOR_DIALOG_STATE,
+  CLOSE_IMAGE_SELECTOR_DIALOG,
   CHANGE_ZOOM,
   CROP_COMPLETED,
   IMAGE_URL,
@@ -63,8 +63,8 @@ function isUrl(str) {
   return false
 }
 
-export const changeImageSelectorDialogState = () => ({
-  type: CHANGE_IMAGE_SELECTOR_DIALOG_STATE,
+export const closeImageSelectorDialog = () => ({
+  type: CLOSE_IMAGE_SELECTOR_DIALOG,
 })
 
 export const setPhotos = values => ({
@@ -124,8 +124,7 @@ export const setFileWithImageUrl = () => (dispatch, getState) => {
     : searchImagesAndSetPhotos(imageUrl))
 }
 
-export const selectPhoto = index => (dispatch, getState) => {
-  const photos = photosSelector(getState())
-  dispatch(changeFileWithUrl(photos[index].src))
-  dispatch(changeImageSelectorDialogState())
+export const selectPhoto = item => (dispatch) => {
+  dispatch(changeFileWithUrl(item.src))
+  dispatch(closeImageSelectorDialog())
 }
