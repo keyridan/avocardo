@@ -5,6 +5,16 @@ import LinearProgress from '@material-ui/core/LinearProgress'
 import Masonry from 'react-masonry-infinite'
 
 const styles = theme => ({
+  img1: {
+    [theme.breakpoints.up('sm')]: {
+      width: 275,
+      height: 155,
+    },
+    [theme.breakpoints.down('sm')]: {
+      width: 175,
+      height: 100,
+    },
+  },
   img: {
     [theme.breakpoints.up('sm')]: {
       width: 275,
@@ -41,7 +51,7 @@ const ImagesLoader = (
           <img
             key={index}
             src={photo.src}
-            className={classes.img}
+            className={index < 10 ? classes.img1 : classes.img}
             onClick={() => selectPhoto(photo)}
           />
         ))
