@@ -13,9 +13,8 @@ import {
   LOAD_NEXT_PAGE_IMAGES_REQUEST_SUCCESS,
   READ_FILE,
   READ_FILE_ERROR,
-  SET_GROUP_KEY,
   SET_IMAGE_URL,
-  SET_PHOTOS
+  SET_PHOTOS,
 } from '../constants'
 import { imageUrlSelector, pageImagesSelector, photosFromRequestedImagesSelector, photosSelector } from '../selectors'
 import { getImage } from '../utils/image'
@@ -85,12 +84,7 @@ export const searchImages = (value) => {
   }
 }
 
-export const changeGroupKey = groupKey => ({
-  type: SET_GROUP_KEY,
-  payload: groupKey,
-})
-
-export const loadNextPageImages = groupKey => (dispatch, getState) => {
+export const loadNextPageImages = () => (dispatch, getState) => {
   const state = getState()
   const value = imageUrlSelector(state)
   const pageNumber = pageImagesSelector(state) + 1
@@ -107,7 +101,6 @@ export const loadNextPageImages = groupKey => (dispatch, getState) => {
     },
   })
     .then(() => {
-      dispatch(changeGroupKey(groupKey))
       const newState = getState()
       const newPhotos = [
         ...photosSelector(newState),

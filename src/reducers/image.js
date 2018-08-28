@@ -14,7 +14,7 @@ const defaultState = {
   zoom: 1,
   aspect: 20 / 23,
   croppedImage: null,
-  imageUrl: 'sun',
+  imageUrl: '',
 }
 
 const image = (state = defaultState, action) => {
