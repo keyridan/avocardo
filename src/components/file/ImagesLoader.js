@@ -38,7 +38,7 @@ const ImagesLoader = (
             },
             [theme.breakpoints.down('sm')]: {
               width: 175,
-              height: Math.ceil(props.height * 275 / props.width),
+              height: Math.ceil(props.height * 175 / props.width),
             },
           }))
           return (
