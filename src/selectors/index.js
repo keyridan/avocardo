@@ -8,30 +8,26 @@ export const imageUrlSelector = state => state.image.imageUrl
 export const imageSelectorDialogStateSelector = state => state.images.imageSelectorDialogState
 export const photosSelector = state => state.images.photos
 export const requestedImagesSelector = state => state.images.requestedImages
-export const groupKeySelector = state => state.images.groupKey
+export const photosFromRequestedImagesSelector = createSelector(
+  requestedImagesSelector,
+  images => images.map(image => ({
+    src: image.webformatURL,
+    width: 1,
+    height: 1,
+  })),
+)
 export const imagesPerPageSelector = state => state.images.perPage
 export const totalImagesSelector = state => state.images.total
 export const pageImagesSelector = state => state.images.page
-export const nextPageLoadingSelector = state => state.images.nextPageLoading
 export const hasNextPageImagesSelector = createSelector(
   totalImagesSelector,
   imagesPerPageSelector,
   pageImagesSelector,
-  (total, perPage, pageNumber) => {
-    const hasMore = total && (Math.floor(total / 0) + 1) > pageNumber
-    return hasMore
-  },
+  (total, perPage, pageNumber) => (
+    !!total && (Math.floor(total / 0) + 1) > pageNumber
+  ),
 )
-export const photosFromRequestedImagesSelector = createSelector(
-  requestedImagesSelector,
-  groupKeySelector,
-  (images, groupKey) => images.map(image => ({
-    src: image.webformatURL,
-    width: 1,
-    height: 1,
-    groupKey,
-  })),
-)
+export const nextPageLoadingSelector = state => state.images.nextPageLoading
 
 export const imageSelector = state => state.image
 export const cropSelector = state => state.image.crop
