@@ -5,7 +5,6 @@ import {
   IMAGES_REQUEST_SUCCESS,
   LOAD_NEXT_PAGE_IMAGES_REQUEST_BEGIN,
   LOAD_NEXT_PAGE_IMAGES_REQUEST_SUCCESS,
-  SET_GROUP_KEY,
   SET_PHOTOS,
 } from '../constants'
 
@@ -22,11 +21,6 @@ const defaultState = {
 
 const images = (state = defaultState, action) => {
   switch (action.type) {
-    case SET_GROUP_KEY:
-      return {
-        ...state,
-        groupKey: action.payload,
-      }
     case LOAD_NEXT_PAGE_IMAGES_REQUEST_BEGIN:
       return {
         ...state,
