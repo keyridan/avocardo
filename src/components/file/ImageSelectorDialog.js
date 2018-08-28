@@ -11,7 +11,6 @@ const styles = () => ({
 
 const ImageSelectorDialog = ({ classes, imageSelectorDialogState, closeImageSelectorDialog }) => (
   <Dialog
-    fullScreen
     aria-labelledby="image-selector-dialog-title"
     open={imageSelectorDialogState}
     onClose={closeImageSelectorDialog}
