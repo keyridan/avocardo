@@ -3,26 +3,9 @@ import PropTypes from 'prop-types'
 import withStyles from '@material-ui/core/styles/withStyles'
 import LinearProgress from '@material-ui/core/LinearProgress'
 import Masonry from 'react-masonry-infinite'
+import styled from '../../utils/styled'
 
-const styles = theme => ({
-  img1: {
-    [theme.breakpoints.up('sm')]: {
-      width: 275,
-      height: 155,
-    },
-    [theme.breakpoints.down('sm')]: {
-      width: 175,
-      height: 100,
-    },
-  },
-  img: {
-    [theme.breakpoints.up('sm')]: {
-      width: 275,
-    },
-    [theme.breakpoints.down('sm')]: {
-      width: 175,
-    },
-  },
+const styles = () => ({
   loader: {},
 })
 
@@ -47,14 +30,27 @@ const ImagesLoader = (
       ]}
     >
       {
-        photos.map((photo, index) => (
-          <img
-            key={index}
-            src={photo.src}
-            className={index < 10 ? classes.img1 : classes.img}
-            onClick={() => selectPhoto(photo)}
-          />
-        ))
+        photos.map((photo, index) => {
+          const StyledImage = styled('img')(({ theme, props }) => ({
+            [theme.breakpoints.up('sm')]: {
+              width: 275,
+              height: Math.ceil(props.height * 275 / props.width),
+            },
+            [theme.breakpoints.down('sm')]: {
+              width: 175,
+              height: Math.ceil(props.height * 275 / props.width),
+            },
+          }))
+          return (
+            <StyledImage
+              key={index}
+              height={photo.height}
+              width={photo.width}
+              src={photo.src}
+              onClick={() => selectPhoto(photo)}
+            />
+          )
+        })
       }
     </Masonry >
   )

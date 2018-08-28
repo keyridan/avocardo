@@ -12,8 +12,8 @@ export const photosFromRequestedImagesSelector = createSelector(
   requestedImagesSelector,
   images => images.map(image => ({
     src: image.webformatURL,
-    width: 1,
-    height: 1,
+    width: image.webformatWidth,
+    height: image.webformatHeight,
   })),
 )
 export const imagesPerPageSelector = state => state.images.perPage
