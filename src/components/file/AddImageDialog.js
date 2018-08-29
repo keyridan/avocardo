@@ -23,7 +23,7 @@ const styles = theme => ({
   },
 })
 
-const FileDialog = ({ classes, openInputImage, addOrUpdateBackSideImageValueAndClean, closeAndClean, imageNotEmpty }) => (
+const AddImageDialog = ({ classes, openInputImage, addOrUpdateBackSideImageValueAndClean, closeAndClean, imageNotEmpty }) => (
   <Dialog
     fullScreen
     aria-labelledby="simple-dialog-title"
@@ -54,7 +54,7 @@ const FileDialog = ({ classes, openInputImage, addOrUpdateBackSideImageValueAndC
   </Dialog >
 )
 
-FileDialog.propTypes = {
+AddImageDialog.propTypes = {
   classes: PropTypes.object.isRequired,
   openInputImage: PropTypes.bool.isRequired,
   imageNotEmpty: PropTypes.bool.isRequired,
@@ -62,4 +62,4 @@ FileDialog.propTypes = {
   closeAndClean: PropTypes.func.isRequired,
 }
 
-export default withStyles(styles)(FileDialog)
+export default withStyles(styles)(AddImageDialog)

@@ -7,7 +7,7 @@ import SpeedDialAction from '@material-ui/lab/SpeedDialAction'
 import AddPhotoAlternate from '@material-ui/icons/AddPhotoAlternateOutlined'
 import NoteAdd from '@material-ui/icons/NoteAddOutlined'
 import TranslatedTextContainer from '../../containers/TranslatedTextContainer'
-import FileDialogContainer from '../../containers/file/FileDialogContainer'
+import AddImageDialogContainer from '../../containers/file/AddImageDialogContainer'
 
 const styles = theme => ({
   root: {
@@ -32,18 +32,18 @@ const styles = theme => ({
   },
 })
 
-const CardSpeedDial = ({ classes, open, isTouch, openSpeedDialState, closeSpeedDialState, changeSpeedDialState, addBackSideValue, changeOpenInputImageState }) => (
+const AddBackSideSpeedDial = ({ classes, open, isTouch, openSpeedDial, closeSpeedDial, changeSpeedDialState, addBackSideValue, changeOpenInputImageState }) => (
   <div className={classes.root} >
     <div className={classes.speedDial} >
       <SpeedDial
-        ariaLabel="SpeedDial example"
+        ariaLabel="SpeedDial"
         icon={<SpeedDialIcon />}
-        onBlur={closeSpeedDialState}
+        onBlur={closeSpeedDial}
         onClick={changeSpeedDialState}
-        onClose={closeSpeedDialState}
-        onFocus={isTouch ? undefined : openSpeedDialState}
-        onMouseEnter={isTouch ? undefined : openSpeedDialState}
-        onMouseLeave={closeSpeedDialState}
+        onClose={closeSpeedDial}
+        onFocus={isTouch ? undefined : openSpeedDial}
+        onMouseEnter={isTouch ? undefined : openSpeedDial}
+        onMouseLeave={closeSpeedDial}
         open={open}
       >
         <SpeedDialAction
@@ -58,11 +58,11 @@ const CardSpeedDial = ({ classes, open, isTouch, openSpeedDialState, closeSpeedD
         />
       </SpeedDial >
     </div >
-    <FileDialogContainer />
+    <AddImageDialogContainer />
   </div >
 )
 
-CardSpeedDial.propTypes = {
+AddBackSideSpeedDial.propTypes = {
   classes: PropTypes.object.isRequired,
   open: PropTypes.bool.isRequired,
   closeSpeedDialState: PropTypes.func.isRequired,
@@ -72,4 +72,4 @@ CardSpeedDial.propTypes = {
   changeOpenInputImageState: PropTypes.func.isRequired,
 }
 
-export default withStyles(styles)(CardSpeedDial)
+export default withStyles(styles)(AddBackSideSpeedDial)

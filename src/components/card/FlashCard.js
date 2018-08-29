@@ -12,7 +12,7 @@ import Grid from '@material-ui/core/Grid'
 import Checkbox from '@material-ui/core/Checkbox'
 import SimpleInput from '../common/SimpleInput'
 import TranslatedTextContainer from '../../containers/TranslatedTextContainer'
-import CardSpeedDialContainer from '../../containers/card/CardSpeedDialContainer'
+import AddBackSideSpeedDialContainer from '../../containers/card/AddBackSideSpeedDialContainer'
 import Concept from './Concept'
 
 const styles = theme => ({
@@ -73,7 +73,7 @@ const FlashCard = ({ frontSide, backSide, setFrontSideValue, setBackSideValue, c
                 <Typography color="textSecondary" >
                   <TranslatedTextContainer value="card_back_side_title" />
                 </Typography >
-                <CardSpeedDialContainer />
+                <AddBackSideSpeedDialContainer />
               </TableCell >
             </TableRow >
           </TableHead >
@@ -122,6 +122,8 @@ FlashCard.propTypes = {
   setBackSideValue: PropTypes.func.isRequired,
   removeBackSideItem: PropTypes.func.isRequired,
   openImageToCrop: PropTypes.func.isRequired,
+  toggleOption: PropTypes.func.isRequired,
+  toggleAllOptions: PropTypes.func.isRequired,
 }
 
 export default withStyles(styles)(FlashCard)

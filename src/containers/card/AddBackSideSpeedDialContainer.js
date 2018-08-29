@@ -1,12 +1,12 @@
 import { connect } from 'react-redux'
-import CardSpeedDial from '../../components/card/CardSpeedDial'
+import AddBackSideSpeedDial from '../../components/card/AddBackSideSpeedDial'
 import { openSpeedDialSelector } from '../../selectors'
 import {
   addBackSideValue,
   changeOpenInputImageState,
   changeSpeedDialState,
-  closeSpeedDialState,
-  openSpeedDialState,
+  closeSpeedDial,
+  openSpeedDial,
 } from '../../actions'
 
 const mapStateToProps = (state) => {
@@ -21,8 +21,8 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = {
-  openSpeedDialState,
-  closeSpeedDialState,
+  openSpeedDial,
+  closeSpeedDial,
   changeSpeedDialState,
   addBackSideValue,
   changeOpenInputImageState,
@@ -31,4 +31,4 @@ const mapDispatchToProps = {
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
-)(CardSpeedDial)
+)(AddBackSideSpeedDial)

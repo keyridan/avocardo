@@ -9,7 +9,7 @@ import {
   CHANGE_CHOOSE_LANGUAGE_STATE,
   CHANGE_DECK_LIST_STATE,
   CHANGE_INFO_SWITCHER_STATE,
-  CHANGE_OPEN_CARD_SPEED_DIAL_STATE,
+  CHANGE_ADD_BACK_SIDE_SPEED_DIAL_STATE,
   CHANGE_OPEN_INPUT_IMAGE_STATE,
   CHANGE_OPEN_LOGIN_FORM,
   CHANGE_OPEN_USER_FORM,
@@ -214,19 +214,19 @@ export const setFrontSideValue = (value, index) => (dispatch, getState) => {
 }
 
 
-export const openSpeedDialState = () => ({
-  type: CHANGE_OPEN_CARD_SPEED_DIAL_STATE,
+export const openSpeedDial = () => ({
+  type: CHANGE_ADD_BACK_SIDE_SPEED_DIAL_STATE,
   payload: true,
 })
 
-export const closeSpeedDialState = () => ({
-  type: CHANGE_OPEN_CARD_SPEED_DIAL_STATE,
+export const closeSpeedDial = () => ({
+  type: CHANGE_ADD_BACK_SIDE_SPEED_DIAL_STATE,
   payload: false,
 })
 
 export const changeSpeedDialState = () => (dispatch, getState) => dispatch({
   payload: !openSpeedDialSelector(getState()),
-  type: CHANGE_OPEN_CARD_SPEED_DIAL_STATE,
+  type: CHANGE_ADD_BACK_SIDE_SPEED_DIAL_STATE,
 })
 
 export const changeOpenInputImageState = () => ({

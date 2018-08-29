@@ -1,10 +1,10 @@
 export * from './images'
 
-export const openSpeedDialSelector = state => state.cardSpeedDialState.open
-export const openInputImageSelector = state => state.cardSpeedDialState.openInputImage
+export const openSpeedDialSelector = state => state.addBackSideSpeedDialState.open
+export const openInputImageSelector = state => state.addBackSideSpeedDialState.openInputImage
+
 export const imageSrcSelector = state => state.image.imageSrc
 export const imageUrlSelector = state => state.image.imageUrl
-
 export const imageSelector = state => state.image
 export const cropSelector = state => state.image.crop
 export const zoomSelector = state => state.image.zoom

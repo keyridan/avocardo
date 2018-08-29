@@ -1,9 +1,9 @@
 import { connect } from 'react-redux'
-import FileDialog from '../../components/file/FileDialog'
+import AddImageDialog from '../../components/file/AddImageDialog'
 import { imageNotEmptySelector, openInputImageSelector } from '../../selectors'
 import { addOrUpdateBackSideImageValueAndClean, closeAndClean, } from '../../actions'
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   openInputImage: openInputImageSelector(state),
   imageNotEmpty: imageNotEmptySelector(state),
 })
@@ -16,4 +16,4 @@ const mapDispatchToProps = {
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
-)(FileDialog)
+)(AddImageDialog)

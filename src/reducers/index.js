@@ -20,7 +20,7 @@ import infos from './infos'
 import infoProvider from './infoProvider'
 import chooseLanguageState from './chooseLanguageState'
 import themeType from './themeType'
-import cardSpeedDialState from './cardSpeedDialState'
+import addBackSideSpeedDialState from './addBackSideSpeedDialState'
 import image from './image'
 import images from './images'
 import userFormState from './userFormState'
@@ -50,7 +50,7 @@ export default combineReducers({
   infoProvider,
   chooseLanguageState,
   themeType,
-  cardSpeedDialState,
+  addBackSideSpeedDialState,
   image,
   images,
 })

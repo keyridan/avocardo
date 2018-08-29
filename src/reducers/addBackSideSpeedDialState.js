@@ -1,13 +1,13 @@
-import { CHANGE_OPEN_CARD_SPEED_DIAL_STATE, CHANGE_OPEN_INPUT_IMAGE_STATE } from '../constants'
+import { CHANGE_ADD_BACK_SIDE_SPEED_DIAL_STATE, CHANGE_OPEN_INPUT_IMAGE_STATE } from '../constants'
 
 const defaultState = {
   open: false,
   openInputImage: false,
 }
 
-const cardSpeedDialState = (state = defaultState, action) => {
+const addBackSideSpeedDialState = (state = defaultState, action) => {
   switch (action.type) {
-    case CHANGE_OPEN_CARD_SPEED_DIAL_STATE:
+    case CHANGE_ADD_BACK_SIDE_SPEED_DIAL_STATE:
       return {
         ...state,
         open: action.payload,
@@ -22,4 +22,4 @@ const cardSpeedDialState = (state = defaultState, action) => {
   }
 }
 
-export default cardSpeedDialState
+export default addBackSideSpeedDialState

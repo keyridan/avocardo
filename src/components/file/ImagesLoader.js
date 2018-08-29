@@ -17,6 +17,7 @@ const ImagesLoader = (
   return (
     <Masonry
       useWindow={false}
+      threshold={600}
       initialLoad={false}
       useCapture
       pageStart={1}
