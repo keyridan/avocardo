@@ -1,4 +1,5 @@
 export * from './images'
+export * from './message'
 
 export const openSpeedDialSelector = state => state.addBackSideSpeedDialState.open
 export const openInputImageSelector = state => state.addBackSideSpeedDialState.openInputImage

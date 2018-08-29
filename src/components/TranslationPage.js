@@ -10,6 +10,7 @@ import WordInput from '../containers/WordInput'
 import TranslateButton from '../containers/TranslateButton'
 import CardsAppBar from '../containers/appbar/CardsAppBar'
 import InfoCardsContainer from '../containers/info/InfoCardsContainer'
+import MessageContainer from '../containers/MessageContainer'
 import Card from './card/Card'
 
 const styles = theme => ({
@@ -29,6 +30,7 @@ const styles = theme => ({
 
 const TranslationPage = ({ classes }) => (
   <div >
+    <MessageContainer />
     <CardsAppBar />
     <div className={classes.root} >
       <Grid container spacing={8} className={classes.translationContainer} >

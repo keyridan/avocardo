@@ -1,7 +1,7 @@
 export const TRANSLATE_BEGIN = 'TRANSLATE_BEGIN'
 export const TRANSLATE_SUCCESS = 'TRANSLATE_SUCCESS'
 export const TRANSLATE_FAILURE = 'TRANSLATE_FAILURE'
-export const CARDS_TRANSLATE_DISMISS_ERROR = 'CARDS_TRANSLATE_DISMISS_ERROR'
+export const TRANSLATE_FAILURE_TEXT = 'translate_failure'
 export const DEFAULT_FROM_LANGUAGE = 'EN'
 export const DEFAULT_TO_LANGUAGE = 'DE'
 
@@ -27,18 +27,22 @@ export const LOGOUT = 'LOGOUT'
 export const LOGIN_BEGIN = 'LOGIN_BEGIN'
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS'
 export const LOGIN_FAILURE = 'LOGIN_FAILURE'
+export const LOGIN_FAILURE_MESSAGE = 'login_failure_message'
 export const CHANGE_OPEN_LOGIN_FORM = 'CHANGE_OPEN_LOGIN_FORM'
 export const CHANGE_OPEN_USER_FORM = 'CHANGE_OPEN_USER_FORM'
 export const CHANGE_SHOW_PASSWORD = 'CHANGE_SHOW_PASSWORD'
 export const FETCH_DECKS_BEGIN = 'FETCH_DECKS_BEGIN'
 export const FETCH_DECKS_SUCCESS = 'FETCH_DECKS_SUCCESS'
 export const FETCH_DECKS_FAILURE = 'FETCH_DECKS_FAILURE'
+export const FETCH_DECKS_FAILURE_MESSAGE = 'images_request_failure_message'
+export const FETCH_DECKS_UNAUTHORIZED_MESSAGE = 'fetch_decks_unauthorized_message'
 export const TOGGLE_OPTION = 'TOGGLE_OPTION'
 export const TOGGLE_OPTION_ERROR = 'TOGGLE_OPTION_ERROR'
 export const CHOOSE_DECK = 'CHOOSE_DECK'
 export const CHANGE_DECK_LIST_STATE = 'CHANGE_DECK_LIST_STATE'
 export const ADD_CARD_TO_DECK_BEGIN = 'ADD_CARD_TO_DECK_BEGIN'
 export const ADD_CARD_TO_DECK_SUCCESS = 'ADD_CARD_TO_DECK_SUCCESS'
+export const ADD_CARD_TO_DECK_SUCCESS_MESSAGE = 'add_card_to_deck_success_message'
 export const ADD_CARD_TO_DECK_FAILURE = 'ADD_CARD_TO_DECK_FAILURE'
 export const BACKSIDE_QUANTITY_ERROR = 'BACKSIDE_QUANTITY_ERROR'
 export const SET_CARD_VALUES = 'SET_CARD_VALUES'
@@ -60,6 +64,7 @@ export const SET_PHOTOS = 'SET_PHOTOS'
 export const IMAGES_REQUEST_BEGIN = 'IMAGES_REQUEST_BEGIN'
 export const IMAGES_REQUEST_SUCCESS = 'IMAGES_REQUEST_SUCCESS'
 export const IMAGES_REQUEST_FAILURE = 'IMAGES_REQUEST_FAILURE'
+export const IMAGES_REQUEST_FAILURE_MESSAGE = 'images_request_failure_message'
 export const LOAD_NEXT_PAGE_IMAGES_REQUEST_BEGIN = 'LOAD_NEXT_PAGE_IMAGES_REQUEST_BEGIN'
 export const LOAD_NEXT_PAGE_IMAGES_REQUEST_SUCCESS = 'LOAD_NEXT_PAGE_IMAGES_REQUEST_SUCCESS'
 export const LOAD_NEXT_PAGE_IMAGES_REQUEST_FAILURE = 'LOAD_NEXT_PAGE_IMAGES_REQUEST_FAILURE'
@@ -69,6 +74,18 @@ export const CHANGE_CROP = 'CHANGE_CROP'
 export const CHANGE_ZOOM = 'CHANGE_ZOOM'
 export const CROP_COMPLETED = 'CROP_COMPLETED'
 export const IMAGE_CLEAN = 'IMAGE_CLEAN'
+export const CLOSE_MESSAGE = 'CLOSE_MESSAGE'
+export const SOMETHING_WENT_WRONG_MESSAGE = 'something_went_wrong_message'
+export const INFO_MESSAGE = 'info_message'
+export const UNAUTHORIZED_MESSAGE = 'unauthorized'
+export const FORBIDDEN_MESSAGE = 'forbidden'
+export const WARNING_MESSAGE = 'warning_message'
+export const MESSAGE_TYPES = {
+  WARNING: 'warning',
+  SUCCESS: 'success',
+  ERROR: 'error',
+  INFO: 'info',
+}
 export const INFO_PROVIDERS = ['LEO']
 export const THEME_TYPES = {
   DARK: { value: 'dark', isDark: true },

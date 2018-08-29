@@ -24,6 +24,7 @@ import addBackSideSpeedDialState from './addBackSideSpeedDialState'
 import image from './image'
 import images from './images'
 import userFormState from './userFormState'
+import message from './message'
 
 export default combineReducers({
   toLanguage,
@@ -53,5 +54,6 @@ export default combineReducers({
   addBackSideSpeedDialState,
   image,
   images,
+  message,
 })
 

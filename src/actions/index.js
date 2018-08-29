@@ -45,7 +45,7 @@ import {
   TRANSLATE_BEGIN,
   TRANSLATE_FAILURE,
   TRANSLATE_SUCCESS,
-  TRANSLATE_URL,
+  TRANSLATE_URL, CLOSE_MESSAGE,
 } from '../constants'
 import {
   backSideSelector,
@@ -56,6 +56,10 @@ import {
 import { setCardValues, setTranslationResult } from './setTranslationValues'
 
 export * from './image'
+
+export const closeMessage = () => ({
+  type: CLOSE_MESSAGE,
+})
 
 export const toggleAllOptions = value => (dispatch, getState) => {
   const { backSide } = getState().flashCard
