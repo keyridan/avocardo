@@ -129,12 +129,15 @@
   "warning_message": "Warning",
   "info_message": "Info",
   "something_went_wrong_message": "Something went wrong =(",
+  "internal_error": "Internal error. Something went wrong =(",
   "unauthorized": "Unauthorized action. Please authorise to continue",
   "forbidden": "The access is permanently forbidden",
   "add_card_to_deck_success_message": "Card successfully added",
   "translate_failure": "Translation error occurred",
   "login_failure_message": "Login error. Check your e-mail and password",
-  "images_request_failure_message": "Images search error",
-  "fetch_decks_failure_message": "Decks search error",
-  "fetch_decks_unauthorized_message": "Decks search error. Login and repeat"
+  "images_request_failure_message": "Images searching error",
+  "fetch_decks_failure_message": "Decks searching error",
+  "fetch_decks_unauthorized_message": "Decks searching error. Login and repeat",
+  "add_card_to_deck_failure_message": "Card adding error",
+  "add_card_to_deck_unauthorized_message": "Card adding error. Login and repeat"
 }

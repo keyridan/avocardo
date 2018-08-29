@@ -1,10 +1,13 @@
 import {
+  ADD_CARD_TO_DECK_FAILURE,
+  ADD_CARD_TO_DECK_FAILURE_MESSAGE,
   ADD_CARD_TO_DECK_SUCCESS,
   ADD_CARD_TO_DECK_SUCCESS_MESSAGE,
+  ADD_CARD_TO_DECK_UNAUTHORIZED_MESSAGE,
   CLOSE_MESSAGE,
   FETCH_DECKS_FAILURE,
   FETCH_DECKS_FAILURE_MESSAGE,
-  FETCH_DECKS_UNAUTHORIZED_MESSAGE, FORBIDDEN_MESSAGE,
+  FETCH_DECKS_UNAUTHORIZED_MESSAGE,
   IMAGES_REQUEST_FAILURE,
   IMAGES_REQUEST_FAILURE_MESSAGE,
   INFO_MESSAGE,
@@ -16,8 +19,8 @@ import {
   TRANSLATE_FAILURE,
   TRANSLATE_FAILURE_TEXT,
   TRANSLATE_SUCCESS,
-  UNAUTHORIZED_MESSAGE,
 } from '../constants'
+import parseErrorMessages from '../utils/parseErrorMessages'
 
 const defaultValue = {
   translatedText: '',
@@ -25,36 +28,12 @@ const defaultValue = {
   open: false,
 }
 
-function parseLoginErrorByType(payload) {
-  switch (payload.status) {
-    case 401:
-      return UNAUTHORIZED_MESSAGE
-    case 403:
-      return FORBIDDEN_MESSAGE
-    default:
-      return SOMETHING_WENT_WRONG_MESSAGE
-  }
-}
-
-const specifyIfNeeded = (parsedValue, status, specifiedMessages) => {
-  const filteredSpecifyMessages = specifiedMessages && specifiedMessages
-    .filter(item => item.status === status)
-  return filteredSpecifyMessages && filteredSpecifyMessages.length > 0
-    ? filteredSpecifyMessages[0].text
-    : parsedValue
-}
-
-const parseLoginError = (payload, specifiedMessages) => (
-  !payload.status
-    ? ''
-    : specifyIfNeeded(parseLoginErrorByType(payload), payload.status, specifiedMessages)
-)
-
 function requestFailureMessage(action, defaultMessage, specifiedMessages) {
-  const parsedValue = parseLoginError(action.payload, specifiedMessages)
+  const parsedValue = parseErrorMessages(action.payload, specifiedMessages)
+  const errorOrEmpty = parsedValue && parsedValue === SOMETHING_WENT_WRONG_MESSAGE ? action.payload.error : ''
   return {
     open: true,
-    text: parsedValue ? '' : action.payload,
+    text: parsedValue ? errorOrEmpty : action.payload,
     translatedText: parsedValue || defaultMessage,
     type: MESSAGE_TYPES.ERROR,
   }
@@ -82,21 +61,23 @@ const message = (state = defaultValue, action) => {
           type: MESSAGE_TYPES.INFO,
         }
         : defaultValue
+    case ADD_CARD_TO_DECK_FAILURE:
+      return failureMessage(ADD_CARD_TO_DECK_FAILURE_MESSAGE, {
+        401: ADD_CARD_TO_DECK_UNAUTHORIZED_MESSAGE,
+      })
     case FETCH_DECKS_FAILURE:
-      return failureMessage(FETCH_DECKS_FAILURE_MESSAGE, [{
-        status: 401,
-        text: FETCH_DECKS_UNAUTHORIZED_MESSAGE,
-      }])
+      return failureMessage(FETCH_DECKS_FAILURE_MESSAGE, {
+        401: FETCH_DECKS_UNAUTHORIZED_MESSAGE,
+      })
     case LOAD_NEXT_PAGE_IMAGES_REQUEST_FAILURE:
     case IMAGES_REQUEST_FAILURE:
       return failureMessage(IMAGES_REQUEST_FAILURE_MESSAGE)
     case TRANSLATE_FAILURE:
       return failureMessage(TRANSLATE_FAILURE_TEXT)
     case LOGIN_FAILURE:
-      return failureMessage(LOGIN_FAILURE_MESSAGE, [{
-        status: 401,
-        text: LOGIN_FAILURE_MESSAGE,
-      }])
+      return failureMessage(LOGIN_FAILURE_MESSAGE, {
+        401: LOGIN_FAILURE_MESSAGE,
+      })
     case CLOSE_MESSAGE:
       return {
         ...defaultValue,

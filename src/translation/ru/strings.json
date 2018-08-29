@@ -129,6 +129,7 @@
   "warning_message": "Warning",
   "info_message": "Info",
   "something_went_wrong_message": "Что-то пошло не так =(",
+  "internal_error": "Внутренняя ошибка. Что-то пошло не так =(",
   "unauthorized": "Неавторизованное действие. Пожалуйста, авторизуйтесь для продолжения",
   "forbidden": "Доступ запрещен",
   "add_card_to_deck_success_message": "Карта успешно добавлена",
@@ -136,5 +137,7 @@
   "login_failure_message": "Ошибка авторизации. Проверьте свой e-mail и пароль",
   "images_request_failure_message": "Ошибка поиска картинок",
   "fetch_decks_failure_message": "Ошибка поиска колод",
-  "fetch_decks_unauthorized_message": "Ошибка поиска колод. Авторизуйтесь и повторите поиск"
+  "fetch_decks_unauthorized_message": "Ошибка поиска колод. Авторизуйтесь и повторите поиск",
+  "add_card_to_deck_failure_message": "Ошибка сохранения карты",
+  "add_card_to_deck_unauthorized_message": "Ошибка сохранения карты. Авторизуйтесь и повторите"
 }
