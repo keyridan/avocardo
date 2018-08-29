@@ -1,6 +1,5 @@
 import { createSelector } from 'reselect'
 
-export const imagesLoadingSelector = state => state.images.imagesLoading
 export const imageSelectorDialogStateSelector = state => state.images.imageSelectorDialogState
 export const photosSelector = state => state.images.photos
 export const requestedImagesSelector = state => state.images.requestedImages

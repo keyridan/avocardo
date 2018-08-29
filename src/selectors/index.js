@@ -3,6 +3,7 @@ export * from './images'
 export const openSpeedDialSelector = state => state.addBackSideSpeedDialState.open
 export const openInputImageSelector = state => state.addBackSideSpeedDialState.openInputImage
 
+export const imagesLoadingSelector = state => state.image.imagesLoading
 export const imageSrcSelector = state => state.image.imageSrc
 export const imageUrlSelector = state => state.image.imageUrl
 export const imageSelector = state => state.image
