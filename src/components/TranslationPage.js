@@ -2,10 +2,8 @@ import React from 'react'
 import Grid from '@material-ui/core/Grid'
 import withStyles from '@material-ui/core/styles/withStyles'
 import FromLanguageButtonBarContainer from '../containers/FromLanguageButtonBarContainer'
-import LanguageFromSelectorContainer from '../containers/LanguageFromSelectorContainer'
 import TranslationResultContainer from '../containers/TranslationResultContainer'
 import ToLanguageButtonBarContainer from '../containers/ToLanguageButtonBarContainer'
-import LanguageToSelectorContainer from '../containers/LanguageToSelectorContainer'
 import WordInput from '../containers/WordInput'
 import TranslateButton from '../containers/TranslateButton'
 import CardsAppBar from '../containers/appbar/CardsAppBar'
@@ -35,29 +33,15 @@ const TranslationPage = ({ classes }) => (
     <CardsAppBar />
     <div className={classes.root} >
       <Grid container spacing={8} className={classes.translationContainer} >
-        <Grid item container xs={12} sm={5} >
-          <Grid item container className={classes.languagesContainer} >
-            <Grid item xs={12} sm={8} >
-              <FromLanguageButtonBarContainer />
-            </Grid >
-            <Grid item xs={12} sm={4} >
-              <LanguageFromSelectorContainer />
-            </Grid >
-          </Grid >
-          <Grid item xs={12} >
-            <WordInput />
-          </Grid >
+        <Grid item xs={12} sm={5} >
+          <FromLanguageButtonBarContainer />
+          <WordInput />
         </Grid >
         <Grid item >
           <TranslateButton />
         </Grid >
-        <Grid item container xs={12} sm={5} className={classes.languagesContainer} >
-          <Grid item xs={12} sm={8} >
-            <ToLanguageButtonBarContainer />
-          </Grid >
-          <Grid item xs={12} sm={4} >
-            <LanguageToSelectorContainer />
-          </Grid >
+        <Grid item xs={12} sm={5} >
+          <ToLanguageButtonBarContainer />
         </Grid >
       </Grid >
       <Grid container spacing={8} >
