@@ -1,5 +1,5 @@
 {
-	"automatic": "Automatic",
+	"automatic": "Detect language",
 	"other_language_akk": "other",
 	"afrikaans_akk": "Afrikaans",
 	"albanian_akk": "Albanian",
@@ -122,7 +122,7 @@
   "card_back_side_title": "Back Side",
   "email-address": "Email address",
   "password": "Password",
-  "select_multiple_languages": "Select multiple languages",
+  "select_language": "Select language",
   "info_provider_switcher": "Send info request",
   "add_note": "Add note",
   "add_image": "Add image",

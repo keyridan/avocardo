@@ -10,7 +10,7 @@ const ToLanguageButtonBar = ({ recentToLanguages }) => (
         key={item}
         value={item}
         color="primary"
-        variant="contained"
+        variant="outlined"
       >
         {stringKey(item)}
       </ToLanguageButton >

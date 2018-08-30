@@ -4,7 +4,8 @@ import {
   CHOOSE_FROM_LANGUAGE,
   CHOOSE_RECENT_FROM_LANGUAGE,
   CHOOSE_RECENT_TO_LANGUAGE,
-  CHOOSE_TO_LANGUAGE, FACT_TYPE,
+  CHOOSE_TO_LANGUAGE,
+  FACT_TYPE,
   LOGIN_BEGIN,
   LOGIN_SUCCESS,
   LOGIN_URL,
@@ -73,65 +74,101 @@ describe('actions', () => {
       payload: 'testWord',
     })
   })
+})
 
-  it('chooseRecentToLanguage should create CHOOSE_RECENT_TO_LANGUAGE action with language', () => {
+describe('chooseRecentToLanguage', () => {
+  it('should create CHOOSE_RECENT_TO_LANGUAGE and CHOOSE_RECENT_TO_LANGUAGE actions with language when new language', () => {
     const store = mockStore({
       fromLanguage: 'EN',
       toLanguage: 'DE',
+      recentToLanguages: ['EN', 'ES', 'RU'],
     })
-    const languagesObject = [{
-      key: 'DE',
-      value: 'some DE value',
-    }, {
+    const languagesObject = {
+      key: 'FR',
+      value: 'some FR value',
+    }
+    const expectedActions = [
+      { type: CHOOSE_TO_LANGUAGE, payload: 'FR' },
+      { type: CHOOSE_RECENT_TO_LANGUAGE, payload: ['ES', 'RU', 'FR'] },
+    ]
+    store.dispatch(actions.chooseRecentToLanguage(languagesObject))
+    expect(store.getActions()).to.eql(expectedActions)
+  })
+
+  it('should reverse languages when language is the same as fromLanguage', () => {
+    const store = mockStore({
+      fromLanguage: 'EN',
+      toLanguage: 'DE',
+      recentFromLanguages: ['EN', 'ES', 'RU'],
+      recentToLanguages: ['DE', 'ES', 'RU'],
+    })
+    const languagesObject = {
       key: 'EN',
       value: 'some EN value',
-    }]
-    expect(store.dispatch(actions.chooseRecentToLanguage(languagesObject))).to.eql({
-      type: CHOOSE_RECENT_TO_LANGUAGE,
-      payload: ['DE', 'EN'],
-    })
+    }
+    const expectedActions = [
+      { type: CHOOSE_FROM_LANGUAGE, payload: 'DE' },
+      { type: CHOOSE_RECENT_FROM_LANGUAGE, payload: ['ES', 'RU', 'DE'] },
+      { type: CHOOSE_TO_LANGUAGE, payload: 'EN' },
+      { type: CHOOSE_RECENT_TO_LANGUAGE, payload: ['ES', 'RU', 'EN'] },
+      {
+        type: SET_TRANSLATION_RESULT,
+        payload: {
+          options: [],
+          wordTo: '',
+        },
+      },
+    ]
+    store.dispatch(actions.chooseRecentToLanguage(languagesObject))
+    expect(store.getActions()).to.eql(expectedActions)
   })
+})
 
-  it('chooseRecentFromLanguage should create CHOOSE_RECENT_FROM_LANGUAGE action with language', () => {
+describe('chooseRecentFromLanguage', () => {
+  it('should create CHOOSE_RECENT_FROM_LANGUAGE and CHOOSE_FROM_LANGUAGE actions with language when new language', () => {
     const store = mockStore({
       fromLanguage: 'EN',
       toLanguage: 'DE',
+      recentFromLanguages: ['EN', 'ES', 'RU'],
     })
-    const languagesObject = [{
+    const languagesObject = {
+      key: 'FR',
+      value: 'some FR value',
+    }
+    const expectedActions = [
+      { type: CHOOSE_FROM_LANGUAGE, payload: 'FR' },
+      { type: CHOOSE_RECENT_FROM_LANGUAGE, payload: ['ES', 'RU', 'FR'] },
+    ]
+    store.dispatch(actions.chooseRecentFromLanguage(languagesObject))
+    expect(store.getActions()).to.eql(expectedActions)
+  })
+
+  it('should reverse languages when language is the same as toLanguage', () => {
+    const store = mockStore({
+      fromLanguage: 'EN',
+      toLanguage: 'DE',
+      recentFromLanguages: ['EN', 'ES', 'RU'],
+      recentToLanguages: ['DE', 'ES', 'RU'],
+    })
+    const languagesObject = {
       key: 'DE',
       value: 'some DE value',
-    }, {
-      key: 'EN',
-      value: 'some EN value',
-    }]
-    expect(store.dispatch(actions.chooseRecentFromLanguage(languagesObject))).to.eql({
-      type: CHOOSE_RECENT_FROM_LANGUAGE,
-      payload: ['DE', 'EN'],
-    })
-  })
-
-  it('chooseRecentToLanguage should create CHOOSE_RECENT_TO_LANGUAGE action with toLanguage when empty', () => {
-    const store = mockStore({
-      fromLanguage: 'EN',
-      toLanguage: 'DE',
-    })
-    const languagesObject = []
-    expect(store.dispatch(actions.chooseRecentToLanguage(languagesObject))).to.eql({
-      type: CHOOSE_RECENT_TO_LANGUAGE,
-      payload: ['DE'],
-    })
-  })
-
-  it('chooseRecentFromLanguage should create CHOOSE_RECENT_FROM_LANGUAGE action with fromLanguage when empty', () => {
-    const store = mockStore({
-      fromLanguage: 'EN',
-      toLanguage: 'DE',
-    })
-    const languagesObject = []
-    expect(store.dispatch(actions.chooseRecentFromLanguage(languagesObject))).to.eql({
-      type: CHOOSE_RECENT_FROM_LANGUAGE,
-      payload: ['EN'],
-    })
+    }
+    const expectedActions = [
+      { type: CHOOSE_FROM_LANGUAGE, payload: 'DE' },
+      { type: CHOOSE_RECENT_FROM_LANGUAGE, payload: ['ES', 'RU', 'DE'] },
+      { type: CHOOSE_TO_LANGUAGE, payload: 'EN' },
+      { type: CHOOSE_RECENT_TO_LANGUAGE, payload: ['ES', 'RU', 'EN'] },
+      {
+        type: SET_TRANSLATION_RESULT,
+        payload: {
+          options: [],
+          wordTo: '',
+        },
+      }
+    ]
+    store.dispatch(actions.chooseRecentFromLanguage(languagesObject))
+    expect(store.getActions()).to.eql(expectedActions)
   })
 })
 

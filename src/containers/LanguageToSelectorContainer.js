@@ -3,7 +3,6 @@ import LanguageSelector from '../components/LanguageSelector'
 import { chooseRecentToLanguage } from '../actions'
 
 const mapStateToProps = state => ({
-  recentLanguages: state.recentToLanguages,
   language: state.language,
 })
 

@@ -25,6 +25,7 @@ import image from './image'
 import images from './images'
 import userFormState from './userFormState'
 import message from './message'
+import version from './version'
 
 export default combineReducers({
   toLanguage,
@@ -55,5 +56,6 @@ export default combineReducers({
   image,
   images,
   message,
+  version,
 })
 

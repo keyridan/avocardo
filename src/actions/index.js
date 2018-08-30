@@ -6,10 +6,10 @@ import {
   ADD_CARD_TO_DECK_SUCCESS,
   ADD_CARD_TO_DECK_URL,
   BACKSIDE_QUANTITY_ERROR,
+  CHANGE_ADD_BACK_SIDE_SPEED_DIAL_STATE,
   CHANGE_CHOOSE_LANGUAGE_STATE,
   CHANGE_DECK_LIST_STATE,
   CHANGE_INFO_SWITCHER_STATE,
-  CHANGE_ADD_BACK_SIDE_SPEED_DIAL_STATE,
   CHANGE_OPEN_INPUT_IMAGE_STATE,
   CHANGE_OPEN_LOGIN_FORM,
   CHANGE_OPEN_USER_FORM,
@@ -21,6 +21,7 @@ import {
   CHOOSE_RECENT_FROM_LANGUAGE,
   CHOOSE_RECENT_TO_LANGUAGE,
   CHOOSE_TO_LANGUAGE,
+  CLOSE_MESSAGE,
   FACT_TYPE,
   FETCH_DECKS_BEGIN,
   FETCH_DECKS_FAILURE,
@@ -45,14 +46,9 @@ import {
   TRANSLATE_BEGIN,
   TRANSLATE_FAILURE,
   TRANSLATE_SUCCESS,
-  TRANSLATE_URL, CLOSE_MESSAGE,
+  TRANSLATE_URL,
 } from '../constants'
-import {
-  backSideSelector,
-  croppedImageSelector,
-  imageSelector,
-  openSpeedDialSelector,
-} from '../selectors'
+import { backSideSelector, croppedImageSelector, imageSelector, openSpeedDialSelector, } from '../selectors'
 import { setCardValues, setTranslationResult } from './setTranslationValues'
 
 export * from './image'
@@ -103,39 +99,6 @@ function chooseRecentValuesWithType({ type, languagesValues }) {
   }
 }
 
-function chooseRecentLanguage({ languages, type }) {
-  const languagesValues = languages.map(item => item.key)
-  return chooseRecentValuesWithType({ type, languagesValues })
-}
-
-function chooseRecentLanguageOrDefaultLanguage({ languagesObject, defaultLanguage, type }) {
-  return (languagesObject && languagesObject.length > 0)
-    ? chooseRecentLanguage({
-      languages: languagesObject,
-      type,
-    })
-    : chooseRecentValuesWithType({
-      type,
-      languagesValues: [defaultLanguage],
-    })
-}
-
-export const chooseRecentToLanguage = languagesObject => (dispatch, getState) => (
-  dispatch(chooseRecentLanguageOrDefaultLanguage({
-    languagesObject,
-    defaultLanguage: getState().toLanguage,
-    type: CHOOSE_RECENT_TO_LANGUAGE,
-  }))
-)
-
-export const chooseRecentFromLanguage = languagesObject => (dispatch, getState) => (
-  dispatch(chooseRecentLanguageOrDefaultLanguage({
-    languagesObject,
-    defaultLanguage: getState().fromLanguage,
-    type: CHOOSE_RECENT_FROM_LANGUAGE,
-  }))
-)
-
 export const changeSwitcherState = type => (dispatch, getState) => {
   const { infoProvider } = getState()
   const typeInfoProviderState = {
@@ -172,8 +135,8 @@ export const setInfos = (value) => {
 const addToRecentIfNotExist = (recentLanguages = [], value, dispatchChooseRecentLanguage) => {
   if (recentLanguages.indexOf(value) === -1 && value !== 'AUTO') {
     dispatchChooseRecentLanguage([
+      ...recentLanguages.slice(1),
       value,
-      ...recentLanguages,
     ])
   }
 }
@@ -428,8 +391,8 @@ export const setPassword = value => ({
 })
 
 export const translate = ({
-  toLanguage, word, fromLanguage, infoProvider,
-}) => {
+                            toLanguage, word, fromLanguage, infoProvider,
+                          }) => {
   if (!word) {
     return Promise.resolve()
   }
@@ -597,14 +560,14 @@ export const setFromLanguageOrReverseLanguages = fromLanguage => (dispatch, getS
   const { toLanguage } = getState()
   dispatch(fromLanguage === toLanguage
     ? reverseLanguages()
-    : chooseFromLanguage(fromLanguage))
+    : chooseFromLanguageAndAddToRecent(fromLanguage))
 }
 
 export const setToLanguageOrReverseLanguages = toLanguage => (dispatch, getState) => {
   const { fromLanguage } = getState()
   dispatch(toLanguage === fromLanguage
     ? reverseLanguages()
-    : chooseToLanguage(toLanguage))
+    : chooseToLanguageAndAddToRecent(toLanguage))
 }
 
 const pushFromLanguage = newValue => (dispatch, getState) => {
@@ -634,6 +597,14 @@ export const setToLanguage = newValue => (dispatch, getState) => {
     ? pushToLanguage(newValue)
     : setToLanguageOrReverseLanguages(newValue))
 }
+
+export const chooseRecentToLanguage = languagesObject => (
+  setToLanguage(languagesObject.key)
+)
+
+export const chooseRecentFromLanguage = languagesObject => (
+  setFromLanguage(languagesObject.key)
+)
 
 const setWordToHistory = () => (dispatch, getState) => {
   const path = translationLink(getState())

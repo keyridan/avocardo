@@ -1,6 +1,6 @@
 import { CHOOSE_RECENT_FROM_LANGUAGE } from '../constants'
 
-const recentFromLanguages = (state = ['DE', 'EN', 'FR', 'RU'], action) => {
+const recentFromLanguages = (state = ['DE', 'EN', 'FR'], action) => {
   switch (action.type) {
     case CHOOSE_RECENT_FROM_LANGUAGE:
       return [

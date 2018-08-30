@@ -14,6 +14,7 @@ import MessageContainer from '../containers/MessageContainer'
 import Card from './card/Card'
 
 const styles = theme => ({
+  languagesContainer: {},
   root: {
     flexGrow: 1,
     padding: 15,
@@ -34,17 +35,29 @@ const TranslationPage = ({ classes }) => (
     <CardsAppBar />
     <div className={classes.root} >
       <Grid container spacing={8} className={classes.translationContainer} >
-        <Grid item xs={12} sm={5} >
-          <LanguageFromSelectorContainer />
-          <FromLanguageButtonBarContainer />
-          <WordInput />
+        <Grid item container xs={12} sm={5} >
+          <Grid item container className={classes.languagesContainer} >
+            <Grid item xs={10} >
+              <FromLanguageButtonBarContainer />
+            </Grid >
+            <Grid item xs={2} >
+              <LanguageFromSelectorContainer />
+            </Grid >
+          </Grid >
+          <Grid item xs={12} >
+            <WordInput />
+          </Grid >
         </Grid >
         <Grid item >
           <TranslateButton />
         </Grid >
-        <Grid item xs={12} sm={5} >
-          <LanguageToSelectorContainer />
-          <ToLanguageButtonBarContainer />
+        <Grid item container xs={12} sm={5} className={classes.languagesContainer} >
+          <Grid item xs={10} >
+            <ToLanguageButtonBarContainer />
+          </Grid >
+          <Grid item xs={2} >
+            <LanguageToSelectorContainer />
+          </Grid >
         </Grid >
       </Grid >
       <Grid container spacing={8} >

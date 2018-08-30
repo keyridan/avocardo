@@ -12,7 +12,7 @@ const FromLanguageButtonBar = ({ recentFromLanguages }) => {
           key={item}
           value={item}
           color="primary"
-          variant="contained"
+          variant="outlined"
         >
           {stringKey(item)}
         </FromLanguageButton >

@@ -1,3 +1,10 @@
+export const STORE_VERSION = '0.0.1'
+export const UPDATE_STATE_FOR = [
+  { recentFromLanguages: ['EN', 'DE', 'FR'] },
+  { recentToLanguages: ['EN', 'DE', 'FR'] },
+  { fromLanguage: 'DE' },
+  { toLanguage: 'EN' },
+]
 export const TRANSLATE_BEGIN = 'TRANSLATE_BEGIN'
 export const TRANSLATE_SUCCESS = 'TRANSLATE_SUCCESS'
 export const TRANSLATE_FAILURE = 'TRANSLATE_FAILURE'
