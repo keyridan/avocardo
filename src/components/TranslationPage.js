@@ -37,10 +37,10 @@ const TranslationPage = ({ classes }) => (
       <Grid container spacing={8} className={classes.translationContainer} >
         <Grid item container xs={12} sm={5} >
           <Grid item container className={classes.languagesContainer} >
-            <Grid item xs={10} >
+            <Grid item xs={12} sm={8} >
               <FromLanguageButtonBarContainer />
             </Grid >
-            <Grid item xs={2} >
+            <Grid item xs={12} sm={4} >
               <LanguageFromSelectorContainer />
             </Grid >
           </Grid >
@@ -52,10 +52,10 @@ const TranslationPage = ({ classes }) => (
           <TranslateButton />
         </Grid >
         <Grid item container xs={12} sm={5} className={classes.languagesContainer} >
-          <Grid item xs={10} >
+          <Grid item xs={12} sm={8} >
             <ToLanguageButtonBarContainer />
           </Grid >
-          <Grid item xs={2} >
+          <Grid item xs={12} sm={4} >
             <LanguageToSelectorContainer />
           </Grid >
         </Grid >

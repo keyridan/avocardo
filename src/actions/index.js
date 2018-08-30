@@ -12,7 +12,7 @@ import {
   CHANGE_INFO_SWITCHER_STATE,
   CHANGE_OPEN_INPUT_IMAGE_STATE,
   CHANGE_OPEN_LOGIN_FORM,
-  CHANGE_OPEN_USER_FORM,
+  CHANGE_OPEN_USER_FORM, CHANGE_RECENT_FROM_LANGUAGE_SELECTOR_STATE, CHANGE_RECENT_TO_LANGUAGE_SELECTOR_STATE,
   CHANGE_SHOW_PASSWORD,
   CHANGE_THEME_TYPE_STATE,
   CHOOSE_DECK,
@@ -55,6 +55,14 @@ export * from './image'
 
 export const closeMessage = () => ({
   type: CLOSE_MESSAGE,
+})
+
+export const changeFromLanguageSelectorState = () => ({
+  type: CHANGE_RECENT_FROM_LANGUAGE_SELECTOR_STATE,
+})
+
+export const changeToLanguageSelectorState = () => ({
+  type: CHANGE_RECENT_TO_LANGUAGE_SELECTOR_STATE,
 })
 
 export const toggleAllOptions = value => (dispatch, getState) => {

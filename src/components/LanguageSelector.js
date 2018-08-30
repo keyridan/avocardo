@@ -20,21 +20,27 @@ const suggestions = language => formValuesFromArray(
 
 const LanguageSelector = (
   {
-    className, classes, language, chooseRecentLanguage,
+    className, openState, changeOpenState, language, chooseRecentLanguage,
   }) => {
   return (
-    <div className={className} >
+    <div >
       <Select
-        classes={classes}
+        menuIsOpen={openState}
+        onMenuOpen={changeOpenState}
+        onMenuClose={changeOpenState}
         options={suggestions(language)}
         onChange={chooseRecentLanguage}
+        placeholder={<TranslatedTextContainer value="select_language" />}
       />
+
     </div >
   )
 }
 
 LanguageSelector.propTypes = {
   className: PropTypes.string,
+  openState: PropTypes.bool.isRequired,
+  changeOpenState: PropTypes.func.isRequired,
   chooseRecentLanguage: PropTypes.func.isRequired,
 }
 
