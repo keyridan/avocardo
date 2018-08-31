@@ -19,3 +19,4 @@ coverage
 __trash__
 dist
 /yarn.lock
+package-lock.json
