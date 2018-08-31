@@ -2,10 +2,11 @@ import Paper from '@material-ui/core/Paper/Paper'
 import Popover from '@material-ui/core/Popover/Popover'
 import React from 'react'
 import PropTypes from 'prop-types'
-import SimpleButton from '../../components/common/SimpleButton'
 import withStyles from '@material-ui/core/styles/withStyles'
+import SimpleButton from '../../components/common/SimpleButton'
+import TranslatedTextContainer from '../../containers/TranslatedTextContainer'
 
-const styles = theme => ({
+const styles = () => ({
   paper: {
     padding: '15px',
     display: 'flex',
@@ -38,20 +39,22 @@ const UserMenu = ({
     }}
   >
     <Paper className={classes.paper}>
-      <span>Logged in as: <span className={classes.userName}>{user}</span>
+      <span><TranslatedTextContainer value="logged_in_as" /> <span className={classes.userName}>{user}</span>
       </span>
       <SimpleButton
         className={classes.logout}
         color="primary"
         onClick={logout}
       >
-        LOGOUT
+        <TranslatedTextContainer value="logout" />
       </SimpleButton>
     </Paper>
   </Popover>
 )
 
 UserMenu.propTypes = {
+  user: PropTypes.string.isRequired,
+  classes: PropTypes.objectOf(styles).isRequired,
   userFormState: PropTypes.shape({
     open: PropTypes.bool.isRequired,
     anchorEl: PropTypes.any,

@@ -22,7 +22,7 @@ const styles = (theme) => {
       width: 'auto',
       marginLeft: theme.spacing.unit * 3,
       marginRight: theme.spacing.unit * 3,
-      [theme.breakpoints.up(400 + theme.spacing.unit * 3 * 2)]: {
+      [theme.breakpoints && theme.breakpoints.up(400 + (theme.spacing.unit * 3 * 2))]: {
         width: 400,
         marginLeft: 'auto',
         marginRight: 'auto',
@@ -69,7 +69,7 @@ const LoginPage = ({
         </div >
         <FormControl margin="normal" required fullWidth >
           <InputLabel htmlFor="email" >
-            <TranslatedTextContainer value="email-address" />
+            <TranslatedTextContainer value="login_placeholder" />
           </InputLabel >
           <Input
             id="email"
@@ -115,6 +115,8 @@ const LoginPage = ({
 }
 
 LoginPage.propTypes = {
+  classes: PropTypes.objectOf(styles).isRequired,
+  login: PropTypes.func.isRequired,
   tinyCardsLogin: PropTypes.shape({
     identifier: PropTypes.string,
     password: PropTypes.string,

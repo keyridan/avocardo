@@ -16,7 +16,7 @@ import { SUPPORTED_LOCALISATION_LANGUAGES } from '../../constants'
 import AppBarUser from '../../components/appbar/AppBarUser'
 
 const CardsAppBar = ({
-  auth, language, classes, changeChooseLanguageState, chooseLanguage, chooseLanguageState,
+  auth, language, changeChooseLanguageStateFunc, chooseLanguageFunc, chooseLanguageState,
 }) => (
   <div className={s.cards_app_bar} >
     <AppBar position="static" >
@@ -25,7 +25,7 @@ const CardsAppBar = ({
         <IconButton
           aria-owns="menu-appbar"
           aria-haspopup="true"
-          onClick={event => changeChooseLanguageState(event.currentTarget)}
+          onClick={event => changeChooseLanguageStateFunc(event.currentTarget)}
           color="inherit"
         >
           <span style={{ paddingBottom: '5px' }}>{language}</span >
@@ -42,13 +42,15 @@ const CardsAppBar = ({
             horizontal: 'right',
           }}
           open={chooseLanguageState.open}
-          onClose={() => changeChooseLanguageState(null)}
+          onClose={() => changeChooseLanguageStateFunc(null)}
         >
           {SUPPORTED_LOCALISATION_LANGUAGES.map(menuLanguage => (
-            <MenuItem onClick={() => {
-              chooseLanguage(menuLanguage)
-              changeChooseLanguageState()
-            }}
+            <MenuItem
+              key={menuLanguage}
+              onClick={() => {
+                chooseLanguageFunc(menuLanguage)
+                changeChooseLanguageStateFunc()
+              }}
             >
               <TranslatedTextContainer value={stringKey(menuLanguage.toUpperCase())} />
             </MenuItem >
@@ -63,7 +65,17 @@ const CardsAppBar = ({
 CardsAppBar.propTypes = {
   auth: PropTypes.bool.isRequired,
   language: PropTypes.string.isRequired,
-  chooseLanguageState: PropTypes.bool.isRequired,
+  chooseLanguageState: PropTypes.shape({
+    open: PropTypes.bool,
+    anchorEl: PropTypes.object,
+  }).isRequired,
+  changeChooseLanguageStateFunc: PropTypes.func,
+  chooseLanguageFunc: PropTypes.func,
+}
+
+CardsAppBar.defaultProps = {
+  changeChooseLanguageStateFunc: () => {},
+  chooseLanguageFunc: () => {},
 }
 
 const mapStateToProps = state => ({

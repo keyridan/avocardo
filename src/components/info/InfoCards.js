@@ -8,7 +8,7 @@ import { INFO_PROVIDERS } from '../../constants'
 
 const styles = theme => ({
   container: {
-    paddingTop: theme.spacing.unit * 6,
+    paddingTop: theme.spacing ? theme.spacing.unit * 6 : 0,
   },
 })
 
@@ -19,11 +19,11 @@ const InfoCards = ({
     <Typography variant="title" gutterBottom >
       <TranslatedTextContainer value="additional_info" />
     </Typography >
-    {INFO_PROVIDERS.map((provider, index) => (
+    {INFO_PROVIDERS.map(provider => (
       <InfoPanel
         info={infos[provider]}
         type={provider}
-        key={index}
+        key={JSON.stringify(provider)}
         checked={infoProvider[provider].checked}
       />
     ))}
@@ -31,10 +31,15 @@ const InfoCards = ({
 )
 
 InfoCards.propTypes = {
-  infos: PropTypes.arrayOf(PropTypes.shape({
-    info: PropTypes.object,
-  })).isRequired,
-  infoProvider: PropTypes.object.isRequired,
+  classes: PropTypes.objectOf(styles).isRequired,
+  infos: PropTypes.shape({
+    [INFO_PROVIDERS]: PropTypes.object,
+  }).isRequired,
+  infoProvider: PropTypes.shape({
+    [INFO_PROVIDERS]: PropTypes.shape({
+      checked: PropTypes.bool.isRequired,
+    }).isRequired,
+  }).isRequired,
 }
 
 export default withStyles(styles)(InfoCards)

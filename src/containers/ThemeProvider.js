@@ -26,7 +26,15 @@ const ThemeProvider = ({ children, themeType }) => {
 
 ThemeProvider.propTypes = {
   children: PropTypes.node.isRequired,
-  themeType: PropTypes.string.isRequired,
+  themeType: PropTypes.shape({
+    isDark: PropTypes.bool,
+  }),
+}
+
+ThemeProvider.defaultProps = {
+  themeType: {
+    isDark: false,
+  },
 }
 
 const mapStateToProps = state => ({

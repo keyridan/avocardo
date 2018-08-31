@@ -17,15 +17,18 @@ import Concept from './Concept'
 
 const styles = theme => ({
   card: {
-    ...theme.mixins.gutters(),
-    padding: theme.spacing.unit * 2,
+    // ...theme.mixins.gutters(),
+    padding: theme.spacing ? (theme.spacing.unit * 2) : 0,
   },
   back_side_title: {
     flexDirection: 'row',
   },
 })
 
-const FlashCard = ({ frontSide, backSide, setFrontSideValue, setBackSideValue, classes, toggleOption, toggleAllOptions, removeBackSideItem, openImageToCrop }) => (
+const FlashCard = ({
+  frontSide, backSide, setFrontSideValue, setBackSideValue, classes, toggleOption,
+  toggleAllOptions, removeBackSideItem, openImageToCrop,
+}) => (
   <div >
     <Grid container >
       <Grid item xs={12} sm={5} >
@@ -42,12 +45,12 @@ const FlashCard = ({ frontSide, backSide, setFrontSideValue, setBackSideValue, c
           <TableBody >
             {frontSide.values
               .map((item, index) => (
-                <TableRow >
+                <TableRow key={JSON.stringify(item)}>
                   <TableCell >
                     <Paper className={classes.card} >
                       <SimpleInput
                         value={item}
-                        key={index}
+                        key={JSON.stringify(item)}
                         onChange={(event) => {
                           setFrontSideValue(event.target.value, index)
                         }}
@@ -80,17 +83,17 @@ const FlashCard = ({ frontSide, backSide, setFrontSideValue, setBackSideValue, c
           <TableBody >
             {backSide.values
               .map((item, index) => (
-                <TableRow >
+                <TableRow key={JSON.stringify(item)}>
                   <TableCell
                     padding="none"
                   >
                     <Checkbox
-                      checked={parseInt(item.checked)}
+                      checked={parseInt(item.checked, 10)}
                       onClick={() => toggleOption(index)}
-                      key={index}
+                      key={JSON.stringify(item)}
                     />
                   </TableCell >
-                  <TableCell  >
+                  <TableCell>
                     <Concept
                       item={item}
                       index={index}
@@ -109,15 +112,18 @@ const FlashCard = ({ frontSide, backSide, setFrontSideValue, setBackSideValue, c
 )
 
 FlashCard.propTypes = {
-  frontSide: PropTypes.string.isRequired,
-  backSide: {
+  classes: PropTypes.objectOf(styles).isRequired,
+  frontSide: PropTypes.shape({
+    values: PropTypes.arrayOf(PropTypes.string).isRequired,
+  }).isRequired,
+  backSide: PropTypes.shape({
     maxCheckedItems: PropTypes.number.isRequired,
     checkedItems: PropTypes.number.isRequired,
     values: PropTypes.arrayOf(PropTypes.shape({
       value: PropTypes.string,
       checked: PropTypes.number,
     })).isRequired,
-  }.isRequired,
+  }).isRequired,
   setFrontSideValue: PropTypes.func.isRequired,
   setBackSideValue: PropTypes.func.isRequired,
   removeBackSideItem: PropTypes.func.isRequired,

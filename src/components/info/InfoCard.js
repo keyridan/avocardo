@@ -31,4 +31,8 @@ InfoCard.propTypes = {
   }),
 }
 
+InfoCard.defaultProps = {
+  info: '',
+}
+
 export default InfoCard

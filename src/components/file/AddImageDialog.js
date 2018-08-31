@@ -10,52 +10,58 @@ import ImageCropperContainer from '../../containers/file/ImageCropperContainer'
 
 const styles = theme => ({
   dialogButtons: {
-    [theme.breakpoints.down('sm')]: {
+    [theme.breakpoints && theme.breakpoints.down('sm')]: {
       bottom: 20,
     },
     position: 'fixed',
-    right: 25,
+    right: 15,
     zIndex: 4,
   },
   dialog: {
-    paddingLeft: 0,
-    paddingRight: 0,
+    paddingLeft: 15,
+    paddingRight: 15,
   },
 })
 
-const AddImageDialog = ({ classes, openInputImage, addOrUpdateBackSideImageValueAndClean, closeAndClean, imageNotEmpty }) => (
-  <Dialog
-    fullScreen
-    aria-labelledby="simple-dialog-title"
-    open={openInputImage}
-  >
-    <DialogContent className={classes.dialog} >
-      <div className={classes.dialogButtons} >
-        <Button
-          variant="fab"
-          color="primary"
-          onClick={closeAndClean}
-          aria-label="Close"
-        >
-          <Close />
-        </Button >
-        <Button
-          variant="fab"
-          color="primary"
-          disabled={!imageNotEmpty}
-          onClick={addOrUpdateBackSideImageValueAndClean}
-          aria-label="OK"
-        >
-          <Check />
-        </Button >
-      </div >
-      <ImageCropperContainer />
-    </DialogContent >
-  </Dialog >
+const AddImageDialog = ({
+  classes, openInputImage, addOrUpdateBackSideImageValueAndClean, closeAndClean, imageNotEmpty,
+}) => (
+  <div>
+    {openInputImage && (
+    <Dialog
+      fullScreen
+      aria-labelledby="simple-dialog-title"
+      open={openInputImage}
+    >
+      <DialogContent className={classes.dialog} >
+        <div className={classes.dialogButtons} >
+          <Button
+            variant="fab"
+            color="primary"
+            onClick={closeAndClean}
+            aria-label="Close"
+          >
+            <Close />
+          </Button >
+          &nbsp;
+          <Button
+            variant="fab"
+            color="primary"
+            disabled={!imageNotEmpty}
+            onClick={addOrUpdateBackSideImageValueAndClean}
+            aria-label="OK"
+          >
+            <Check />
+          </Button >
+        </div >
+        <ImageCropperContainer />
+      </DialogContent >
+    </Dialog >)}
+  </div>
 )
 
 AddImageDialog.propTypes = {
-  classes: PropTypes.object.isRequired,
+  classes: PropTypes.objectOf(styles).isRequired,
   openInputImage: PropTypes.bool.isRequired,
   imageNotEmpty: PropTypes.bool.isRequired,
   addOrUpdateBackSideImageValueAndClean: PropTypes.func.isRequired,

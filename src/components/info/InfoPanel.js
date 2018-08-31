@@ -5,6 +5,7 @@ import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails'
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary'
 import Typography from '@material-ui/core/Typography'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
+import _ from 'lodash'
 import InfoProviderSwitcherContainer from '../../containers/info/InfoProviderSwitcherContainer'
 import InfoCard from './InfoCard'
 import InfoTable from './InfoTable'
@@ -22,8 +23,10 @@ const InfoPanel = ({ info, type, checked }) => (
         />
       </ExpansionPanelSummary >
       <ExpansionPanelDetails className={s.info_panel_details} >
-        <InfoCard info={info} />
-        {info && info.table && info.table.rows && (
+        {_.isEmpty(info) && (
+          <InfoCard info={info} />
+        )}
+        {_.isEmpty(info) && info.table && info.table.rows && (
           <InfoTable rows={info.table.rows} />
         )}
       </ExpansionPanelDetails >
@@ -36,9 +39,13 @@ InfoPanel.propTypes = {
     title: PropTypes.string,
     url: PropTypes.string,
     description: PropTypes.string,
-  }).isRequired,
+  }),
   type: PropTypes.string.isRequired,
   checked: PropTypes.bool.isRequired,
+}
+
+InfoPanel.defaultProps = {
+  info: {},
 }
 
 export default InfoPanel

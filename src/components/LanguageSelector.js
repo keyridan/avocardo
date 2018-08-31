@@ -20,44 +20,37 @@ const suggestions = language => formValuesFromArray(
   language,
 ).sort((a, b) => a.value.localeCompare(b.value))
 
-const LanguageSelector = (
-  {
-    className, openState, changeOpenState, language, chooseRecentLanguage,
-  }) => {
-  return (
-    <div >
-      {!openState && (
-        <SimpleButton
-          aria-label="More"
-          color="primary"
-          variant="outlined"
-          onClick={changeOpenState}
-        >
-          <KeyboardArrowDown />
-        </SimpleButton >
-      )}
-      {openState && (
-        <Select
-          autoFocus
-          menuIsOpen={openState}
-          onMenuClose={changeOpenState}
-          options={suggestions(language)}
-          onChange={chooseRecentLanguage}
-        />
-      )}
-    </div >
-  )
-}
+const LanguageSelector = ({
+  openState, changeOpenState, language, chooseRecentLanguage,
+}) => (
+  <div>
+    {!openState && (
+      <SimpleButton
+        aria-label="More"
+        color="primary"
+        variant="outlined"
+        onClick={changeOpenState}
+      >
+        <KeyboardArrowDown />
+      </SimpleButton >
+    )}
+    {openState && (
+      <Select
+        autoFocus
+        menuIsOpen={openState}
+        onMenuClose={changeOpenState}
+        options={suggestions(language)}
+        onChange={chooseRecentLanguage}
+      />
+    )}
+  </div >
+)
 
 LanguageSelector.propTypes = {
-  className: PropTypes.string,
+  language: PropTypes.string.isRequired,
   openState: PropTypes.bool.isRequired,
   changeOpenState: PropTypes.func.isRequired,
   chooseRecentLanguage: PropTypes.func.isRequired,
-}
-
-LanguageSelector.defaultProps = {
-  className: '',
 }
 
 export default LanguageSelector

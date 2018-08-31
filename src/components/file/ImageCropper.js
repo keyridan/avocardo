@@ -15,7 +15,7 @@ const styles = theme => ({
     position: 'relative',
   },
   controls: {
-    [theme.breakpoints.up('sm')]: {
+    [theme.breakpoints && theme.breakpoints.up('sm')]: {
       margin: 'auto',
       width: '50%',
       height: 80,
@@ -86,17 +86,22 @@ const ImageCropper = ({
 )
 
 ImageCropper.propTypes = {
-  classes: PropTypes.object.isRequired,
+  classes: PropTypes.objectOf(styles).isRequired,
   zoom: PropTypes.number.isRequired,
   aspect: PropTypes.number.isRequired,
   crop: PropTypes.shape({
     x: PropTypes.number,
     y: PropTypes.number,
   }).isRequired,
+  imageSrc: PropTypes.string,
   cropCompleted: PropTypes.func.isRequired,
   changeZoom: PropTypes.func.isRequired,
   changeCrop: PropTypes.func.isRequired,
   changeFile: PropTypes.func.isRequired,
+}
+
+ImageCropper.defaultProps = {
+  imageSrc: null,
 }
 
 export default withStyles(styles)(ImageCropper)

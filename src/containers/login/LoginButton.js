@@ -4,12 +4,12 @@ import PropTypes from 'prop-types'
 import ButtonWithProgress from '../../components/common/ButtonWithProgress'
 import { login } from '../../actions/index'
 
-const LoginButton = ({ className, pending, login }) => (
+const LoginButton = ({ className, pending, loginClickHandler }) => (
   <ButtonWithProgress
     fullWidth
     className={className}
     loading={pending}
-    onClick={login}
+    onClick={loginClickHandler}
     buttonColor="primary"
     progressColor="secondary"
   >
@@ -18,7 +18,7 @@ const LoginButton = ({ className, pending, login }) => (
 )
 
 LoginButton.propTypes = {
-  login: PropTypes.func.isRequired,
+  loginClickHandler: PropTypes.func.isRequired,
   pending: PropTypes.bool.isRequired,
   className: PropTypes.string,
 }
@@ -32,7 +32,7 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = {
-  login,
+  loginClickHandler: login,
 }
 
 export default connect(

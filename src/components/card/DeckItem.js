@@ -1,5 +1,6 @@
 import React from 'react'
 import Avatar from '@material-ui/core/Avatar'
+import PropTypes from 'prop-types'
 import s from './DeckList.css'
 
 const DeckItem = ({ deck }) => (
@@ -15,5 +16,21 @@ const DeckItem = ({ deck }) => (
     }
   </div >
 )
+
+DeckItem.propTypes = {
+  deck: PropTypes.oneOfType([
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
+      description: PropTypes.string.isRequired,
+      coverImageUrl: PropTypes.string.isRequired,
+    }),
+    PropTypes.string.isRequired,
+  ]),
+}
+
+DeckItem.defaultProps = {
+  deck: '',
+}
 
 export default DeckItem

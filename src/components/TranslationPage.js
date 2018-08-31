@@ -1,6 +1,7 @@
 import React from 'react'
 import Grid from '@material-ui/core/Grid'
 import withStyles from '@material-ui/core/styles/withStyles'
+import PropTypes from 'prop-types'
 import FromLanguageButtonBarContainer from '../containers/FromLanguageButtonBarContainer'
 import TranslationResultContainer from '../containers/TranslationResultContainer'
 import ToLanguageButtonBarContainer from '../containers/ToLanguageButtonBarContainer'
@@ -21,7 +22,7 @@ const styles = theme => ({
     justifyContent: 'space-around',
   },
   result: {
-    [theme.breakpoints.up('sm')]: {
+    [theme.breakpoints && theme.breakpoints.up('sm')]: {
       order: 1,
     },
   },
@@ -56,5 +57,9 @@ const TranslationPage = ({ classes }) => (
     </div >
   </div >
 )
+
+TranslationPage.propTypes = {
+  classes: PropTypes.objectOf(styles).isRequired,
+}
 
 export default withStyles(styles)(TranslationPage)

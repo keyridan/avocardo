@@ -20,7 +20,7 @@ const styles = theme => ({
     backgroundColor: green[700],
   },
   error: {
-    backgroundColor: theme.palette.error.dark,
+    backgroundColor: theme.palette ? theme.palette.error.dark : 'currentColor',
   },
   info: {
     backgroundColor: blue[700],
@@ -33,7 +33,7 @@ const styles = theme => ({
   },
   iconVariant: {
     opacity: 0.9,
-    marginRight: theme.spacing.unit,
+    marginRight: theme.spacing ? theme.spacing.unit : 0,
   },
   message: {
     display: 'flex',
@@ -48,7 +48,9 @@ const variantIcon = {
   info: InfoIcon,
 }
 
-const MessageSnackBar = ({ classes, text, translatedText, type, open, closeMessage }) => {
+const MessageSnackBar = ({
+  classes, text, translatedText, type, open, closeMessage,
+}) => {
   const Icon = variantIcon[type]
   return (
     <Snackbar
@@ -66,7 +68,9 @@ const MessageSnackBar = ({ classes, text, translatedText, type, open, closeMessa
         message={
           (
             <span id="client-snackbar" className={classes.message} >
-              <Icon className={classNames(classes.icon, classes.iconVariant)} />
+              {Icon && (
+                <Icon className={classNames(classes.icon, classes.iconVariant)} />
+              )}
               {translatedText && (<TranslatedTextContainer value={translatedText} />)}
               {translatedText && text && (<br />)}
               {text}
@@ -90,11 +94,16 @@ const MessageSnackBar = ({ classes, text, translatedText, type, open, closeMessa
 }
 
 MessageSnackBar.propTypes = {
+  classes: PropTypes.objectOf(styles).isRequired,
   text: PropTypes.string.isRequired,
   translatedText: PropTypes.string.isRequired,
-  type: PropTypes.string.isRequired,
+  type: PropTypes.string,
   open: PropTypes.bool.isRequired,
   closeMessage: PropTypes.func.isRequired,
+}
+
+MessageSnackBar.defaultProps = {
+  type: '',
 }
 
 export default withStyles(styles)(MessageSnackBar)

@@ -19,7 +19,7 @@ const styles = theme => ({
     right: '-25px',
   },
   dialogButtons: {
-    [theme.breakpoints.down('sm')]: {
+    [theme.breakpoints && theme.breakpoints.down('sm')]: {
       bottom: 20,
     },
     position: 'fixed',
@@ -32,7 +32,10 @@ const styles = theme => ({
   },
 })
 
-const AddBackSideSpeedDial = ({ classes, open, isTouch, openSpeedDial, closeSpeedDial, changeSpeedDialState, addBackSideValue, changeOpenInputImageState }) => (
+const AddBackSideSpeedDial = ({
+  classes, open, isTouch, openSpeedDial, closeSpeedDial, changeSpeedDialState,
+  addBackSideValue, changeOpenInputImageState,
+}) => (
   <div className={classes.root} >
     <div className={classes.speedDial} >
       <SpeedDial
@@ -63,10 +66,11 @@ const AddBackSideSpeedDial = ({ classes, open, isTouch, openSpeedDial, closeSpee
 )
 
 AddBackSideSpeedDial.propTypes = {
-  classes: PropTypes.object.isRequired,
+  classes: PropTypes.objectOf(styles).isRequired,
+  isTouch: PropTypes.bool.isRequired,
   open: PropTypes.bool.isRequired,
-  closeSpeedDialState: PropTypes.func.isRequired,
-  openSpeedDialState: PropTypes.func.isRequired,
+  closeSpeedDial: PropTypes.func.isRequired,
+  openSpeedDial: PropTypes.func.isRequired,
   changeSpeedDialState: PropTypes.func.isRequired,
   addBackSideValue: PropTypes.func.isRequired,
   changeOpenInputImageState: PropTypes.func.isRequired,

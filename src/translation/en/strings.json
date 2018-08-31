@@ -112,7 +112,7 @@
   "translation_btn": "Translate",
   "enter_text_helper": "Ctrl+⏎/⌘+⏎ also works",
   "word_input_label": "Text to translate",
-  "image_url_input_label": "Image url or text to search image",
+  "image_url_input_label": "Url or text to search image",
   "deck_list_helper": "Decks",
   "deck_selector_helper": "Choose deck to save card",
   "deck_selector_login_helper": "Login to Tinycards to enable",
@@ -120,7 +120,7 @@
   "additional_info": "Additional info",
   "card_front_side_title": "Front Side",
   "card_back_side_title": "Back Side",
-  "email-address": "Email address",
+  "login_placeholder": "Login",
   "password": "Password",
   "select_language": "Select language",
   "info_provider_switcher": "Send info request",
@@ -134,10 +134,12 @@
   "forbidden": "The access is permanently forbidden",
   "add_card_to_deck_success_message": "Card successfully added",
   "translate_failure": "Translation error occurred",
-  "login_failure_message": "Login error. Check your e-mail and password",
+  "login_failure_message": "Login error. Check your email and password",
   "images_request_failure_message": "Images searching error",
   "fetch_decks_failure_message": "Decks searching error",
   "fetch_decks_unauthorized_message": "Decks searching error. Login and repeat",
   "add_card_to_deck_failure_message": "Card adding error",
-  "add_card_to_deck_unauthorized_message": "Card adding error. Login and repeat"
+  "add_card_to_deck_unauthorized_message": "Card adding error. Login and repeat",
+  "logged_in_as": "Logged in as:",
+  "logout": "logout"
 }

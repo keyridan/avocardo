@@ -41,6 +41,7 @@ const ButtonWithProgress = ({
 )
 
 ButtonWithProgress.propTypes = {
+  classes: PropTypes.objectOf(style).isRequired,
   onClick: PropTypes.func.isRequired,
   loading: PropTypes.bool.isRequired,
   disabled: PropTypes.bool,

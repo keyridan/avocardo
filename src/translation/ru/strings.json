@@ -120,14 +120,14 @@
   "additional_info": "Дополнительная информация",
   "card_front_side_title": "Лицевая сторона",
   "card_back_side_title": "Задняя сторона",
-  "email": "Логин",
+  "login_placeholder": "Логин",
   "password": "Пароль",
   "select_language": "Выберите язык",
   "info_provider_switcher": "Отправлять запрос",
   "add_note": "Добавить текст",
   "add_image": "Добавить изображение",
   "warning_message": "Warning",
-  "info_message": "Info",
+  "info_message": "Информация",
   "something_went_wrong_message": "Что-то пошло не так =(",
   "internal_error": "Внутренняя ошибка. Что-то пошло не так =(",
   "unauthorized": "Неавторизованное действие. Пожалуйста, авторизуйтесь для продолжения",
@@ -139,5 +139,7 @@
   "fetch_decks_failure_message": "Ошибка поиска колод",
   "fetch_decks_unauthorized_message": "Ошибка поиска колод. Авторизуйтесь и повторите поиск",
   "add_card_to_deck_failure_message": "Ошибка сохранения карты",
-  "add_card_to_deck_unauthorized_message": "Ошибка сохранения карты. Авторизуйтесь и повторите"
+  "add_card_to_deck_unauthorized_message": "Ошибка сохранения карты. Авторизуйтесь и повторите",
+  "logged_in_as": "Вы вошли как:",
+  "logout": "выйти"
 }

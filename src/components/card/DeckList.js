@@ -62,10 +62,26 @@ const DeckList = ({
 DeckList.propTypes = {
   auth: PropTypes.bool.isRequired,
   deckListState: PropTypes.bool.isRequired,
-  decks: PropTypes.array.isRequired,
+  deck: PropTypes.oneOfType([
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
+      description: PropTypes.string.isRequired,
+      coverImageUrl: PropTypes.string.isRequired,
+    }),
+    PropTypes.string,
+  ]),
+  decks: PropTypes.shape({
+    pending: PropTypes.bool.isRequired,
+    values: PropTypes.arrayOf(PropTypes.instanceOf(DeckItem.deck).isRequired).isRequired,
+  }).isRequired,
   chooseDeck: PropTypes.func.isRequired,
   changeDeckListState: PropTypes.func.isRequired,
   fetchDecks: PropTypes.func.isRequired,
+}
+
+DeckList.defaultProps = {
+  deck: '',
 }
 
 export default DeckList
