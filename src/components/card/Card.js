@@ -2,6 +2,7 @@ import React from 'react'
 import withStyles from '@material-ui/core/styles/withStyles'
 import Typography from '@material-ui/core/Typography'
 import Grid from '@material-ui/core/Grid'
+import PropTypes from 'prop-types'
 import DeckListContainer from '../../containers/card/DeckListContainer'
 import FlashCardContainer from '../../containers/card/FlashCardContainer'
 import AddCardToDeckButton from '../../containers/card/AddCardToDeckButton'
@@ -9,7 +10,7 @@ import TranslatedTextContainer from '../../containers/TranslatedTextContainer'
 
 const styles = theme => ({
   container: {
-    paddingTop: theme.spacing.unit * 6,
+    paddingTop: theme.spacing ? theme.spacing.unit * 6 : 0,
   },
   cardContainer: {
     flexDirection: 'column',
@@ -34,5 +35,9 @@ const Card = ({ classes }) => (
     </Grid >
   </div >
 )
+
+Card.propTypes = {
+  classes: PropTypes.objectOf(styles).isRequired,
+}
 
 export default withStyles(styles)(Card)

@@ -86,8 +86,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
   changeLoginFormState,
-  changeChooseLanguageState,
-  chooseLanguage,
+  changeChooseLanguageStateFunc: changeChooseLanguageState,
+  chooseLanguageFunc: chooseLanguage,
 }
 
 export default connect(

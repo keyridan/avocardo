@@ -9,42 +9,39 @@ const styles = () => ({
   loader: {},
 })
 
-const ImagesLoader = (
-  {
-    classes, hasNextPage, loadNextPageImages, photos, selectPhoto,
-  }) => {
-
-  return (
-    <Masonry
-      useWindow={false}
-      threshold={600}
-      initialLoad={false}
-      useCapture
-      pageStart={1}
-      pack={true}
-      loader={(<LinearProgress color="secondary" className={classes.loader} />)}
-      hasMore={hasNextPage}
-      loadMore={loadNextPageImages}
-      sizes={[
+const ImagesLoader = ({
+  classes, hasNextPage, loadNextPageImages, photos, selectPhoto,
+}) => (
+  <Masonry
+    useWindow={false}
+    threshold={600}
+    initialLoad={false}
+    useCapture
+    pageStart={1}
+    pack
+    loader={(<LinearProgress color="secondary" className={classes.loader} />)}
+    hasMore={hasNextPage}
+    loadMore={loadNextPageImages}
+    sizes={[
         { columns: 1, gutter: 10 },
         { mq: '768px', columns: 2, gutter: 10 },
       ]}
-    >
-      {
-        photos.map((photo, index) => {
+  >
+    {
+        photos.map((photo) => {
           const StyledImage = styled('img')(({ theme, props }) => ({
             [theme.breakpoints.up('sm')]: {
               width: 275,
-              height: Math.ceil(props.height * 275 / props.width),
+              height: Math.ceil((props.height * 275) / props.width),
             },
             [theme.breakpoints.down('sm')]: {
               width: 175,
-              height: Math.ceil(props.height * 175 / props.width),
+              height: Math.ceil((props.height * 175) / props.width),
             },
           }))
           return (
             <StyledImage
-              key={index}
+              key={JSON.stringify(photo)}
               height={photo.height}
               width={photo.width}
               src={photo.src}
@@ -53,12 +50,11 @@ const ImagesLoader = (
           )
         })
       }
-    </Masonry >
-  )
-}
+  </Masonry >
+)
 
 ImagesLoader.propTypes = {
-  classes: PropTypes.object.isRequired,
+  classes: PropTypes.objectOf(styles).isRequired,
   hasNextPage: PropTypes.bool.isRequired,
   photos: PropTypes.arrayOf(PropTypes.shape({
     src: PropTypes.string,
