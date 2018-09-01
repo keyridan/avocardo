@@ -21,7 +21,6 @@ const styles = (theme) => {
       position: 'absolute',
       width: '200px',
       zIndex: 100,
-
     },
     input: {
       display: 'flex',

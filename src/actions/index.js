@@ -12,7 +12,8 @@ import {
   CHANGE_INFO_SWITCHER_STATE,
   CHANGE_OPEN_INPUT_IMAGE_STATE,
   CHANGE_OPEN_LOGIN_FORM,
-  CHANGE_OPEN_USER_FORM, CHANGE_RECENT_FROM_LANGUAGE_SELECTOR_STATE, CHANGE_RECENT_TO_LANGUAGE_SELECTOR_STATE,
+  CHANGE_OPEN_USER_FORM, CHANGE_RECENT_FROM_LANGUAGE_SELECTOR_STATE,
+  CHANGE_RECENT_TO_LANGUAGE_SELECTOR_STATE,
   CHANGE_SHOW_PASSWORD,
   CHANGE_THEME_TYPE_STATE,
   CHOOSE_DECK,
@@ -48,7 +49,7 @@ import {
   TRANSLATE_SUCCESS,
   TRANSLATE_URL,
 } from '../constants'
-import { backSideSelector, croppedImageSelector, imageSelector, openSpeedDialSelector, } from '../selectors'
+import { backSideSelector, croppedImageSelector, imageSelector, openSpeedDialSelector } from '../selectors'
 import { setCardValues, setTranslationResult } from './setTranslationValues'
 
 export * from './image'
@@ -278,6 +279,7 @@ const addOrUpdateBackSideImageValue = () => (dispatch, getState) => {
       },
     })
   }
+  return undefined
 }
 
 export const closeAndClean = () => (dispatch) => {
@@ -399,8 +401,8 @@ export const setPassword = value => ({
 })
 
 export const translate = ({
-                            toLanguage, word, fromLanguage, infoProvider,
-                          }) => {
+  toLanguage, word, fromLanguage, infoProvider,
+}) => {
   if (!word) {
     return Promise.resolve()
   }

@@ -22,11 +22,12 @@ const InfoPanel = ({ info, type, checked }) => (
           className={s.info_provider_switcher}
         />
       </ExpansionPanelSummary >
+      {console.log('info', info)}
       <ExpansionPanelDetails className={s.info_panel_details} >
-        {_.isEmpty(info) && (
+        {!_.isEmpty(info) && (
           <InfoCard info={info} />
         )}
-        {_.isEmpty(info) && info.table && info.table.rows && (
+        {(!_.isEmpty(info)) && info.table && info.table.rows && (
           <InfoTable rows={info.table.rows} />
         )}
       </ExpansionPanelDetails >
