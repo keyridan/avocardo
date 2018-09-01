@@ -22,7 +22,6 @@ const InfoPanel = ({ info, type, checked }) => (
           className={s.info_provider_switcher}
         />
       </ExpansionPanelSummary >
-      {console.log('info', info)}
       <ExpansionPanelDetails className={s.info_panel_details} >
         {!_.isEmpty(info) && (
           <InfoCard info={info} />
