@@ -18,8 +18,10 @@ const styles = (theme) => {
   const noOptionMessagePadding = `${theme.spacing ? theme.spacing.unit : 0}px ${theme.spacing ? theme.spacing.unit * 2 : 0}px`
   return {
     root: {
-      flexGrow: 1,
-      height: 250,
+      position: 'absolute',
+      width: '200px',
+      zIndex: 100,
+
     },
     input: {
       display: 'flex',
@@ -178,7 +180,7 @@ const LanguageSelector = ({
     }),
   }
   return (
-    <div className={classes.root}>
+    <div>
       {!openState && (
       <SimpleButton
         aria-label="More"
@@ -190,16 +192,18 @@ const LanguageSelector = ({
       </SimpleButton >
     )}
       {openState && (
-      <Select
-        autoFocus
-        menuIsOpen={openState}
-        onMenuClose={changeOpenState}
-        options={suggestions(language)}
-        onChange={chooseRecentLanguage}
-        classes={classes}
-        styles={selectStyles}
-        components={components}
-      />
+      <Paper className={classes.root}>
+        <Select
+          autoFocus
+          menuIsOpen={openState}
+          onMenuClose={changeOpenState}
+          options={suggestions(language)}
+          onChange={chooseRecentLanguage}
+          classes={classes}
+          styles={selectStyles}
+          components={components}
+        />
+      </Paper>
     )}
     </div >
   )
