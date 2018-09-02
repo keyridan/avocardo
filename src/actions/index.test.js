@@ -165,7 +165,7 @@ describe('chooseRecentFromLanguage', () => {
           options: [],
           wordTo: '',
         },
-      }
+      },
     ]
     store.dispatch(actions.chooseRecentFromLanguage(languagesObject))
     expect(store.getActions()).to.eql(expectedActions)
@@ -267,6 +267,7 @@ describe('async actions', () => {
         type: SET_INFO_VALUES,
         payload: {
           LEO: {},
+          TATOEBA: {},
         },
       },
     ]

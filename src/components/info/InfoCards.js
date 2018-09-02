@@ -36,7 +36,10 @@ InfoCards.propTypes = {
     [INFO_PROVIDERS]: PropTypes.object,
   }).isRequired,
   infoProvider: PropTypes.shape({
-    [INFO_PROVIDERS]: PropTypes.shape({
+    LEO: PropTypes.shape({
+      checked: PropTypes.bool.isRequired,
+    }).isRequired,
+    TATOEBA: PropTypes.shape({
       checked: PropTypes.bool.isRequired,
     }).isRequired,
   }).isRequired,

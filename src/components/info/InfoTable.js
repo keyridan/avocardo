@@ -14,6 +14,7 @@ import Paper from '@material-ui/core/Paper'
 import Grid from '@material-ui/core/Grid'
 import withStyles from '@material-ui/core/styles/withStyles'
 import InfoDataRow from './InfoDataRow'
+import InfoDataItemLinksContainer from '../../containers/info/InfoDataItemLinksContainer'
 
 const styles = theme => ({
   highlightedWord: {
@@ -33,11 +34,19 @@ const InfoTable = ({ rows, classes }) => (
             <ExpansionPanelDetails >
               <Grid container spacing={8} >
                 {row.rows && row.rows.map((smallTitledRow, index) => (
-                  <Grid key={index} item xs>
+                  <Grid key={index} item xs >
                     <Table >
                       <TableHead >
                         <TableRow >
-                          <TableCell >{smallTitledRow.value}</TableCell >
+                          <TableCell >
+                            {smallTitledRow.value && (
+                              <InfoDataItemLinksContainer
+                                items={smallTitledRow.value.split(' ').map(item => ({ value: item }))}
+                                value={smallTitledRow.value.trim()}
+                              />
+                            )}
+                            {smallTitledRow.title}
+                          </TableCell >
                         </TableRow >
                       </TableHead >
                       {smallTitledRow.infoData && smallTitledRow.infoData.map(infoData => (

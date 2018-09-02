@@ -6,7 +6,7 @@ import { highlightedValue } from '../../highlightValue'
 function highlightedItems(highlights, value, className) {
   return (highlights.length > 0
     ? highlightedValue({ highlights, value, className })
-    : [{ value, children: (<span >{value}</span >) }])
+    : value.split(' ').map(item => ({ value: item })))
 }
 
 const HighlightedItemLinks = ({ highlights = [], value, className }) => (

@@ -1,9 +1,15 @@
-export const STORE_VERSION = '0.0.1'
+export const STORE_VERSION = '0.0.2'
 export const UPDATE_STATE_FOR = [
   { recentFromLanguages: ['EN', 'DE', 'FR'] },
   { recentToLanguages: ['EN', 'DE', 'FR'] },
   { fromLanguage: 'DE' },
   { toLanguage: 'EN' },
+  {
+    infoProvider: {
+      LEO: { checked: true },
+      TATOEBA: { checked: true },
+    },
+  },
 ]
 export const TRANSLATE_BEGIN = 'TRANSLATE_BEGIN'
 export const TRANSLATE_SUCCESS = 'TRANSLATE_SUCCESS'
@@ -98,7 +104,7 @@ export const MESSAGE_TYPES = {
   ERROR: 'error',
   INFO: 'info',
 }
-export const INFO_PROVIDERS = ['LEO']
+export const INFO_PROVIDERS = ['LEO', 'TATOEBA']
 export const THEME_TYPES = {
   DARK: { value: 'dark', isDark: true },
   LIGHT: { value: 'light', isDark: false },
