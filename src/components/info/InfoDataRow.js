@@ -4,13 +4,14 @@ import TableCell from '@material-ui/core/TableCell'
 import TableRow from '@material-ui/core/TableRow'
 import HighlightedItemLinks from './HighlightedItemLinks'
 
-const InfoDataRow = ({ infoData, highlightClassName }) => (
+const InfoDataRow = ({ infoData, highlightClassName, rowSettings }) => (
   <TableRow >
     {infoData.title && (
       <TableCell >{infoData.title}</TableCell >
     )}
     <TableCell >
       <HighlightedItemLinks
+        {...rowSettings}
         value={infoData.value.trim()}
         highlights={infoData.highlights}
         className={highlightClassName}
@@ -29,6 +30,10 @@ InfoDataRow.propTypes = {
     title: PropTypes.string,
   })).isRequired,
   highlightClassName: PropTypes.string.isRequired,
+  rowSettings: PropTypes.shape({
+    from: PropTypes.func,
+    to: PropTypes.func,
+  }),
 }
 
 export default InfoDataRow

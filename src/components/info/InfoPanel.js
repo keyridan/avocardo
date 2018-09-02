@@ -11,7 +11,7 @@ import InfoCard from './InfoCard'
 import InfoTable from './InfoTable'
 import s from './InfoPanel.css'
 
-const InfoPanel = ({ info, type, checked }) => (
+const InfoPanel = ({ info, type, checked, rowSettings }) => (
   <div >
     <ExpansionPanel >
       <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />} className={s.info_panel} >
@@ -27,7 +27,7 @@ const InfoPanel = ({ info, type, checked }) => (
           <InfoCard info={info} />
         )}
         {(!_.isEmpty(info)) && info.table && info.table.rows && (
-          <InfoTable rows={info.table.rows} />
+          <InfoTable rows={info.table.rows} rowSettings={rowSettings} />
         )}
       </ExpansionPanelDetails >
     </ExpansionPanel >
@@ -42,6 +42,10 @@ InfoPanel.propTypes = {
   }),
   type: PropTypes.string.isRequired,
   checked: PropTypes.bool.isRequired,
+  rowSettings: PropTypes.shape({
+    from: PropTypes.func,
+    to: PropTypes.func,
+  }),
 }
 
 InfoPanel.defaultProps = {

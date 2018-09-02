@@ -9,8 +9,10 @@ function highlightedItems(highlights, value, className) {
     : value.split(' ').map(item => ({ value: item })))
 }
 
-const HighlightedItemLinks = ({ highlights = [], value, className }) => (
+const HighlightedItemLinks = ({ highlights = [], value, className, to, from }) => (
   <InfoDataItemLinksContainer
+    to={to}
+    from={from}
     className="highlighted_link"
     value={value}
     items={highlightedItems(highlights, value, className)}

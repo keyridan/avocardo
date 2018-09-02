@@ -5,6 +5,7 @@ import Typography from '@material-ui/core/Typography'
 import InfoPanel from './InfoPanel'
 import TranslatedTextContainer from '../../containers/TranslatedTextContainer'
 import { INFO_PROVIDERS } from '../../constants'
+import { fromLanguageSelector, toLanguageSelector } from '../../selectors'
 
 const styles = theme => ({
   container: {
@@ -12,21 +13,27 @@ const styles = theme => ({
   },
 })
 
-const InfoCards = ({
-  infos, infoProvider, classes,
-}) => (
+const InfoCards = (
+  {
+    infos, infoProvider, classes,
+  }) => (
   <div className={classes.container} >
     <Typography variant="title" gutterBottom >
       <TranslatedTextContainer value="additional_info" />
     </Typography >
-    {INFO_PROVIDERS.map(provider => (
-      <InfoPanel
-        info={infos[provider]}
-        type={provider}
-        key={JSON.stringify(provider)}
-        checked={infoProvider[provider].checked}
-      />
-    ))}
+    <InfoPanel
+      info={infos.LEO}
+      type="LEO"
+      key="LEO"
+      checked={infoProvider.LEO.checked}
+    />
+    <InfoPanel
+      info={infos.TATOEBA}
+      type="TATOEBA"
+      key="TATOEBA"
+      rowSettings={{ from: toLanguageSelector, to: fromLanguageSelector }}
+      checked={infoProvider.TATOEBA.checked}
+    />
   </div >
 )
 

@@ -22,7 +22,7 @@ const styles = theme => ({
   },
 })
 
-const InfoTable = ({ rows, classes }) => (
+const InfoTable = ({ rows, classes, rowSettings }) => (
   <div >
     {rows && (
       <Paper >
@@ -52,6 +52,7 @@ const InfoTable = ({ rows, classes }) => (
                       {smallTitledRow.infoData && smallTitledRow.infoData.map(infoData => (
                         <TableBody >
                           <InfoDataRow
+                            rowSettings={rowSettings}
                             infoData={infoData}
                             highlightClassName={classes.highlightedWord}
                           />
@@ -75,6 +76,10 @@ InfoTable.propTypes = {
     url: PropTypes.string,
     description: PropTypes.string,
   })),
+  rowSettings: PropTypes.shape({
+    from: PropTypes.func,
+    to: PropTypes.func,
+  }),
 }
 
 export default withStyles(styles)(InfoTable)

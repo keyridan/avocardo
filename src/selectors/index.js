@@ -1,6 +1,9 @@
 export * from './images'
 export * from './message'
 
+export const fromLanguageSelector = state => state.fromLanguage
+export const toLanguageSelector = state => state.toLanguage
+
 export const openSpeedDialSelector = state => state.addBackSideSpeedDialState.open
 export const openInputImageSelector = state => state.addBackSideSpeedDialState.openInputImage
 
